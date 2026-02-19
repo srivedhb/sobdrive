@@ -69,7 +69,15 @@ section { padding:80px 20px; max-width:1000px; margin:auto; }
 .review { background:#1e293b; padding:20px; margin:20px auto; border-radius:12px; }
 ul { list-style: disc; padding-left: 20px; }
 footer { background:#111827; padding:40px 20px; text-align:center; font-size:14px; }
+/* Default link color */
 a { color:#facc15; text-decoration:none; }
+
+/* Ensure CTA anchors contrast with the yellow background and behave like buttons */
+a.cta, a.cta-large, .cta, .cta-large {
+  color: #0f172a;
+  display: inline-block;
+  text-decoration: none;
+}
 button:hover { opacity:0.9; }
 @media(max-width:768px){ h1 { font-size:28px; } .steps { flex-direction:column; align-items:center; } }
 </style>
@@ -79,7 +87,7 @@ button:hover { opacity:0.9; }
 <header class="hero">
 <h1>Toronto GTA Drunk Driver Service – 24/7 Designated Drivers</h1>
 <p class="subheadline">Drank too much? We drive you home safely in your own car across Toronto, Mississauga, Brampton, Markham and surrounding GTA areas. Fast arrival. Professional drivers. Available 24/7.</p>
-<button class="cta">🚗 Book a GTA Driver Now</button>
+  <a class="cta" href="tel:+12892362726">🚗 Book a GTA Driver Now</a>
 <p class="trust">✔ Verified Drivers | ✔ 15–30 Min Arrival | ✔ Fully Insured | ✔ Serving Toronto GTA</p>
 </header>
 
@@ -138,7 +146,7 @@ button:hover { opacity:0.9; }
 <section>
 <h2>Book Your Safe Ride Home in Toronto GTA Now</h2>
 <p>Avoid DUI penalties, protect your license, and ensure your safety. Book a designated driver service now and get home safely in your own car.</p>
-<button class="cta-large">Get Home Safely Now</button>
+  <a class="cta-large" href="tel:+12892362726">Get Home Safely Now</a>
 </section>
 </main>
 
