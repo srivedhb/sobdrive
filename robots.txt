@@ -1,0 +1,40 @@
+# SOBDRIVE Robots Configuration
+# Last updated: 2026-02-20
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.json$
+Disallow: /api/
+
+# Reference to sitemap
+Sitemap: https://www.sobdrive.com/sitemap.xml
+
+# Crawl delay (requests per second)
+Crawl-delay: 1
+
+# Request rate for all agents
+Request-rate: 1/10s
+
+# Google Search Engine specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing Search Engine specific rules
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
