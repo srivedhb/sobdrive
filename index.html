@@ -8,12 +8,12 @@
   <title>SOBDRIVE | 24/7 Designated Driver Service Toronto GTA</title>
   <meta name="title" content="SOBDRIVE | 24/7 Designated Driver Service Toronto GTA" />
   <meta name="description" content="Need a designated driver in Toronto GTA? SOBDRIVE provides 24/7 professional drunk driver services across Toronto, Mississauga, Brampton, Markham & surrounding GTA areas. Fast 15-30 min arrival. Book now!" />
-  <meta name="keywords" content="designated driver Toronto, drunk driver service GTA, designated driver service Mississauga, designated driver Brampton, designated driver Markham, sobdrive, GTA designated driver, Toronto designated driver near me, drunk driving service Toronto" />
+  <meta name="keywords" content="designated driver Toronto, drunk driver service GTA, designated driver service Mississauga, designated driver Brampton, designated driver Markham, sobdrive, GTA designated driver, Toronto designated driver near me" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="SOBDRIVE" />
   <link rel="canonical" href="https://sobdrive.ca/" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sobdrive.ca/" />
   <meta property="og:title" content="SOBDRIVE | 24/7 Designated Driver Service Toronto GTA" />
@@ -23,7 +23,6 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://sobdrive.ca/" />
   <meta name="twitter:title" content="SOBDRIVE | 24/7 Designated Driver Service Toronto GTA" />
   <meta name="twitter:description" content="Drank too much? SOBDRIVE gets you and your car home safely across Toronto GTA. Professional drivers. 15-30 min arrival. Available 24/7." />
 
@@ -33,7 +32,7 @@
   <meta name="geo.position" content="43.651070;-79.347015" />
   <meta name="ICBM" content="43.651070, -79.347015" />
 
-  <!-- Schema.org Structured Data (Local Business) -->
+  <!-- LocalBusiness Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -56,15 +55,62 @@
     },
     "openingHours": "Mo-Su 00:00-24:00",
     "priceRange": "$$",
-    "areaServed": [
-      "Toronto", "Mississauga", "Brampton", "Markham", "Vaughan", "Richmond Hill"
-    ],
-    "serviceType": "Designated Driver Service",
-    "sameAs": []
+    "areaServed": ["Toronto","Mississauga","Brampton","Markham","Vaughan","Richmond Hill"],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "2",
+      "bestRating": "5"
+    }
   }
   </script>
 
-  <!-- Schema.org FAQ -->
+  <!-- Review Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "SOBDRIVE",
+      "url": "https://sobdrive.ca"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": "Best designated driver service in Toronto GTA. Arrived in 20 minutes and got me home safely!",
+    "author": {
+      "@type": "Person",
+      "name": "John D."
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "SOBDRIVE",
+      "url": "https://sobdrive.ca"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": "Professional, safe, and affordable. I use SOBDRIVE every time I go out in Mississauga.",
+    "author": {
+      "@type": "Person",
+      "name": "Sarah M."
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,334 +119,295 @@
       {
         "@type": "Question",
         "name": "How fast can a GTA driver arrive?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Most drivers arrive within 15–30 minutes depending on location and traffic."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Most drivers arrive within 15–30 minutes depending on location and traffic." }
       },
       {
         "@type": "Question",
         "name": "Do you drive my own car in Toronto?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Our professional GTA drivers drive you home in your own vehicle."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our professional GTA drivers drive you home in your own vehicle." }
       },
       {
         "@type": "Question",
         "name": "Which areas in GTA do you serve?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We operate in Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill and surrounding GTA neighborhoods."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "We operate in Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill and surrounding GTA neighborhoods." }
       }
     ]
   }
   </script>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Georgia', serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
-      line-height: 1.7;
+
+    :root {
+      --orange: #FF6B00;
+      --orange-light: #FF8C38;
+      --orange-pale: #FFF4EB;
+      --dark: #1a1a1a;
+      --gray: #666;
+      --light-gray: #f7f7f7;
+      --border: #eee;
     }
+
+    body { font-family: 'Nunito', sans-serif; background: #fff; color: var(--dark); line-height: 1.7; }
     a { color: inherit; text-decoration: none; }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,0.95);
-      border-bottom: 1px solid #222;
+      background: #fff; border-bottom: 2px solid var(--orange);
       padding: 1rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 12px rgba(255,107,0,0.08);
     }
-    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; color: #f5c518; }
-    .nav-phone { background: #f5c518; color: #000; padding: 0.5rem 1.2rem; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
+    .logo { font-size: 1.6rem; font-weight: 900; color: var(--orange); letter-spacing: 2px; }
+    .logo span { color: var(--dark); }
+    .nav-phone {
+      background: var(--orange); color: #fff;
+      padding: 0.55rem 1.4rem; border-radius: 50px;
+      font-weight: 800; font-size: 0.9rem;
+      box-shadow: 0 4px 14px rgba(255,107,0,0.3);
+    }
 
     /* HERO */
     .hero {
-      min-height: 90vh;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      background: var(--orange-pale);
+      padding: 6rem 2rem 5rem;
       text-align: center;
-      padding: 4rem 2rem;
-      background: radial-gradient(ellipse at center, #1a1a00 0%, #0a0a0a 70%);
-      border-bottom: 1px solid #222;
     }
     .hero-badge {
       display: inline-block;
-      background: #f5c518; color: #000;
-      font-size: 0.75rem; font-weight: 800; letter-spacing: 3px;
-      padding: 0.4rem 1rem; border-radius: 2px;
-      margin-bottom: 2rem; text-transform: uppercase;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 6vw, 4.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      max-width: 800px;
+      background: var(--orange); color: #fff;
+      font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.35rem 1rem; border-radius: 50px;
       margin-bottom: 1.5rem;
     }
-    .hero h1 span { color: #f5c518; }
-    .hero p {
-      font-size: 1.15rem; color: #aaa;
-      max-width: 560px; margin-bottom: 2.5rem;
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900; line-height: 1.15;
+      max-width: 750px; margin: 0 auto 1.2rem;
     }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: 1.1rem; color: var(--gray); max-width: 540px; margin: 0 auto 2.5rem; }
     .hero-cta {
       display: inline-block;
-      background: #f5c518; color: #000;
+      background: var(--orange); color: #fff;
       font-size: 1.1rem; font-weight: 800;
-      padding: 1rem 2.5rem; border-radius: 4px;
-      letter-spacing: 1px;
+      padding: 1rem 2.8rem; border-radius: 50px;
+      box-shadow: 0 6px 24px rgba(255,107,0,0.35);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,197,24,0.3); }
-    .trust-bar {
-      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
-      margin-top: 3rem; font-size: 0.85rem; color: #777;
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(255,107,0,0.4); }
+    .trust-bar { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+    .trust-item {
+      background: #fff; border: 1px solid #ffdcc2;
+      border-radius: 50px; padding: 0.4rem 1.1rem;
+      font-size: 0.85rem; font-weight: 700; color: var(--orange);
+      display: flex; align-items: center; gap: 0.4rem;
     }
-    .trust-bar span { display: flex; align-items: center; gap: 0.4rem; }
-    .trust-bar span::before { content: '✔'; color: #f5c518; }
+    .trust-item::before { content: '✔'; }
 
     /* SECTIONS */
-    section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
-    h2 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 900; margin-bottom: 2rem;
-      border-left: 4px solid #f5c518; padding-left: 1rem;
-    }
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-alt { background: var(--light-gray); }
+    .orange-line { width: 50px; height: 4px; background: var(--orange); border-radius: 4px; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 900; margin-bottom: 0.5rem; }
+    .section-sub { color: var(--gray); margin-bottom: 2.5rem; }
 
     /* HOW IT WORKS */
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
     .step {
-      background: #111; border: 1px solid #222;
-      padding: 2rem; border-radius: 8px; text-align: center;
+      background: #fff; border: 1px solid var(--border);
+      border-top: 4px solid var(--orange);
+      padding: 2rem 1.5rem; border-radius: 12px;
+      text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.04);
     }
     .step-num {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: #f5c518; color: #000;
-      font-size: 1.3rem; font-weight: 900;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--orange-pale); color: var(--orange);
+      font-size: 1.4rem; font-weight: 900;
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 1rem;
     }
-    .step h3 { font-size: 1rem; margin-bottom: 0.5rem; }
-    .step p { color: #777; font-size: 0.9rem; }
+    .step h3 { font-weight: 800; margin-bottom: 0.4rem; }
+    .step p { color: var(--gray); font-size: 0.9rem; }
 
     /* WHY */
     .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
     .why-item {
-      background: #111; border: 1px solid #222;
-      padding: 1.5rem; border-radius: 8px;
+      background: #fff; border: 1px solid var(--border);
+      padding: 1.5rem; border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
     }
-    .why-item h3 { color: #f5c518; margin-bottom: 0.5rem; font-size: 1rem; }
-    .why-item p { color: #777; font-size: 0.9rem; }
+    .why-item:hover { box-shadow: 0 6px 24px rgba(255,107,0,0.1); }
+    .why-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .why-item h3 { font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem; }
+    .why-item p { color: var(--gray); font-size: 0.88rem; }
 
     /* REVIEWS */
-    .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
     .review {
-      background: #111; border: 1px solid #222;
-      padding: 1.5rem; border-radius: 8px;
+      background: #fff; border: 1px solid var(--border);
+      border-left: 4px solid var(--orange);
+      padding: 1.5rem; border-radius: 12px;
     }
-    .stars { color: #f5c518; font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .review p { color: #ccc; font-size: 0.95rem; margin-bottom: 0.75rem; }
-    .reviewer { color: #555; font-size: 0.85rem; }
+    .stars { color: var(--orange); font-size: 1rem; margin-bottom: 0.75rem; }
+    .review p { color: #444; font-size: 0.95rem; margin-bottom: 0.75rem; font-style: italic; }
+    .reviewer { color: var(--gray); font-size: 0.82rem; font-weight: 700; }
 
     /* FAQ */
-    .faq-item { border-bottom: 1px solid #222; padding: 1.5rem 0; }
-    .faq-item h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #f5c518; }
-    .faq-item p { color: #aaa; font-size: 0.95rem; }
-
-    /* CTA SECTION */
-    .cta-section {
-      background: #f5c518; color: #000;
-      text-align: center; padding: 5rem 2rem;
-    }
-    .cta-section h2 { color: #000; border-color: #000; }
-    .cta-section p { max-width: 500px; margin: 0 auto 2rem; font-size: 1.05rem; }
-    .cta-dark {
-      display: inline-block;
-      background: #000; color: #f5c518;
-      font-size: 1.1rem; font-weight: 800;
-      padding: 1rem 2.5rem; border-radius: 4px;
-    }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+    .faq-item h3 { font-weight: 800; margin-bottom: 0.4rem; font-size: 1rem; }
+    .faq-item p { color: var(--gray); font-size: 0.93rem; }
 
     /* AREAS */
     .areas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .area-tag {
-      background: #111; border: 1px solid #333;
-      padding: 0.4rem 1rem; border-radius: 20px;
-      font-size: 0.85rem; color: #aaa;
+      background: var(--orange-pale); border: 1px solid #ffdcc2;
+      color: var(--orange); font-weight: 700;
+      padding: 0.4rem 1.1rem; border-radius: 50px; font-size: 0.85rem;
     }
 
-    /* FOOTER */
-    footer {
-      background: #050505; border-top: 1px solid #1a1a1a;
-      padding: 3rem 2rem; text-align: center; color: #444; font-size: 0.85rem;
+    /* CTA */
+    .cta-section { background: var(--orange); color: #fff; text-align: center; padding: 5rem 2rem; }
+    .cta-section h2 { color: #fff; margin-bottom: 0.75rem; }
+    .cta-section p { max-width: 500px; margin: 0 auto 2rem; opacity: 0.9; font-size: 1.05rem; }
+    .cta-white {
+      display: inline-block; background: #fff; color: var(--orange);
+      font-size: 1.1rem; font-weight: 900;
+      padding: 1rem 2.8rem; border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
     }
-    footer .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    footer .footer-links a { color: #666; }
-    footer .footer-links a:hover { color: #f5c518; }
-    .footer-logo { font-size: 1.2rem; font-weight: 900; letter-spacing: 3px; color: #f5c518; margin-bottom: 1rem; }
+    .cta-white:hover { transform: translateY(-3px); }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: #aaa; padding: 3rem 2rem; text-align: center; font-size: 0.85rem; }
+    .footer-logo { font-size: 1.4rem; font-weight: 900; color: var(--orange); letter-spacing: 2px; margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { color: #888; }
+    .footer-links a:hover { color: var(--orange); }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <div class="logo">SOBDRIVE</div>
-    <a href="tel:+12892362726" class="nav-phone">📞 +1-289-236-2726</a>
+    <div class="logo">SOB<span>DRIVE</span></div>
+    <a href="tel:+12892362726" class="nav-phone">📞 Call Now</a>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
-    <div class="hero-badge">Toronto GTA's #1 Designated Driver</div>
+    <div class="hero-badge">Toronto GTA's Trusted Designated Driver</div>
     <h1>Get Home Safe.<br /><span>We Drive Your Car.</span></h1>
-    <p>Drank too much? SOBDRIVE sends a professional driver to get you and your vehicle home safely — across Toronto, Mississauga, Brampton, Markham & more.</p>
+    <p>Had too much to drink? SOBDRIVE sends a professional driver to get you and your vehicle home safely — 24/7 across Toronto GTA.</p>
     <a href="tel:+12892362726" class="hero-cta">🚗 Book a Driver Now</a>
     <div class="trust-bar">
-      <span>Verified Drivers</span>
-      <span>15–30 Min Arrival</span>
-      <span>Fully Insured</span>
-      <span>Available 24/7</span>
+      <div class="trust-item">Verified Drivers</div>
+      <div class="trust-item">15–30 Min Arrival</div>
+      <div class="trust-item">Fully Insured</div>
+      <div class="trust-item">Available 24/7</div>
     </div>
   </header>
 
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Book in Seconds</h3>
-        <p>Call us or book online anytime, day or night across the GTA.</p>
+  <div class="section">
+    <div class="section-inner">
+      <div class="orange-line"></div>
+      <h2>How It Works</h2>
+      <p class="section-sub">Getting home safely is easy with SOBDRIVE — 3 simple steps.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><h3>Book in Seconds</h3><p>Call us anytime, day or night. We're available 24/7 across the GTA.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>Driver Arrives</h3><p>A professional driver arrives at your location within 15–30 minutes.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Home Safely</h3><p>Relax while we drive you and your car safely to your destination.</p></div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Driver Arrives</h3>
-        <p>A professional driver arrives at your location within 15–30 minutes.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Ride Home Safely</h3>
-        <p>Relax while we drive you and your car safely to your destination.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY CHOOSE US -->
-  <section id="why-us">
-    <h2>Why Choose SOBDRIVE?</h2>
-    <div class="why-grid">
-      <div class="why-item">
-        <h3>24/7 Availability</h3>
-        <p>We operate around the clock including weekends and holidays.</p>
-      </div>
-      <div class="why-item">
-        <h3>Licensed & Insured</h3>
-        <p>All drivers are background-checked, licensed and fully insured.</p>
-      </div>
-      <div class="why-item">
-        <h3>Affordable Pricing</h3>
-        <p>Flat, transparent pricing across the GTA. No hidden fees.</p>
-      </div>
-      <div class="why-item">
-        <h3>Fast Response</h3>
-        <p>15–30 minute arrival times across Toronto and surrounding areas.</p>
-      </div>
-      <div class="why-item">
-        <h3>Local Experts</h3>
-        <p>Drivers who know Toronto GTA roads, neighbourhoods and traffic.</p>
-      </div>
-      <div class="why-item">
-        <h3>Your Car, Our Driver</h3>
-        <p>We drive YOUR vehicle home — no leaving your car behind.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section id="reviews">
-    <h2>What Customers Say</h2>
-    <div class="reviews">
-      <div class="review">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p>"Best designated driver service in Toronto GTA. Arrived in 20 minutes and got me home safely!"</p>
-        <div class="reviewer">— John D., Toronto</div>
-      </div>
-      <div class="review">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p>"Professional, safe, and affordable. I use SOBDRIVE every time I go out in Mississauga."</p>
-        <div class="reviewer">— Sarah M., Mississauga</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AREAS -->
-  <section id="service-areas">
-    <h2>Areas We Serve</h2>
-    <p style="color:#aaa; margin-bottom:1.5rem;">SOBDRIVE covers all major cities and neighbourhoods across the Greater Toronto Area.</p>
-    <div class="areas">
-      <span class="area-tag">Toronto</span>
-      <span class="area-tag">Mississauga</span>
-      <span class="area-tag">Brampton</span>
-      <span class="area-tag">Markham</span>
-      <span class="area-tag">Vaughan</span>
-      <span class="area-tag">Richmond Hill</span>
-      <span class="area-tag">Scarborough</span>
-      <span class="area-tag">North York</span>
-      <span class="area-tag">Etobicoke</span>
-      <span class="area-tag">Oakville</span>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <h3>How fast can a GTA driver arrive?</h3>
-      <p>Most drivers arrive within 15–30 minutes depending on your location and traffic conditions.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Do you drive my own car?</h3>
-      <p>Yes! Our professional drivers drive you home in YOUR own vehicle — so you don't have to worry about leaving your car behind.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Which GTA areas do you serve?</h3>
-      <p>We serve Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke and surrounding GTA neighbourhoods.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Are your drivers insured and background-checked?</h3>
-      <p>Yes. All SOBDRIVE drivers are fully licensed, insured and have passed background checks for your safety.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How do I book a designated driver?</h3>
-      <p>Simply call us at +1-289-236-2726 anytime. We're available 24/7 including weekends and holidays.</p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta-section">
-    <div style="max-width:700px; margin:0 auto;">
-      <h2 style="border-color:#000;">Book Your Safe Ride Home Now</h2>
-      <p>Avoid DUI penalties, protect your license, and get home safely. Our drivers are standing by 24/7 across Toronto GTA.</p>
-      <a href="tel:+12892362726" class="cta-dark">📞 Call +1-289-236-2726</a>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <div class="section section-alt">
+    <div class="section-inner">
+      <div class="orange-line"></div>
+      <h2>Why Choose SOBDRIVE?</h2>
+      <p class="section-sub">Professional, fast and affordable designated driver service across Toronto GTA.</p>
+      <div class="why-grid">
+        <div class="why-item"><div class="why-icon">🕐</div><h3>24/7 Availability</h3><p>We operate around the clock including weekends and holidays.</p></div>
+        <div class="why-item"><div class="why-icon">✅</div><h3>Licensed & Insured</h3><p>All drivers are background-checked, licensed and fully insured.</p></div>
+        <div class="why-item"><div class="why-icon">💰</div><h3>Affordable Pricing</h3><p>Flat, transparent pricing across the GTA. No hidden fees.</p></div>
+        <div class="why-item"><div class="why-icon">⚡</div><h3>Fast Response</h3><p>15–30 minute arrival times across Toronto and surrounding areas.</p></div>
+        <div class="why-item"><div class="why-icon">🗺️</div><h3>Local Experts</h3><p>Drivers who know Toronto GTA roads and neighbourhoods.</p></div>
+        <div class="why-item"><div class="why-icon">🚘</div><h3>Your Car, Our Driver</h3><p>We drive YOUR vehicle — no leaving your car behind.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+      <div class="orange-line"></div>
+      <h2>What Customers Say</h2>
+      <p class="section-sub">Trusted by GTA residents to get home safely.</p>
+      <div class="reviews">
+        <div class="review">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Best designated driver service in Toronto GTA. Arrived in 20 minutes and got me home safely!"</p>
+          <div class="reviewer">— John D., Toronto</div>
+        </div>
+        <div class="review">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Professional, safe, and affordable. I use SOBDRIVE every time I go out in Mississauga."</p>
+          <div class="reviewer">— Sarah M., Mississauga</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="section-inner">
+      <div class="orange-line"></div>
+      <h2>Areas We Serve</h2>
+      <p class="section-sub">Covering all major cities across the Greater Toronto Area.</p>
+      <div class="areas">
+        <span class="area-tag">Toronto</span>
+        <span class="area-tag">Mississauga</span>
+        <span class="area-tag">Brampton</span>
+        <span class="area-tag">Markham</span>
+        <span class="area-tag">Vaughan</span>
+        <span class="area-tag">Richmond Hill</span>
+        <span class="area-tag">Scarborough</span>
+        <span class="area-tag">North York</span>
+        <span class="area-tag">Etobicoke</span>
+        <span class="area-tag">Oakville</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+      <div class="orange-line"></div>
+      <h2>Frequently Asked Questions</h2>
+      <p class="section-sub">Everything you need to know about SOBDRIVE.</p>
+      <div class="faq-item"><h3>How fast can a GTA driver arrive?</h3><p>Most drivers arrive within 15–30 minutes depending on your location and traffic conditions.</p></div>
+      <div class="faq-item"><h3>Do you drive my own car?</h3><p>Yes! Our professional drivers drive you home in YOUR own vehicle — no leaving your car behind.</p></div>
+      <div class="faq-item"><h3>Which GTA areas do you serve?</h3><p>We serve Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke and surrounding GTA neighbourhoods.</p></div>
+      <div class="faq-item"><h3>Are your drivers insured and background-checked?</h3><p>Yes. All SOBDRIVE drivers are fully licensed, insured and have passed background checks for your safety.</p></div>
+      <div class="faq-item"><h3>How do I book a designated driver?</h3><p>Simply call us at +1-289-236-2726 anytime. We're available 24/7 including weekends and holidays.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Book Your Safe Ride Home Now</h2>
+    <p>Avoid DUI penalties, protect your license, and get home safely. Our drivers are standing by 24/7 across Toronto GTA.</p>
+    <a href="tel:+12892362726" class="cta-white">📞 Call +1-289-236-2726</a>
+  </div>
+
   <footer>
     <div class="footer-logo">SOBDRIVE</div>
     <div class="footer-links">
       <a href="#how-it-works">How It Works</a>
       <a href="#why-us">Why Us</a>
-      <a href="#service-areas">Service Areas</a>
+      <a href="#service-areas">Areas</a>
       <a href="#faq">FAQ</a>
-      <a href="mailto:support@sobdrive.com">support@sobdrive.com</a>
+      <a href="/cdn-cgi/l/email-protection#2c5f595c5c435e586c5f434e485e455a49024f4341"><span class="__cf_email__" data-cfemail="1e6d6b6e6e716c6a5e6d717c7a6c77687b307d7173">[email&#160;protected]</span></a>
     </div>
-    <p>24/7 Designated Driver Service — Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill</p>
-    <p style="margin-top:0.5rem;">© 2026 SOBDRIVE. All Rights Reserved.</p>
-  </footer>
-
-</body>
-</html>
+    <p>24/7 Designated Driver Service — Toronto, Mississauga, Brampton, Markh
