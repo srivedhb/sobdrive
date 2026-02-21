@@ -1149,7 +1149,7 @@
           <div class="popular-badge">Most Popular</div>
           <div class="pricing-icon">🚗</div>
           <h3>City Ride</h3>
-          <div class="pricing-range">11 – 30 km</div>
+          <div class="pricing-range">11+ km</div>
           <div class="pricing-price">$19.99<span> + $2.50/km</span></div>
           <div class="pricing-price-sub">$19.99 booking fee<br/>+ $2.50 per km</div>
           <ul class="pricing-features">
@@ -1159,43 +1159,6 @@
             <li>15–30 min arrival</li>
             <li>24/7</li>
             <li>Fully Background-checked</li>
-          </ul>
-          <a href="#book" class="pricing-cta">Book Now</a>
-        </div>
-
-        <!-- TIER 3: 30–60km -->
-        <div class="pricing-card reveal d2">
-          <div class="pricing-icon">🛣️</div>
-          <h3>Long Ride</h3>
-          <div class="pricing-range">31 – 60 km</div>
-          <div class="pricing-price">$9.99<span> + $2.50/km</span></div>
-          <div class="pricing-price-sub">$9.99 booking fee<br/>+ $2.50 per km</div>
-          <ul class="pricing-features">
-            <li>e.g. 45km = $122.50 total</li>
-            <li>We drive your own car</li>
-            <li>Professional driver</li>
-            <li>15–30 min arrival</li>
-            <li>24/7</li>
-            <li>Fully background-checked</li>
-          </ul>
-          <a href="#book" class="pricing-cta">Book Now</a>
-        </div>
-
-        <!-- TIER 4: 60km+ -->
-        <div class="pricing-card reveal d3">
-          <div class="no-fee-tag">✦ No Booking Fee</div>
-          <div class="pricing-icon">🏁</div>
-          <h3>Highway Ride</h3>
-          <div class="pricing-range">60+ km</div>
-          <div class="pricing-price">$2.50<span>/km</span></div>
-          <div class="pricing-price-sub">No booking fee at all.<br/>Pay only per km.</div>
-          <ul class="pricing-features">
-            <li>e.g. 80km = $200 total</li>
-            <li>Zero booking fee</li>
-            <li>We drive your own car</li>
-            <li>Professional driver</li>
-            <li>24/7</li>
-            <li>All GTA highways</li>
           </ul>
           <a href="#book" class="pricing-cta">Book Now</a>
         </div>
@@ -1748,15 +1711,9 @@
     if (km <= 10) {
       total = 39.99;
       breakdown = 'Flat rate — zero booking fee';
-    } else if (km <= 30) {
+    } else {
       total = 19.99 + (km * 2.5);
       breakdown = `$19.99 booking fee + ${km}km × $2.50`;
-    } else if (km <= 60) {
-      total = 9.99 + (km * 2.5);
-      breakdown = `$9.99 booking fee + ${km}km × $2.50`;
-    } else {
-      total = km * 2.5;
-      breakdown = `No booking fee — ${km}km × $2.50`;
    }
     priceEl.textContent = `$${total.toFixed(2)}`;
     breakdownEl.textContent = breakdown;
@@ -1776,5 +1733,3 @@ function formatPhone(input) {
   </script>
 </body>
 </html>
-
-
