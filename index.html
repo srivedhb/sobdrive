@@ -9,6 +9,8 @@
   <meta name="robots" content="index, follow" />
   <meta name="author" content="SOBDRIVE" />
   <link rel="canonical" href="https://sobdrive.ca/" />
+  <link rel="icon" type="image/png" href="images/sobDrive-favicon.png" />
+  <link rel="apple-touch-icon" href="images/sobDrive-favicon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sobdrive.ca/" />
   <meta property="og:title" content="SOBDRIVE | 24/7 Designated Driver Service Toronto GTA" />
@@ -29,7 +31,7 @@
     "alternateName": ["SOBDRIVE Designated Driver","SOBDRIVE GTA"],
     "description": "24/7 professional designated driver service serving Toronto GTA. We drive you home in your own vehicle safely and affordably.",
     "url": "https://sobdrive.ca",
-    "telephone": "+12892362726",
+    "telephone": "+19052439404",
     "email": "sobdrive1@gmail.com",
     "currenciesAccepted": "CAD",
     "paymentAccepted": "Cash, Credit Card, Debit",
@@ -92,7 +94,7 @@
     "url": "https://sobdrive.ca",
     "logo": {"@type":"ImageObject","url":"https://sobdrive.ca/logo.png","width":200,"height":60},
     "contactPoint": [
-      {"@type":"ContactPoint","telephone":"+12892362726","contactType":"customer service","areaServed":"CA","availableLanguage":"English","contactOption":"TollFree","hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
+      {"@type":"ContactPoint","telephone":"+19052439404","contactType":"customer service","areaServed":"CA","availableLanguage":"English","contactOption":"TollFree","hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
     ],
     "sameAs":["https://www.facebook.com/sobdrive","https://www.instagram.com/sobdrive"]
   }
@@ -107,7 +109,7 @@
   <!-- FAQ -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"Where can I find a designated driver near me in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"SOBDRIVE covers all of Toronto GTA including Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke, Oshawa, Pickering and Oakville. Call +1-289-236-2726 or book online at sobdrive.ca for a driver near you in 15–30 minutes."}},
+    {"@type":"Question","name":"Where can I find a designated driver near me in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"SOBDRIVE covers all of Toronto GTA including Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke, Oshawa, Pickering and Oakville. Call +1-905-243-9404 or book online at sobdrive.ca for a driver near you in 15–30 minutes."}},
     {"@type":"Question","name":"How fast can a designated driver near me arrive?","acceptedAnswer":{"@type":"Answer","text":"Most SOBDRIVE drivers arrive within 15–30 minutes depending on your location and traffic conditions across the GTA."}},
     {"@type":"Question","name":"Do you drive my own car?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our professional GTA drivers drive you home in your own vehicle — no leaving your car behind at the bar or restaurant."}},
     {"@type":"Question","name":"How much does a designated driver cost in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"Rides under 5km are a flat $30 with zero booking fee. For 10–30km: $20 booking fee + $2.50/km. For 30–60km: $10 booking fee + $2.50/km. For 60km+: no booking fee, just $2.50/km."}},
@@ -116,7 +118,7 @@
   ]}</script>
   <!-- WebPage -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebPage","@id":"https://sobdrive.ca/","url":"https://sobdrive.ca/","name":"SOBDRIVE | 24/7 Designated Driver Service Toronto GTA","description":"24/7 designated driver service near you in Toronto GTA. Book online or call +1-289-236-2726.","isPartOf":{"@type":"WebSite","@id":"https://sobdrive.ca/#website","url":"https://sobdrive.ca","name":"SOBDRIVE","description":"Toronto GTA Designated Driver Service","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://sobdrive.ca/?q={search_term_string}"},"query-input":"required name=search_term_string"}},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sobdrive.ca/"}]},"mainEntity":{"@id":"https://sobdrive.ca/#business"}}
+  {"@context":"https://schema.org","@type":"WebPage","@id":"https://sobdrive.ca/","url":"https://sobdrive.ca/","name":"SOBDRIVE | 24/7 Designated Driver Service Toronto GTA","description":"24/7 designated driver service near you in Toronto GTA. Book online or call +1-905-243-9404.","isPartOf":{"@type":"WebSite","@id":"https://sobdrive.ca/#website","url":"https://sobdrive.ca","name":"SOBDRIVE","description":"Toronto GTA Designated Driver Service","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://sobdrive.ca/?q={search_term_string}"},"query-input":"required name=search_term_string"}},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sobdrive.ca/"}]},"mainEntity":{"@id":"https://sobdrive.ca/#business"}}
   </script>
 
 
@@ -136,11 +138,24 @@
       --dark: #1C1C1C;
       --gray: #5a5a5a;
       --border: #E8E0D5;
-
+      --gold: #D4AF37;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Cabin', sans-serif; background: var(--white); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
+
+    /* ── Golden maple leaf: filter shifts emoji from orange-red to gold ── */
+    .maple {
+      display: inline-block;
+      filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
+    }
+    /* Pure-emoji elements (no mixed text) get filter directly */
+    .s-leaf,
+    .falling-leaf,
+    .cta-maple {
+      filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
+    }
+
 
     /* ============ SPLASH ============ */
     #splash {
@@ -165,7 +180,7 @@
     .s-leaf { position:absolute; bottom:-40px; font-size:clamp(1rem,3vw,1.8rem); animation:leafFloat linear forwards; opacity:0; }
     @keyframes leafFloat { 0%{transform:translateY(0) rotate(0deg) scale(0.5);opacity:0} 15%{opacity:1} 85%{opacity:0.9} 100%{transform:translateY(-110vh) rotate(360deg) scale(1.1);opacity:0} }
     .splash-content { position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
-    .splash-maple-icon { font-size:clamp(3rem,10vw,5.5rem); animation:mapleDropIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.3s both; filter:drop-shadow(0 8px 24px rgba(213,43,30,0.25)); }
+    .splash-maple-icon { font-size:clamp(3rem,10vw,5.5rem); animation:mapleDropIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.3s both; filter:brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%); }
     @keyframes mapleDropIn { from{opacity:0;transform:translateY(-80px) scale(0.5) rotate(-20deg)} to{opacity:1;transform:translateY(0) scale(1) rotate(0deg)} }
     .splash-wordmark { display:flex; align-items:center; }
     .splash-sob { font-family:'Fjalla One',sans-serif; font-size:clamp(3rem,12vw,7rem); letter-spacing:8px; color:var(--red); line-height:1; animation:slideFromLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s both; }
@@ -181,7 +196,7 @@
     .splash-car { position:absolute; bottom:clamp(10px,3vw,18px); font-size:clamp(2rem,7vw,3.5rem); filter:drop-shadow(0 4px 12px rgba(213,43,30,0.4)); animation:splashCarDrive 4s ease-in-out 2s both; left:-100px; }
     @keyframes splashCarDrive { 0%{left:-100px} 35%{left:50%;transform:translateX(-50%)} 65%{left:50%;transform:translateX(-50%)} 100%{left:110%} }
     .splash-progress { position:absolute; bottom:clamp(58px,13vw,88px); left:15%; right:15%; height:3px; background:rgba(213,43,30,0.15); border-radius:3px; overflow:hidden; }
-    .splash-fill { height:100%; background:linear-gradient(90deg,var(--red-pale),var(--red)); border-radius:3px; animation:fillBar 3.8s ease forwards; }
+    .splash-fill { height:100%; background:linear-gradient(90deg,var(--red-pale),var(--red)); border-radius:3px; animation:fillBar 2.4s ease forwards; }
     @keyframes fillBar { from{width:0%} to{width:100%} }
     .splash-exit { animation:splashOut 0.7s cubic-bezier(0.4,0,0.6,1) forwards !important; }
     @keyframes splashOut { 0%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(1.06)} }
@@ -218,35 +233,145 @@
     .falling-leaf { position:absolute; top:-60px; opacity:0; animation:fallLeaf linear infinite; }
     @keyframes fallLeaf { 0%{transform:translateY(-60px) rotate(0deg);opacity:0} 8%{opacity:0.2} 92%{opacity:0.2} 100%{transform:translateY(115vh) rotate(500deg);opacity:0} }
 
-    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:#fff; color:var(--red); border:1.5px solid rgba(213,43,30,0.2); font-size:clamp(0.62rem,2vw,0.76rem); font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.1rem; border-radius:50px; margin-bottom:1.5rem; box-shadow:0 2px 12px rgba(213,43,30,0.1); animation:fadeUpEl 0.7s ease 4.5s both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:#fff; color:var(--red); border:1.5px solid rgba(213,43,30,0.2); font-size:clamp(0.62rem,2vw,0.76rem); font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.1rem; border-radius:50px; margin-bottom:1.5rem; box-shadow:0 2px 12px rgba(213,43,30,0.1); animation:fadeUpEl 0.7s ease 2.0s both; }
     @keyframes fadeUpEl { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    .hero h1 { font-family:'Fjalla One',sans-serif; font-size:clamp(2rem,5vw,4rem); line-height:1.08; margin-bottom:1.2rem; animation:fadeUpEl 0.7s ease 4.65s both; }
+    .hero h1 { font-family:'Fjalla One',sans-serif; font-size:clamp(2rem,5vw,4rem); line-height:1.08; margin-bottom:1.2rem; animation:fadeUpEl 0.7s ease 2.15s both; }
     .hero h1 .red { color:var(--red); }
-    .hero p { font-size:clamp(0.92rem,2vw,1.08rem); color:var(--gray); margin-bottom:2rem; animation:fadeUpEl 0.7s ease 4.8s both; }
-    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUpEl 0.7s ease 4.95s both; }
+    .hero p { font-size:clamp(0.92rem,2vw,1.08rem); color:var(--gray); margin-bottom:2rem; animation:fadeUpEl 0.7s ease 2.3s both; }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUpEl 0.7s ease 2.45s both; }
     .hero-cta { display:inline-block; background:var(--red); color:#fff; font-family:'Fjalla One',sans-serif; font-size:clamp(0.95rem,2.5vw,1.1rem); letter-spacing:1px; padding:0.85rem 2.2rem; border-radius:50px; box-shadow:0 8px 28px rgba(213,43,30,0.38); transition:transform 0.25s,box-shadow 0.25s,background 0.2s; }
     .hero-cta:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 14px 36px rgba(213,43,30,0.45); background:var(--red-dark); }
 
 
-    /* Hero image placeholder */
-    .hero-image-wrap { position:relative; animation:fadeUpEl 0.7s ease 4.7s both; }
-    .hero-img-placeholder {
+    /* ============ BOOKING OFFER WIDGET ============ */
+    .booking-offer-widget {
       width:100%; aspect-ratio:4/3; border-radius:20px;
-      background:linear-gradient(135deg,#f5e6e4 0%,#fce8e6 50%,#f0d0ce 100%);
+      background: linear-gradient(145deg, #1a1a1a 0%, #2c1a19 50%, #1a0f0f 100%);
       display:flex; flex-direction:column; align-items:center; justify-content:center;
-      border:2px dashed rgba(213,43,30,0.25);
-      box-shadow:0 20px 60px rgba(213,43,30,0.15);
-      overflow:hidden; position:relative;
+      border:2px solid rgba(213,43,30,0.4);
+      box-shadow:0 20px 60px rgba(213,43,30,0.25), 0 0 0 1px rgba(213,43,30,0.1);
+      overflow:hidden; position:relative; gap:0;
+      cursor:pointer;
     }
-    .hero-img-placeholder::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(213,43,30,0.05),transparent); }
-    .img-icon { font-size:clamp(3rem,8vw,5rem); margin-bottom:0.75rem; }
-    .img-label { font-family:'Fjalla One',sans-serif; font-size:clamp(0.8rem,2vw,1rem); color:var(--red); letter-spacing:2px; text-transform:uppercase; }
-    .img-sublabel { font-size:0.75rem; color:var(--gray); margin-top:0.3rem; }
-    .hero-img-badge { position:absolute; bottom:-12px; right:-12px; background:var(--red); color:#fff; padding:0.6rem 1.2rem; border-radius:50px; font-weight:700; font-size:0.8rem; box-shadow:0 4px 16px rgba(213,43,30,0.4); white-space:nowrap; }
+    .bow-glow {
+      position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(ellipse at 50% 0%, rgba(213,43,30,0.18) 0%, transparent 65%);
+      animation: bowGlowPulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes bowGlowPulse { from{opacity:0.5} to{opacity:1} }
+    .bow-border-flash {
+      position:absolute; inset:0; border-radius:18px; pointer-events:none;
+      box-shadow: inset 0 0 0 2px rgba(213,43,30,0);
+      animation: borderFlash 1.8s ease-in-out infinite;
+    }
+    @keyframes borderFlash { 0%,100%{box-shadow:inset 0 0 0 2px rgba(213,43,30,0)} 50%{box-shadow:inset 0 0 0 2px rgba(213,43,30,0.7), 0 0 24px rgba(213,43,30,0.35)} }
 
-    .trust-bar { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:1.8rem; animation:fadeUpEl 0.7s ease 5.1s both; }
-    .trust-item { background:#fff; border:1.5px solid rgba(213,43,30,0.18); border-radius:50px; padding:0.38rem 1rem; font-size:clamp(0.7rem,2vw,0.82rem); font-weight:700; color:var(--red); display:flex; align-items:center; gap:0.35rem; box-shadow:0 2px 8px rgba(213,43,30,0.07); }
-    .trust-item::before { content:'🍁'; font-size:0.72rem; }
+    .bow-top-ribbon {
+      position:absolute; top:0; left:0; right:0;
+      background: var(--red);
+      padding:0.45rem 1rem;
+      display:flex; align-items:center; justify-content:center; gap:0.5rem;
+      font-family:'Fjalla One',sans-serif; font-size:clamp(0.65rem,1.8vw,0.78rem);
+      letter-spacing:2px; text-transform:uppercase; color:#fff;
+      animation: ribbonFlash 2s ease-in-out infinite;
+      z-index:3;
+    }
+    @keyframes ribbonFlash { 0%,100%{background:var(--red)} 50%{background:#b01f14} }
+    .bow-ribbon-dot { width:7px; height:7px; border-radius:50%; background:#fff; animation:dotBlink 1s ease-in-out infinite; }
+    .bow-ribbon-dot:nth-child(2){ animation-delay:0.3s; }
+    .bow-ribbon-dot:nth-child(3){ animation-delay:0.6s; }
+    @keyframes dotBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .bow-content {
+      position:relative; z-index:2;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:clamp(1rem,4vw,2rem) clamp(1rem,3vw,1.5rem);
+      text-align:center; gap:0.6rem; width:100%;
+      padding-top: clamp(2.5rem, 6vw, 3.5rem);
+    }
+    .bow-car-emoji {
+      font-size:clamp(1.8rem,5vw,3.5rem);
+      animation: carBounce 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 4px 12px rgba(213,43,30,0.5));
+      line-height:1;
+    }
+    @keyframes carBounce { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1.05)} }
+
+    .bow-offer-main {
+      font-family:'Fjalla One',sans-serif;
+      font-size:clamp(1rem,3vw,1.8rem);
+      color:#fff; line-height:1.15;
+      letter-spacing:0.5px;
+    }
+    .bow-offer-main .bow-red { color:#ff4444; animation: redFlash 1.2s ease-in-out infinite; }
+    @keyframes redFlash { 0%,100%{color:#ff4444} 50%{color:#ff7070} }
+
+    .bow-price-row {
+      display:flex; align-items:baseline; gap:0.4rem;
+      justify-content:center;
+    }
+    .bow-from { font-size:clamp(0.7rem,2vw,0.85rem); color:rgba(255,255,255,0.6); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+    .bow-price {
+      font-family:'Fjalla One',sans-serif;
+      font-size:clamp(2rem,6vw,3.5rem);
+      color:#fff; line-height:1;
+      text-shadow: 0 0 20px rgba(213,43,30,0.6);
+      animation: priceGlow 2s ease-in-out infinite;
+    }
+    @keyframes priceGlow { 0%,100%{text-shadow:0 0 20px rgba(213,43,30,0.4)} 50%{text-shadow:0 0 35px rgba(213,43,30,0.9), 0 0 60px rgba(213,43,30,0.3)} }
+    .bow-price-sub { font-size:clamp(0.65rem,1.8vw,0.78rem); color:rgba(255,255,255,0.55); letter-spacing:1px; }
+
+    .bow-badges {
+      display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:center; margin-top:0.1rem;
+    }
+    .bow-badge {
+      background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+      color:rgba(255,255,255,0.8); border-radius:50px;
+      padding:0.25rem 0.7rem; font-size:clamp(0.58rem,1.5vw,0.7rem); font-weight:700;
+      letter-spacing:1px; text-transform:uppercase; white-space:nowrap;
+    }
+
+    .bow-cta-btn {
+      display:inline-block; background:var(--red); color:#fff;
+      font-family:'Fjalla One',sans-serif; font-size:clamp(0.8rem,2.5vw,1rem);
+      letter-spacing:1.5px; text-transform:uppercase;
+      padding:0.6rem 1.5rem; border-radius:50px; margin-top:0.3rem;
+      box-shadow:0 6px 24px rgba(213,43,30,0.5);
+      animation: ctaPop 1.8s ease-in-out infinite;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    @keyframes ctaPop { 0%,100%{transform:scale(1); box-shadow:0 6px 24px rgba(213,43,30,0.5)} 50%{transform:scale(1.04); box-shadow:0 10px 36px rgba(213,43,30,0.75)} }
+    .bow-cta-btn:hover { transform:scale(1.07) !important; }
+
+    .bow-urgency {
+      font-size:clamp(0.58rem,1.6vw,0.72rem); color:rgba(255,255,255,0.45);
+      letter-spacing:1px; text-transform:uppercase;
+    }
+    .bow-urgency .bow-live { color:#4ade80; animation: liveBlink 1s step-end infinite; }
+    @keyframes liveBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Mobile: remove fixed aspect-ratio so content breathes */
+    @media(max-width:768px) {
+      .booking-offer-widget {
+        aspect-ratio: unset;
+        min-height: 320px;
+        padding-bottom: 1rem;
+      }
+      .bow-content {
+        gap: 0.4rem;
+        padding-top: 3rem;
+        padding-bottom: 0.5rem;
+      }
+      .bow-car-emoji {
+        font-size: 2rem;
+      }
+      .bow-ribbon-dot {
+        display: none;
+      }
+    }
+
+
 
     @media(max-width:768px) { .hero-inner { grid-template-columns:1fr; gap:2rem; } .hero-image-wrap { order:-1; } }
 
@@ -256,12 +381,7 @@
     .ticker-track span { font-family:'Fjalla One',sans-serif; font-size:clamp(0.65rem,2vw,0.9rem); letter-spacing:2px; padding:0 2rem; }
     @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ============ CAR STRIP ============ */
-    .car-strip { background:#f0ebe3; height:58px; display:flex; align-items:center; position:relative; overflow:hidden; border-top:2px dashed #ddd; border-bottom:2px dashed #ddd; }
-    .road-marks { position:absolute; top:50%; left:0; right:0; height:2px; background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 30px,transparent 30px,transparent 70px); transform:translateY(-50%); opacity:0.25; animation:roadScroll 0.5s linear infinite; }
-    @keyframes roadScroll { from{background-position:0 0} to{background-position:-70px 0} }
-    .car-moving { position:absolute; bottom:8px; font-size:clamp(1.6rem,5vw,2.3rem); animation:carDrive 8s linear infinite; filter:drop-shadow(0 4px 8px rgba(213,43,30,0.3)); }
-    @keyframes carDrive { from{left:-80px} to{left:110%} }
+
 
     /* ============ STATS ============ */
     .stats-bar { background:var(--red); color:#fff; display:grid; grid-template-columns:repeat(4,1fr); text-align:center; padding:clamp(2rem,5vw,3rem) clamp(1rem,4vw,2rem); gap:1.5rem; }
@@ -319,52 +439,6 @@
     .step p { color:var(--gray); font-size:0.88rem; }
 
     /* ============ NO-FEE HERO BANNER ============ */
-    .no-fee-banner {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      border-top: 3px solid var(--red);
-      border-bottom: 3px solid var(--red);
-      padding: 1.1rem clamp(1rem,4vw,2rem);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .no-fee-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(90deg, rgba(213,43,30,0.04) 0, rgba(213,43,30,0.04) 1px, transparent 1px, transparent 60px);
-      pointer-events: none;
-    }
-    .no-fee-inner {
-      display: inline-flex; align-items: center; gap: clamp(0.5rem,2vw,1.5rem);
-      flex-wrap: wrap; justify-content: center;
-    }
-    .no-fee-pill {
-      background: var(--red);
-      color: #fff;
-      font-family: 'Fjalla One', sans-serif;
-      font-size: clamp(0.7rem,2vw,0.82rem);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.3rem 0.9rem;
-      border-radius: 50px;
-      white-space: nowrap;
-      animation: pillPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.5s both;
-    }
-    @keyframes pillPop { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
-    .no-fee-text {
-      color: #fff;
-      font-family: 'Fjalla One', sans-serif;
-      font-size: clamp(0.95rem,3vw,1.25rem);
-      letter-spacing: 1px;
-    }
-    .no-fee-text .highlight { color: var(--red); }
-    .no-fee-sub {
-      color: rgba(255,255,255,0.55);
-      font-size: clamp(0.72rem,2vw,0.82rem);
-      display: flex; align-items: center; gap: 0.4rem;
-    }
-    .no-fee-sub::before { content: '|'; opacity: 0.3; }
-
     /* ============ PRICING ============ */
     .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.5rem; margin-top:0.5rem; }
     .pricing-card { background:#fff; border:2px solid var(--border); border-radius:20px; padding:2rem 1.5rem; text-align:center; box-shadow:0 4px 18px rgba(0,0,0,0.05); transition:transform 0.3s,box-shadow 0.3s; position:relative; overflow:hidden; }
@@ -387,6 +461,7 @@
     .pricing-cta { display:block; background:var(--red); color:#fff; border-radius:50px; padding:0.75rem 1.5rem; font-family:'Fjalla One',sans-serif; font-size:1rem; letter-spacing:1px; transition:background 0.2s,transform 0.2s; }
     .pricing-cta:hover { background:var(--red-dark); transform:translateY(-2px); }
     .pricing-disclaimer { text-align:center; font-size:0.78rem; color:var(--gray); margin-top:1.5rem; }
+    .pricing-swipe-hint { display: none; } /* shown only in mobile media query */
 
     /* ============ FARE CALCULATOR ============ */
     .calc-wrap { background:#fff; border:2px solid var(--border); border-radius:20px; padding:2rem; margin-top:2rem; box-shadow:0 4px 18px rgba(0,0,0,0.05); }
@@ -544,15 +619,6 @@
         bottom: 0.5rem;
       }
 
-      .no-fee-inner {
-        flex-direction: column;
-        gap: 0.35rem;
-      }
-
-      .no-fee-sub::before {
-        content: '';
-      }
-
       .section,
       .booking-section,
       .cta-section {
@@ -571,6 +637,68 @@
 
       .pricing-price {
         font-size: 2rem;
+      }
+
+      /* ── Mobile pricing: horizontal swipe carousel ── */
+      .pricing-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0.5rem 0.25rem 1.2rem;
+        margin: 0 -0.9rem;
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+        scrollbar-width: none;
+      }
+      .pricing-grid::-webkit-scrollbar { display: none; }
+
+      .pricing-card {
+        flex: 0 0 82vw;
+        max-width: 300px;
+        scroll-snap-align: center;
+        padding: 1.4rem 1.2rem 1.2rem;
+      }
+
+      /* Trim features list to 3 items on mobile */
+      .pricing-features li:nth-child(n+4) { display: none; }
+
+      /* Hide verbose sub-text to save vertical space */
+      .pricing-price-sub { display: none; }
+      .pricing-note { display: none; }
+
+      /* Tighter spacing inside cards */
+      .pricing-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+      .no-fee-tag { margin-bottom: 0.4rem; font-size: 0.65rem; }
+      .pricing-range { margin-bottom: 0.5rem; }
+      .pricing-features { margin-bottom: 1rem; gap: 0.35rem; }
+      .pricing-features li { font-size: 0.82rem; }
+
+      /* Swipe hint pill below grid */
+      .pricing-swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        color: var(--gray);
+        margin-top: 0.2rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .pricing-swipe-hint::before,
+      .pricing-swipe-hint::after {
+        content: '←';
+        font-size: 0.8rem;
+        opacity: 0.5;
+        animation: nudge 1.5s ease-in-out infinite;
+      }
+      .pricing-swipe-hint::after { content: '→'; }
+      @keyframes nudge {
+        0%,100% { transform: translateX(0); opacity: 0.5; }
+        50% { transform: translateX(3px); opacity: 1; }
       }
 
       .calc-row {
@@ -679,19 +807,6 @@
     .ts-divider { width: 1px; height: 20px; background: var(--border); flex-shrink:0; }
     @media(max-width:600px){ .ts-divider{display:none} }
 
-    /* ═══ SOCIAL PROOF BADGE ═══ */
-    .social-proof-row {
-      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
-      margin-top: 1.2rem;
-    }
-    .sp-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(213,43,30,0.15);
-      border-radius: 50px; padding: 0.4rem 1rem;
-      font-size: clamp(0.72rem,2vw,0.82rem); font-weight: 700; color: var(--dark);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    }
-    .sp-badge .sp-num { color: var(--red); font-family: 'Fjalla One',sans-serif; font-size: 1rem; }
 
     /* ═══ DUI AWARENESS BANNER ═══ */
     .dui-banner {
@@ -707,13 +822,6 @@
     .dui-text strong { color: var(--red); }
 
     /* ═══ TRUST BADGES (form area) ═══ */
-    .form-trust-badges {
-      display: flex; gap: 0.75rem; flex-wrap: wrap;
-      justify-content: center; margin-bottom: 1.5rem;
-    }
-    .ftb { display:flex; align-items:center; gap:0.4rem; font-size:0.75rem; font-weight:700; color:var(--gray); }
-    .ftb::before { content:'✓'; color:#22c55e; font-weight:900; }
-
     /* ═══ NEARBY CITIES (internal linking) ═══ */
     .nearby-cities {
       background: var(--off-white); border-top: 1px solid var(--border);
@@ -865,14 +973,14 @@
       <span class="avail-dot"></span>
       <span><strong>Drivers Available Now</strong> — 15–30 min arrival across Toronto GTA</span>
       <span style="opacity:0.4">|</span>
-      <span>🍁 Serving 12+ GTA Cities</span>
+      <span><span class="maple">🍁</span> Serving 12+ GTA Cities</span>
     </div>
 </div>
 
   <!-- ═══ TRUST SIGNALS BAR ═══ -->
   <div class="trust-signals-bar">
     <div class="trust-signals-inner">
-      <div class="ts-item"><span class="ts-icon">✅</span> Licensed &amp; Insured</div>
+      <div class="ts-item"><span class="ts-icon">✅</span> Licensed &amp; background-checked</div>
       <div class="ts-divider"></div>
       <div class="ts-item"><span class="ts-icon">⚡</span> 15–30 min arrival</div>
       <div class="ts-divider"></div>
@@ -911,7 +1019,7 @@
 
   <!-- ===== NAV ===== -->
   <nav>
-    <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">🍁 SOBDRIVE</a>
+    <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><span class="maple">🍁</span> SOBDRIVE</a>
     <div class="nav-links">
       <a href="#book">Book Now</a>
       <a href="#pricing">Pricing</a>
@@ -920,7 +1028,7 @@
     </div>
     <div class="nav-actions">
       <a href="#book" class="nav-book">📋 Book Now</a>
-      <a href="tel:+12892362726" class="nav-phone">📞 +1-289-236-2726</a>
+      <a href="tel:+19052439404" class="nav-phone">📞 +1-905-243-9404</a>
     </div>
   </nav>
 
@@ -938,33 +1046,45 @@
       <div class="hero-text">
         <div class="hero-badge">Toronto GTA &nbsp;|&nbsp; 24/7 Service</div>
         <h1>Get Home Safe. <br /><span class="red">We Drive Your Car.</span></h1>
-        <p class="hero-nearme" style="font-size:0.82rem;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;animation:fadeUpEl 0.7s ease 4.6s both;">📍 Designated Driver Near You — Toronto GTA</p>
+        <p class="hero-nearme" style="font-size:0.82rem;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;animation:fadeUpEl 0.7s ease 2.1s both;">📍 Designated Driver Near You — Toronto GTA</p>
         <p>Had too much to drink? SOBDRIVE sends a professional driver to get you and your vehicle home safely — 24/7 across Toronto GTA.</p>
         <div class="hero-btns">
           <a href="#book" class="hero-cta">📋 Book Online</a>
-          <a href="tel:+12892362726" class="hero-cta" style="background:#1a1a1a;box-shadow:0 8px 28px rgba(0,0,0,0.3);">📞 Call Now</a>
-        </div>
-        <div class="trust-bar">
-          <div class="trust-item">Licensed &amp; Insured</div>
-          <div class="trust-item">15–30 min arrival</div>
-          <div class="trust-item">24/7</div>
-          <div class="trust-item">Your car, your keys</div>
+          <a href="tel:+19052439404" class="hero-cta" style="background:#1a1a1a;box-shadow:0 8px 28px rgba(0,0,0,0.3);">📞 Call Now</a>
         </div>
 
-        <div class="social-proof-row">
-          <div class="sp-badge">🚗 <span class="sp-num">500+</span>&nbsp;Safe Rides Completed</div>
-          <div class="sp-badge">⭐ <span class="sp-num">5.0</span>&nbsp;Star Rating</div>
-          <div class="sp-badge">🕐 <span class="sp-num">24/7</span>&nbsp;Always Available</div>
-        </div>
       </div>
       <div class="hero-image-wrap">
-        <!-- REPLACE THIS WITH YOUR ACTUAL PHOTO -->
-        <div class="hero-img-placeholder">
-          <div class="img-icon">🚗</div>
-          <div class="img-label">Replace with your photo</div>
-          <div class="img-sublabel">Driver + Car photo recommended</div>
+        <div class="booking-offer-widget" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+          <div class="bow-glow"></div>
+          <div class="bow-border-flash"></div>
+          <div class="bow-top-ribbon">
+            <div class="bow-ribbon-dot"></div>
+            <div class="bow-ribbon-dot"></div>
+            <div class="bow-ribbon-dot"></div>
+            <span class="maple">🍁</span> Limited-Time Booking Offer
+            <div class="bow-ribbon-dot"></div>
+            <div class="bow-ribbon-dot"></div>
+            <div class="bow-ribbon-dot"></div>
+          </div>
+          <div class="bow-content">
+            <div class="bow-car-emoji">🚗💨</div>
+            <div class="bow-offer-main">Get Home Safe Tonight<br><span class="bow-red">No Booking Fee</span> — Under 5 km</div>
+            <div class="bow-price-row">
+              <span class="bow-from">from</span>
+              <span class="bow-price">$30</span>
+              <span class="bow-price-sub">flat rate</span>
+            </div>
+            <div class="bow-badges">
+              <span class="bow-badge">⚡ 15–30 min arrival</span>
+              <span class="bow-badge">🔑 We drive your car</span>
+              <span class="bow-badge">24/7 Available</span>
+            </div>
+            <a href="#book" class="bow-cta-btn">📋 Book Your Ride Now</a>
+            <div class="bow-urgency"><span class="bow-live">●</span> Drivers available now across Toronto GTA</div>
+          </div>
         </div>
-        <div class="hero-img-badge">24/7 Service</div>
+      
       </div>
     </div>
   </header>
@@ -972,25 +1092,11 @@
   <!-- ===== TICKER ===== -->
   <div class="canada-band">
     <div class="ticker-track">
-      <span>🍁 Toronto</span><span>•</span><span>Mississauga</span><span>•</span><span>Brampton</span><span>•</span><span>Markham</span><span>•</span><span>Vaughan</span><span>•</span><span>Richmond Hill</span><span>•</span><span>Scarborough</span><span>•</span><span>North York</span><span>•</span><span>Etobicoke</span><span>•</span><span>Oshawa</span><span>•</span><span>Pickering</span><span>•</span><span>Oakville 🍁</span>
-      <span>🍁 Toronto</span><span>•</span><span>Mississauga</span><span>•</span><span>Brampton</span><span>•</span><span>Markham</span><span>•</span><span>Vaughan</span><span>•</span><span>Richmond Hill</span><span>•</span><span>Scarborough</span><span>•</span><span>North York</span><span>•</span><span>Etobicoke</span><span>•</span><span>Oshawa</span><span>•</span><span>Pickering</span><span>•</span><span>Oakville 🍁</span>
+      <span><span class="maple">🍁</span> Toronto</span><span>•</span><span>Mississauga</span><span>•</span><span>Brampton</span><span>•</span><span>Markham</span><span>•</span><span>Vaughan</span><span>•</span><span>Richmond Hill</span><span>•</span><span>Scarborough</span><span>•</span><span>North York</span><span>•</span><span>Etobicoke</span><span>•</span><span>Oshawa</span><span>•</span><span>Pickering</span><span>•</span><span>Oakville <span class="maple">🍁</span></span>
+      <span><span class="maple">🍁</span> Toronto</span><span>•</span><span>Mississauga</span><span>•</span><span>Brampton</span><span>•</span><span>Markham</span><span>•</span><span>Vaughan</span><span>•</span><span>Richmond Hill</span><span>•</span><span>Scarborough</span><span>•</span><span>North York</span><span>•</span><span>Etobicoke</span><span>•</span><span>Oshawa</span><span>•</span><span>Pickering</span><span>•</span><span>Oakville <span class="maple">🍁</span></span>
     </div>
   </div>
 
-  <!-- ===== CAR STRIP ===== -->
-  <div class="car-strip" aria-hidden="true">
-    <div class="road-marks"></div>
-    <div class="car-moving">🚗💨</div>
-  </div>
-
-  <!-- ===== NO BOOKING FEE BANNER ===== -->
-  <div class="no-fee-banner">
-    <div class="no-fee-inner">
-      <div class="no-fee-pill">🎉 Limited Offer</div>
-      <div class="no-fee-text">Rides under 5 km — <span class="highlight">$30 FLAT. Zero Booking Fee.</span></div>
-      <div class="no-fee-sub">No hidden charges. Just $30, done.</div>
-    </div>
-  </div>
 
   <!-- ===== STATS ===== -->
   <div class="stats-bar reveal">
@@ -1096,6 +1202,7 @@
         </div>
 
       </div>
+      <div class="pricing-swipe-hint">Swipe to see all plans</div>
 
       <!-- FARE CALCULATOR -->
       <div class="calc-wrap reveal">
@@ -1125,12 +1232,6 @@
   <div class="booking-section" id="book">
     <div class="booking-inner">
       <div class="section-label reveal">Online Booking</div>
-      <div class="form-trust-badges reveal" style="margin-bottom:0;margin-top:1rem;">
-        <span class="ftb">No-obligation booking</span>
-        <span class="ftb">We call within 5 minutes</span>
-        <span class="ftb">Your data is private</span>
-        <span class="ftb">Cancel anytime</span>
-      </div>
       <h2 class="reveal" style="color:#fff">Book Your Driver in Seconds</h2>
       <p class="section-sub reveal">Book in under 60 seconds. We confirm fast, 24/7 across GTA.</p>
       <div class="booking-form reveal">
@@ -1179,24 +1280,6 @@
                 <option>Other GTA Area</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="fcar">Your Car Model</label>
-              <input type="text" id="fcar" placeholder="e.g. Honda Civic 2020" />
-            </div>
-            <div class="form-group">
-              <label for="fcarrier">📱 Your Phone Carrier <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.72rem;color:var(--gray)">(for text confirmation)</span></label>
-              <select id="fcarrier">
-                <option value="">Select carrier (optional)</option>
-                <option value="rogers">Rogers</option>
-                <option value="bell">Bell</option>
-                <option value="telus">Telus</option>
-                <option value="fido">Fido</option>
-                <option value="freedom">Freedom Mobile</option>
-                <option value="virgin">Virgin Mobile</option>
-                <option value="koodo">Koodo</option>
-                <option value="other">Other / Skip text</option>
-              </select>
-            </div>
             <div class="form-group full">
               <label for="fnotes">Additional Notes</label>
               <textarea id="fnotes" placeholder="Any special instructions, parking info, etc."></textarea>
@@ -1212,7 +1295,7 @@
           <h3>Booking Confirmed, <span id="successName"></span>!</h3>
           <div id="successDetails"></div>
           <div id="successSmsNote"></div>
-          <p style="margin-top:1rem;font-size:0.82rem;">Questions? Call us anytime: <a href="tel:+12892362726" style="color:var(--red);font-weight:700;">+1-289-236-2726</a></p>
+          <p style="margin-top:1rem;font-size:0.82rem;">Questions? Call us anytime: <a href="tel:+19052439404" style="color:var(--red);font-weight:700;">+1-905-243-9404</a></p>
         </div>
       </div>
     </div>
@@ -1287,12 +1370,12 @@
         <div class="review reveal">
           <div class="stars">★★★★★</div>
           <p>"Best designated driver service in Toronto GTA. Arrived in 20 minutes and got me home safely!"</p>
-          <div class="reviewer">— John D., Toronto 🍁</div>
+          <div class="reviewer">— John D., Toronto <span class="maple">🍁</span></div>
         </div>
         <div class="review reveal d1">
           <div class="stars">★★★★★</div>
           <p>"Professional, safe, and affordable. I use SOBDRIVE every time I go out in Mississauga."</p>
-          <div class="reviewer">— Sarah M., Mississauga 🍁</div>
+          <div class="reviewer">— Sarah M., Mississauga <span class="maple">🍁</span></div>
         </div>
       </div>
     </div>
@@ -1359,11 +1442,11 @@
       <div class="section-label reveal">FAQ</div>
       <h2 class="reveal">Frequently Asked Questions</h2>
       <p class="section-sub reveal">Everything you need to know about SOBDRIVE.</p>
-      <div class="faq-item reveal"><div class="faq-q">How do I book a designated driver? <span class="faq-arrow">▼</span></div><div class="faq-a">You can book online using the form above, or call us directly at +1-289-236-2726. We're available 24/7.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">How do I book a designated driver? <span class="faq-arrow">▼</span></div><div class="faq-a">You can book online using the form above, or call us directly at +1-905-243-9404. We're available 24/7.</div></div>
       <div class="faq-item reveal"><div class="faq-q">How fast can a GTA driver arrive? <span class="faq-arrow">▼</span></div><div class="faq-a">Most drivers arrive within 15–30 minutes depending on your location and traffic conditions across the GTA.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Do you drive my own car? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes! Our professional drivers drive you home in YOUR own vehicle — no leaving your car behind at the bar.</div></div>
       <div class="faq-item reveal"><div class="faq-q">How much does it cost? <span class="faq-arrow">▼</span></div><div class="faq-a">Rides under 5km are a flat $30 with zero booking fee. For 10–30km it's a $20 booking fee + $2.50/km. For 30–60km it's a $10 booking fee + $2.50/km. For 60km+ there's no booking fee — just $2.50/km.</div></div>
-      <div class="faq-item reveal"><div class="faq-q">Are your drivers insured and background-checked? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. All SOBDRIVE drivers are fully licensed in Ontario, insured and have passed thorough background checks for your peace of mind.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Are your drivers background-checked? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. All SOBDRIVE drivers are fully licensed in Ontario and have passed thorough background checks for your peace of mind.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Can I book in advance? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes, advance bookings are available. Weekends fill fast.</div></div>
     </div>
   </div>
@@ -1376,8 +1459,8 @@
       <p style="color:var(--gray);margin-bottom:1.5rem;">If you're searching for a <strong>designated driver near me</strong> in Toronto GTA, SOBDRIVE is your closest option. We operate 24/7 across 12+ cities and can reach you in 15–30 minutes.</p>
       <div class="nap-block">
         <div class="nap-item"><span class="nap-icon">📍</span><div><span class="nap-label">Service Area</span><span class="nap-value">Toronto GTA, Ontario, Canada</span></div></div>
-        <div class="nap-item"><span class="nap-icon">📞</span><div><span class="nap-label">Phone (24/7)</span><span class="nap-value"><a href="tel:+12892362726">+1 (289) 236-2726</a></span></div></div>
-        <div class="nap-item"><span class="nap-icon">✉️</span><div><span class="nap-label">Email</span><span class="nap-value"><a href="/cdn-cgi/l/email-protection#74071b1610061d021145341319151d185a171b19"><span class="__cf_email__" data-cfemail="92e1fdf0f6e0fbe4f7a3d2f5fff3fbfebcf1fdff">[email&#160;protected]</span></a></span></div></div>
+        <div class="nap-item"><span class="nap-icon">📞</span><div><span class="nap-label">Phone (24/7)</span><span class="nap-value"><a href="tel:+19052439404">+1 (905) 243-9404</a></span></div></div>
+        <div class="nap-item"><span class="nap-icon">✉️</span><div><span class="nap-label">Email</span><span class="nap-value"><a href="mailto:sobdrive1@gmail.com">sobdrive1@gmail.com</a></span></div></div>
         <div class="nap-item"><span class="nap-icon">🕐</span><div><span class="nap-label">Hours</span><span class="nap-value">Open 24 Hours, 7 Days a Week</span></div></div>
       </div>
     </div>
@@ -1411,14 +1494,14 @@
     <p class="reveal">Avoid DUI penalties, protect your Ontario licence, and get home safely. Our Canadian drivers are standing by 24/7.</p>
     <div class="cta-btns reveal">
       <a href="#book" class="cta-btn-white">📋 Book Online</a>
-      <a href="tel:+12892362726" class="cta-btn-white" style="background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);">📞 Call Now</a>
+      <a href="tel:+19052439404" class="cta-btn-white" style="background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);">📞 Call Now</a>
     </div>
   </div>
 
   <!-- ===== FOOTER ===== -->
   <!-- ═══ FOOTER ═══ -->
   <footer>
-    <div class="footer-logo">🍁 SOBDRIVE 🍁</div>
+    <div class="footer-logo"><span class="maple">🍁</span> SOBDRIVE <span class="maple">🍁</span></div>
     <div class="footer-links">
       <a href="#book">Book Now</a>
       <a href="#pricing">Pricing</a>
@@ -1432,13 +1515,13 @@
       <a href="richmond-hill.html">Richmond Hill</a>
       <a href="oshawa.html">Oshawa</a>
       <a href="pickering.html">Pickering</a>
-      <a href="/cdn-cgi/l/email-protection#83f0f6f3f3ecf1f7c3f0ece1e7f1eaf5e6ade0ecee"><span class="__cf_email__" data-cfemail="ccbfb9bcbca3beb88cbfa3aea8bea5baa9e2afa3a1">[email&#160;protected]</span></a>
+      <a href="mailto:sobdrive1@gmail.com">sobdrive1@gmail.com</a>
     </div>
-    <p>24/7 Designated Driver Service — Toronto GTA, Ontario, Canada</p><p style="margin-top:0.5rem;color:#444;">📞 <a href="tel:+12892362726" style="color:#888;">+1 (289) 236-2726</a> &nbsp;|&nbsp; ✉️ <a href="/cdn-cgi/l/email-protection#483b272a2c3a213e2d79082f25292124662b2725" style="color:#888;"><span class="__cf_email__" data-cfemail="89fae6ebedfbe0ffecb8c9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></a></p>
+    <p>24/7 Designated Driver Service — Toronto GTA, Ontario, Canada</p><p style="margin-top:0.5rem;color:#444;">📞 <a href="tel:+19052439404" style="color:#888;">+1 (905) 243-9404</a> &nbsp;|&nbsp; ✉️ <a href="mailto:sobdrive1@gmail.com" style="color:#888;">sobdrive1@gmail.com</a></p>
     <div class="footer-bottom">© 2026 SOBDRIVE. All Rights Reserved.</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Splash control
   const splash = document.getElementById('splash');
   const urlParams = new URLSearchParams(window.location.search);
@@ -1450,8 +1533,8 @@
     // Normal splash animation
     setTimeout(() => {
       splash.classList.add('splash-exit');
-      setTimeout(() => { splash.style.display = 'none'; }, 750);
-    }, 4000);
+      setTimeout(() => { splash.style.display = 'none'; }, 700);
+    }, 2500);
   }
 
   // Direct scroll to booking form instantly (from child page Book buttons)
@@ -1517,6 +1600,25 @@
     });
   });
 
+  // On mobile: any link to #faq must first open the collapsible sections,
+  // then scroll to the FAQ section so it's actually visible
+  document.querySelectorAll('a[href="#faq"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        const faqEl = document.getElementById('faq');
+        const isCollapsed = !document.body.classList.contains('mobile-sections-open');
+        if (faqEl && isCollapsed) {
+          e.preventDefault();
+          setMobileSections(true);
+          // Wait for CSS transition to reveal the section, then scroll
+          setTimeout(() => {
+            faqEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 320);
+        }
+      }
+    });
+  });
+
   // Scroll to top button visibility
   const scrollTopBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', () => {
@@ -1549,7 +1651,7 @@
   //      Hi {{customer_name}}! ✅ Your SOBDRIVE booking is confirmed.
   //      Pickup: {{pickup}} → {{dropoff}}
   //      Date: {{date}} at {{time}}
-  //      Driver arrives in 15-30 min. Questions? +1-289-236-2726
+  //      Driver arrives in 15-30 min. Questions? +1-905-243-9404
   //      - SOBDRIVE 🍁
   //
   //  STEP 2 → Copy Template ID → paste as EMAILJS_SMS_TEMPLATE_ID below
@@ -1565,20 +1667,8 @@
   // ═══════════════════════════════════════════════════════════════════
   const EMAILJS_SERVICE_ID        = 'service_14jlgrk';
   const EMAILJS_EMAIL_TEMPLATE_ID = 'template_7hoccg2';
-  const EMAILJS_SMS_TEMPLATE_ID   = 'template_51f8lhl'; // ← paste Template C ID here
+  const EMAILJS_SMS_TEMPLATE_ID   = 'template_d2cfw1s'; // ← paste Template C ID here
   const EMAILJS_PUBLIC_KEY        = 'oXyYJVwxFQkIvnxHz';
-
-  // Canadian carrier SMS email gateways
-  const CARRIER_GATEWAYS = {
-    'rogers':  'pcs.rogers.com',
-    'bell':    'txt.bell.ca',
-    'telus':   'msg.telus.com',
-    'freedom': 'txt.freedommobile.ca',
-    'fido':    'fido.ca',
-    'virgin':  'vmobile.ca',
-    'koodo':   'msg.koodomobile.com',
-    'other':   null
-  };
 
   async function submitBooking(e) {
     e.preventDefault();
@@ -1602,43 +1692,21 @@
     const date          = document.getElementById('fdate').value;
     const time          = document.getElementById('ftime').value;
     const city          = document.getElementById('fcity').value;
-    const car           = document.getElementById('fcar').value || 'N/A';
     const notes         = document.getElementById('fnotes').value || 'None';
-    const carrierEl     = document.getElementById('fcarrier');
-    const carrier       = carrierEl ? carrierEl.value : '';
 
     // ── A: Email notification to SOBDRIVE ──
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID, {
         customer_name: customerName, customer_phone: customerPhone,
-        pickup, dropoff, date, time, city, car, notes
+        pickup, dropoff, date, time, city, notes
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
 
-    // ── B: SMS text confirmation to customer ──
-    let smsSent = false;
-    if (carrier && carrier !== 'other' && EMAILJS_SMS_TEMPLATE_ID !== 'YOUR_SMS_TEMPLATE_ID') {
-      const gateway = CARRIER_GATEWAYS[carrier];
-      if (gateway) {
-        const smsEmail = rawPhone + '@' + gateway;
-        let dateStr = date;
-        try { dateStr = new Date(date + 'T12:00:00').toLocaleDateString('en-CA', { weekday:'short', month:'short', day:'numeric' }); } catch(e){}
-        try {
-          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_SMS_TEMPLATE_ID, {
-            customer_name: customerName, customer_phone: customerPhone,
-            pickup, dropoff, date: dateStr, time,
-            customer_sms_email: smsEmail
-          }, EMAILJS_PUBLIC_KEY);
-          smsSent = true;
-        } catch (err) { console.warn('Customer SMS failed:', err); }
-      }
-    }
-
     // ── Show personalised success screen ──
-    showSuccess(customerName, customerPhone, pickup, dropoff, date, time, city, smsSent, carrier);
+    showSuccess(customerName, customerPhone, pickup, dropoff, date, time, city);
   }
 
-  function showSuccess(name, phone, pickup, dropoff, date, time, city, smsSent, carrier) {
+  function showSuccess(name, phone, pickup, dropoff, date, time, city) {
     document.getElementById('booking-form-wrap').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
@@ -1656,18 +1724,14 @@
         <div class="bs-row"><span class="bs-label">🏠 Drop-off</span><span class="bs-value">${dropoff}</span></div>
         <div class="bs-row"><span class="bs-label">📅 Date</span><span class="bs-value">${dateStr}</span></div>
         <div class="bs-row"><span class="bs-label">🕐 Time</span><span class="bs-value">${time}</span></div>
-        <div class="bs-row"><span class="bs-label">📍 City</span><span class="bs-value">${city}</span></div>
+        <div class="bs-row"><span class="bs-label">🏙️ City</span><span class="bs-value">${city}</span></div>
       </div>
       <p class="success-eta">🚗 A driver will arrive within <strong>15–30 minutes</strong> at your pickup location.</p>
     `;
 
-    // SMS confirmation status
+    // Call confirmation note
     const smsEl = document.getElementById('successSmsNote');
-    if (smsSent) {
-      smsEl.innerHTML = `<div class="sms-sent">📱 <strong>Text confirmation sent to ${phone}</strong> — check your messages!</div>`;
-    } else {
-      smsEl.innerHTML = `<div class="sms-manual">📱 We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>`;
-    }
+    smsEl.innerHTML = `<div class="sms-manual">📱 We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>`;
   }
   // Fare Calculator
   function calcFare() {
@@ -1706,14 +1770,13 @@ function formatPhone(input) {
   if (digits.length <= 3) {
     input.value = digits;
   } else if (digits.length <= 6) {
-    input.value = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    input.value = digits.slice(0,3) + '-' + digits.slice(3);
   } else {
-    input.value = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    input.value = digits.slice(0,3) + '-' + digits.slice(3,6) + '-' + digits.slice(6);
   }
-  // Visual feedback
-  const valid = digits.length === 10 || digits.length === 11;
-  phoneInput.style.borderColor = digits.length == 10 ? 'green' : '';
 }
   </script>
 </body>
 </html>
+
+
