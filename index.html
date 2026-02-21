@@ -71,9 +71,9 @@
       "@type": "OfferCatalog",
       "name": "Designated Driver Services",
       "itemListElement": [
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Local Ride (under 5km)"},"price":"30.00","priceCurrency":"CAD","description":"Flat $39.99, zero booking fee"},
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"City Ride (10–30km)"},"price":"19.99.00","priceCurrency":"CAD","description":"$19.99 booking fee + $2.50/km"},
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Long Ride (30–60km)"},"price":"10.00","priceCurrency":"CAD","description":"$10 booking fee + $2.50/km"},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Local Ride (under 10km)"},"price":"39.99","priceCurrency":"CAD","description":"Flat $39.99, zero booking fee"},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"City Ride (11-30km)"},"price":"19.99.00","priceCurrency":"CAD","description":"$19.99 booking fee + $2.50/km"},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Long Ride (31–60km)"},"price":"10.00","priceCurrency":"CAD","description":"$9.99 booking fee + $2.50/km"},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Highway Ride (60km+)"},"description":"No booking fee — $2.50/km only","priceCurrency":"CAD"}
       ]
     },
@@ -112,7 +112,7 @@
     {"@type":"Question","name":"Where can I find a designated driver near me in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"SOBDRIVE covers all of Toronto GTA including Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke, Oshawa, Pickering and Oakville. Call +1-905-243-9404 or book online at sobdrive.ca for a driver near you in 15–30 minutes."}},
     {"@type":"Question","name":"How fast can a designated driver near me arrive?","acceptedAnswer":{"@type":"Answer","text":"Most SOBDRIVE drivers arrive within 15–30 minutes depending on your location and traffic conditions across the GTA."}},
     {"@type":"Question","name":"Do you drive my own car?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our professional GTA drivers drive you home in your own vehicle — no leaving your car behind at the bar or restaurant."}},
-    {"@type":"Question","name":"How much does a designated driver cost in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"Rides under 5km are a flat $39.99 with zero booking fee. For 10–30km: $20 booking fee + $2.50/km. For 30–60km: $9.99 booking fee + $2.50/km. For 60km+: no booking fee, just $2.50/km."}},
+    {"@type":"Question","name":"How much does a designated driver cost in Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"Rides under 10km are a flat $39.99 with zero booking fee. For 11-30km: $19.99 booking fee + $2.50/km. For 31–60km: $9.99 booking fee + $2.50/km. For 60km+: no booking fee, just $2.50/km."}},
     {"@type":"Question","name":"Is SOBDRIVE available 24/7?","acceptedAnswer":{"@type":"Answer","text":"Yes. SOBDRIVE is available 24 hours a day, 7 days a week, including weekends and Canadian holidays across all Toronto GTA cities."}},
     {"@type":"Question","name":"What areas near me does SOBDRIVE serve?","acceptedAnswer":{"@type":"Answer","text":"We serve Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Etobicoke, Oshawa, Pickering, Oakville, Ajax, Whitby and Burlington."}}
   ]}</script>
@@ -1069,7 +1069,7 @@
           </div>
           <div class="bow-content">
             <div class="bow-car-emoji">🚗💨</div>
-            <div class="bow-offer-main">Get Home Safe Tonight<br><span class="bow-red">No Booking Fee</span> — Under 5 km</div>
+            <div class="bow-offer-main">Get Home Safe Tonight<br><span class="bow-red">No Booking Fee</span> — Under 10 km</div>
             <div class="bow-price-row">
               <span class="bow-from">from</span>
               <span class="bow-price">$39.99</span>
@@ -1124,13 +1124,13 @@
       <h2 class="reveal">Simple, Distance-Based Pricing</h2>
       <div class="pricing-grid">
 
-        <!-- TIER 1: Under 5km — STAR CARD -->
+        <!-- TIER 1: under 10km — STAR CARD -->
         <div class="pricing-card star reveal">
           <div class="star-badge">⭐ Best Value</div>
           <div class="no-fee-tag">✦ Zero Booking Fee</div>
           <div class="pricing-icon">🏠</div>
           <h3>Local Ride</h3>
-          <div class="pricing-range">Under 5 km</div>
+          <div class="pricing-range">Under 10 km</div>
           <div class="pricing-price">$39.99<span> flat</span></div>
           <div class="pricing-price-sub">One fixed price.<br/>No booking fee, no extras.</div>
           <ul class="pricing-features">
@@ -1144,16 +1144,16 @@
           <a href="#book" class="pricing-cta">Book for $39.99</a>
         </div>
 
-        <!-- TIER 2: 10–30km -->
+        <!-- TIER 2: 6-30km -->
         <div class="pricing-card popular reveal d1">
           <div class="popular-badge">Most Popular</div>
           <div class="pricing-icon">🚗</div>
           <h3>City Ride</h3>
-          <div class="pricing-range">10 – 30 km</div>
+          <div class="pricing-range">11 – 30 km</div>
           <div class="pricing-price">$19.99<span> + $2.50/km</span></div>
           <div class="pricing-price-sub">$19.99 booking fee<br/>+ $2.50 per km</div>
           <ul class="pricing-features">
-            <li>e.g. 19.99km = $70 total</li>
+            <li>e.g. 20km = $70 total</li>
             <li>We drive your own car</li>
             <li>Professional driver</li>
             <li>15–30 min arrival</li>
@@ -1167,7 +1167,7 @@
         <div class="pricing-card reveal d2">
           <div class="pricing-icon">🛣️</div>
           <h3>Long Ride</h3>
-          <div class="pricing-range">30 – 60 km</div>
+          <div class="pricing-range">31 – 60 km</div>
           <div class="pricing-price">$9.99<span> + $2.50/km</span></div>
           <div class="pricing-price-sub">$9.99 booking fee<br/>+ $2.50 per km</div>
           <ul class="pricing-features">
@@ -1444,7 +1444,7 @@
       <div class="faq-item reveal"><div class="faq-q">How do I book a designated driver? <span class="faq-arrow">▼</span></div><div class="faq-a">You can book online using the form above, or call us directly at +1-905-243-9404. We're available 24/7.</div></div>
       <div class="faq-item reveal"><div class="faq-q">How fast can a GTA driver arrive? <span class="faq-arrow">▼</span></div><div class="faq-a">Most drivers arrive within 15–30 minutes depending on your location and traffic conditions across the GTA.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Do you drive my own car? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes! Our professional drivers drive you home in YOUR own vehicle — no leaving your car behind at the bar.</div></div>
-      <div class="faq-item reveal"><div class="faq-q">How much does it cost? <span class="faq-arrow">▼</span></div><div class="faq-a">Rides under 5km are a flat $39.99 with zero booking fee. For 10–30km it's a $19.99 booking fee + $2.50/km. For 30–60km it's a $10 booking fee + $2.50/km. For 60km+ there's no booking fee — just $2.50/km.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">How much does it cost? <span class="faq-arrow">▼</span></div><div class="faq-a">Rides under 10km are a flat $39.99 with zero booking fee. For 11-30km it's a $19.99 booking fee + $2.50/km. For 31–60km it's a $9.99 booking fee + $2.50/km. For 60km+ there's no booking fee — just $2.50/km.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Are your drivers background-checked? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. All SOBDRIVE drivers are fully licensed in Ontario and have passed thorough background checks for your peace of mind.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Can I book in advance? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes, advance bookings are available. Weekends fill fast.</div></div>
     </div>
@@ -1745,8 +1745,8 @@
     }
 
     let total, breakdown;
-    if (km <= 5) {
-      total = 30;
+    if (km <= 10) {
+      total = 39.99;
       breakdown = 'Flat rate — zero booking fee';
     } else if (km <= 30) {
       total = 19.99 + (km * 2.5);
@@ -1757,8 +1757,7 @@
     } else {
       total = km * 2.5;
       breakdown = `No booking fee — ${km}km × $2.50`;
-    }
-
+   }
     priceEl.textContent = `$${total.toFixed(2)}`;
     breakdownEl.textContent = breakdown;
     result.classList.remove('calc-result-hidden');
