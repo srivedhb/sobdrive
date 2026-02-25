@@ -80,8 +80,7 @@
     @media(max-width:600px){.ts-divider{display:none}}
 
     /* ─── NAV ─── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:transparent;transition:background 0.4s,box-shadow 0.4s}
-    nav.scrolled{background:var(--red);box-shadow:0 4px 24px rgba(213,43,30,0.4)}
+    nav{position:sticky;top:0;left:0;right:0;z-index:321;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:var(--red);box-shadow:0 4px 24px rgba(213,43,30,0.35);transition:box-shadow 0.4s}    nav.scrolled{background:var(--red);box-shadow:0 4px 24px rgba(213,43,30,0.4)}
     .logo{font-family:'Fjalla One',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#fff}
     .nav-actions{display:flex;align-items:center;gap:0.55rem}
     .nav-book{background:rgba(255,255,255,0.14);color:#fff;border:1.5px solid rgba(255,255,255,0.38);padding:0.42rem 0.88rem;border-radius:50px;font-weight:700;font-size:0.78rem;white-space:nowrap;transition:transform 0.2s,background 0.2s}
@@ -138,6 +137,8 @@
     .landmark-name{font-family:'Fjalla One',sans-serif;font-size:1.25rem;color:#fff;line-height:1.2;margin-bottom:0.4rem}
     .landmark-desc{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.5;max-height:0;overflow:hidden;transition:max-height 0.4s ease,opacity 0.3s;opacity:0}
     .landmark-card:hover .landmark-desc{max-height:80px;opacity:1}
+    .landmark-swipe-hint{display:none;background:var(--red);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:50px;margin-bottom:0.5rem;}
+
 
     /* ─── SERVICE SECTION ─── */
     .service-section{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--cream)}
@@ -231,12 +232,9 @@
 
     /* ===== TOP STACK FIX ===== */
     :root { --emergency-h: 36px; --trust-h: 40px; }
-    .emergency-bar { position: sticky; top: 0; z-index: 320; }
-    .trust-signals-bar { position: sticky; top: var(--emergency-h); z-index: 319; }
-    .emergency-bar + .trust-signals-bar + nav#mainNav {
-      top: calc(var(--emergency-h) + var(--trust-h)) !important;
-      z-index: 318;
-    }
+    .emergency-bar { position: relative; z-index: 1; }
+    .trust-signals-bar { position: relative; z-index: 1; }
+
     .emergency-bar-right { display: none !important; }
     @media (max-width: 768px) {
       .trust-signals-inner .ts-item:nth-child(n+3),
@@ -248,6 +246,125 @@
       display: inline-block;
       filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
     }
+    /* Mobile responsive nav */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--red);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding: 0.75rem 1.25rem 1rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  z-index: 320;
+}
+.nav-mobile-menu.is-open { display: flex; }
+.nav-mobile-menu a {
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: block;
+  transition: color 0.2s, padding-left 0.2s;
+}
+.nav-mobile-menu a:last-child { border-bottom: none; }
+.nav-mobile-menu a:hover { color: #fff; padding-left: 0.4rem; }
+
+@media (max-width: 768px) {
+  .landmarks-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    scrollbar-width: none;
+  }
+  .landmarks-grid::-webkit-scrollbar { display: none; }
+  .landmark-card {
+    flex: 0 0 72vw;
+    max-width: 260px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Hidden on desktop */
+.landmark-swipe-hint { display: none !important; }
+
+@media (max-width: 768px) {
+  .landmark-swipe-hint {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .landmark-swipe-hint::before,
+  .landmark-swipe-hint::after {
+    content: '←';
+    font-size: 0.8rem;
+    opacity: 0.5;
+    animation: nudge 1.5s ease-in-out infinite;
+  }
+  .landmark-swipe-hint::after { content: '→'; }
+  @keyframes nudge {
+    0%,100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(3px); opacity: 1; }
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    padding: 0.75rem 1rem;
+    position: sticky;
+  }
+  .nav-hamburger { display: flex; }
+  .nav-book { display: none; }
+  .nav-phone .phone-full  { display: none; }
+  .nav-phone .phone-short { display: inline; }
+  .nav-phone {
+    font-size: 0.72rem;
+    padding: 0.38rem 0.7rem;
+  }
+  .logo {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+}
   </style>
 </head>
 <body>
@@ -278,13 +395,47 @@
     </div>
   </div>
 
-  <nav id="mainNav">
-    <a href="index.html?nosplash=true" class="logo"><span class="maple">🍁</span>SOBDRIVE</a>
-    <div class="nav-actions">
-    <a href="index.html?nosplash=true&direct=book" class="nav-book">📋 Book Now</a>
-    <a href="tel:+19052439404" class="nav-phone">📞 +1-905-243-9404</a>
+<!-- Replace your existing <nav> block with this in each city page -->
+
+<nav id="mainNav">
+  <a href="index.html?nosplash=true" class="logo">
+    <span class="maple">🍁</span> SOBDRIVE
+  </a>
+
+  <div class="nav-actions">
+    <a href="index.html?nosplash=true&direct=book" class="nav-book">
+      📋 Book Now
+    </a>
+
+    <!-- Phone: shows short "Call Now" on mobile, full number on desktop -->
+    <a href="tel:+19052439404" class="nav-phone">
+      📞 <span class="phone-full">+1-905-243-9404</span>
+         <span class="phone-short" style="display:none">Call Now</span>
+    </a>
+
+    <!-- Hamburger — visible only on mobile via CSS -->
+    <button
+      class="nav-hamburger"
+      id="navHamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  </nav>
+
+  <!-- Mobile dropdown drawer -->
+  <div class="nav-mobile-menu" id="mobileMenu" role="navigation">
+    <a href="index.html?nosplash=true&direct=book">📋 Book a Driver</a>
+    <a href="index.html?nosplash=true#pricing">💰 Pricing</a>
+    <a href="index.html?nosplash=true#cities">🏙️ All Cities</a>
+    <a href="#faq-section">❓ FAQ</a>
+    <a href="tel:+19052439404" style="color:#fff;font-size:1.05rem;">
+      📞 +1-905-243-9404
+    </a>
+  </div>
+</nav>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
@@ -361,6 +512,9 @@
       </div>
       </div>
     </div>
+
+       <div class="landmark-swipe-hint">Swipe to see all landmarks</div>
+
   </section>
 
   <!-- ═══ SERVICE SECTION ═══ -->
@@ -406,7 +560,7 @@
   </section>
 
   <!-- ═══ FAQ ═══ -->
-  <section class="faq-section">
+  <section class="faq-section" id="faq-section">
     <div class="faq-inner">
       <div class="section-label" style="color:var(--red)">FAQ</div>
       <h2 style="font-family:'Fjalla One',sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:1.5rem;">Designated Driver Mississauga — Common Questions</h2>
@@ -481,7 +635,46 @@
   </script>
 
   <button id="scrollTop" aria-label="Scroll to top">↑</button>
+  <script>
+    // Hamburger menu toggle
+      const hamburger  = document.getElementById('navHamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
 
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          const open = mobileMenu.classList.toggle('is-open');
+          hamburger.classList.toggle('is-open', open);
+          hamburger.setAttribute('aria-expanded', String(open));
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('is-open');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+        document.addEventListener('click', (e) => {
+          const nav = document.getElementById('mainNav');
+          if (nav && !nav.contains(e.target)) {
+            mobileMenu.classList.remove('is-open');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+  </script>
+    <script>
+    // Fix: open mobile collapsible sections before navigating to #cities or #faq
+    document.querySelectorAll('a[href*="index.html"]').forEach(link => {
+      link.addEventListener('click', function() {
+        const href = this.getAttribute('href');
+        if (href.includes('#cities') || href.includes('#faq')) {
+          // Store a flag so index.html knows to open sections on load
+          sessionStorage.setItem('openMobileSections', 'true');
+        }
+      });
+    });
+  </script>
   <script>
     (() => {
       const btn = document.getElementById('scrollTop');

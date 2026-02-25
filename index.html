@@ -464,6 +464,7 @@
     .pricing-cta:hover { background:var(--red-dark); transform:translateY(-2px); }
     .pricing-disclaimer { text-align:center; font-size:0.78rem; color:var(--gray); margin-top:1.5rem; }
     .pricing-swipe-hint { display: none; } /* shown only in mobile media query */
+    .city-swipe-hint { display: none; }
 
     /* ============ FARE CALCULATOR ============ */
     .calc-wrap { background:#fff; border:2px solid var(--border); border-radius:20px; padding:2rem; margin-top:2rem; box-shadow:0 4px 18px rgba(0,0,0,0.05); }
@@ -702,7 +703,29 @@
         0%,100% { transform: translateX(0); opacity: 0.5; }
         50% { transform: translateX(3px); opacity: 1; }
       }
-
+      .city-swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        color: var(--gray);
+        margin-top: 0.2rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .city-swipe-hint::before,
+      .city-swipe-hint::after {
+        content: '←';
+        font-size: 0.8rem;
+        opacity: 0.5;
+        animation: nudge 1.5s ease-in-out infinite;
+      }
+      .city-swipe-hint::after { content: '→'; }
+      @keyframes nudge {
+        0%,100% { transform: translateX(0); opacity: 0.5; }
+        50% { transform: translateX(3px); opacity: 1; }
+      }
       .calc-row {
         flex-direction: column;
         align-items: stretch;
@@ -776,8 +799,6 @@
         text-overflow: ellipsis;
       }
     }
-
-
 
     /* ═══ EMERGENCY TOP BAR ═══ */
     .emergency-bar {
@@ -965,6 +986,27 @@
     .sms-sent { background:#f0fdf4; border:1.5px solid #86efac; border-radius:10px; padding:0.85rem 1.1rem; font-size:0.88rem; color:#166534; margin-top:0.85rem; }
     .sms-manual { background:#fffbeb; border:1.5px solid #fcd34d; border-radius:10px; padding:0.85rem 1.1rem; font-size:0.88rem; color:#92400e; margin-top:0.85rem; }
     @media(max-width:480px) { .bs-label { min-width:72px; font-size:0.72rem; } .bs-value { font-size:0.82rem; } }
+    @media (max-width: 768px) {
+      .city-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 0.75rem;
+        margin: 0 -0.9rem;
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+        scrollbar-width: none;
+      }
+      .city-grid::-webkit-scrollbar { display: none; }
+      .city-card {
+        flex: 0 0 78vw;
+        max-width: 280px;
+        scroll-snap-align: start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1343,8 +1385,7 @@
         </div>
       </div>
     </div>
-  </div>
-
+    <div class="city-swipe-hint">Swipe to see all cities</div>
   <!-- ===== AREAS ===== -->
   <div class="section mobile-collapsible">
     <div class="section-inner">
@@ -1356,6 +1397,8 @@
       </div>
     </div>
   </div>
+  </div>
+
 
   <!-- ===== FAQ ===== -->
   <div class="section section-alt mobile-collapsible" id="faq">
@@ -1654,6 +1697,21 @@
     const smsEl = document.getElementById('successSmsNote');
     smsEl.innerHTML = `<div class="sms-manual">📱 We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>`;
   }
+
+    // Auto-open mobile sections if navigated from city page
+    if (sessionStorage.getItem('openMobileSections') === 'true') {
+      sessionStorage.removeItem('openMobileSections');
+      setMobileSections(true);
+      // Scroll to correct section after sections open
+      const hash = window.location.hash;
+      if (hash) {
+        setTimeout(() => {
+          const target = document.querySelector(hash);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+
   // Fare Calculator
   function calcFare() {
     const km = parseFloat(document.getElementById('calcKm').value);
