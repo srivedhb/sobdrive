@@ -1036,6 +1036,84 @@
     #scrollTop .scroll-tooltip { position:absolute; right:calc(100% + 0.75rem); background:#333; color:#fff; font-size:0.75rem; font-weight:700; white-space:nowrap; padding:0.4rem 0.8rem; border-radius:8px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
     #scrollTop:hover .scroll-tooltip { opacity:1; }
 
+    /* ============ WHATSAPP BUTTON ============ */
+    #waBtn {
+      position: fixed; bottom: clamp(1.2rem,4vw,2rem); left: clamp(1.2rem,4vw,2rem);
+      z-index: 500;
+      background: #25D366; color: #fff;
+      width: clamp(52px,8vw,62px); height: clamp(52px,8vw,62px);
+      border-radius: 50%; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    #waBtn:hover { transform: translateY(-4px) scale(1.1); animation: none; box-shadow: 0 10px 32px rgba(37,211,102,0.7); }
+    @keyframes waPulse {
+      0%,100%{ box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
+      50%{ box-shadow: 0 6px 32px rgba(37,211,102,0.8), 0 0 0 8px rgba(37,211,102,0.12); }
+    }
+    #waBtn svg { width: 28px; height: 28px; fill: #fff; }
+    .wa-tooltip {
+      position: absolute; left: calc(100% + 0.75rem);
+      background: #333; color: #fff; font-size: 0.75rem; font-weight: 700;
+      white-space: nowrap; padding: 0.4rem 0.8rem; border-radius: 8px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    #waBtn:hover .wa-tooltip { opacity: 1; }
+
+    /* ============ BOOK FOR FRIEND TOGGLE ============ */
+    .friend-toggle-wrap {
+      grid-column: 1 / -1;
+      background: var(--off-white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      cursor: pointer; user-select: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .friend-toggle-wrap:hover { border-color: var(--red); background: var(--red-pale); }
+    .friend-toggle-wrap input[type="checkbox"] { display: none; }
+    .friend-toggle-switch {
+      width: 42px; height: 24px; border-radius: 50px;
+      background: var(--border); position: relative;
+      flex-shrink: 0; transition: background 0.25s;
+    }
+    .friend-toggle-switch::after {
+      content: ''; position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #fff; transition: transform 0.25s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .friend-toggle-wrap.active .friend-toggle-switch { background: var(--red); }
+    .friend-toggle-wrap.active .friend-toggle-switch::after { transform: translateX(18px); }
+    .friend-toggle-label { font-size: 0.88rem; font-weight: 700; color: var(--dark); }
+    .friend-toggle-label span { color: var(--gray); font-weight: 400; }
+
+    .friend-fields {
+      grid-column: 1 / -1;
+      display: none;
+      background: var(--red-pale);
+      border: 1.5px solid rgba(213,43,30,0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .friend-fields.open { display: grid; }
+    .friend-fields .form-group { margin: 0; }
+    .friend-fields-header {
+      grid-column: 1 / -1;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 0.25rem;
+    }
+    @media (max-width: 600px) {
+      .friend-fields { grid-template-columns: 1fr; }
+    }
+
     /* ============ FOOTER ============ */
     footer { background:#111; color:#666; padding:clamp(2.5rem,6vw,3.5rem) clamp(1rem,4vw,2rem); text-align:center; font-size:0.85rem; }
     .footer-logo { font-family:'Fjalla One',sans-serif; font-size:clamp(1.2rem,4vw,1.5rem); letter-spacing:3px; color:var(--red); margin-bottom:1rem; }
@@ -1075,6 +1153,83 @@
         scroll-snap-align: start;
       }
     }
+
+  /* ============ SOBDRIVE MODAL ============ */
+  .sd-modal-backdrop {
+    display: none;
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .sd-modal-backdrop.open { display: flex; }
+
+  .sd-modal {
+    background: var(--white);
+    border-radius: 18px;
+    width: 100%; max-width: 420px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+    animation: modalPop 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes modalPop {
+    from { opacity:0; transform: scale(0.88) translateY(20px); }
+    to   { opacity:1; transform: scale(1)    translateY(0); }
+  }
+
+  .sd-modal-header {
+    background: var(--red);
+    padding: 1.1rem 1.4rem;
+    display: flex; align-items: center; gap: 0.65rem;
+  }
+  .sd-modal-header-icon { font-size: 1.4rem; line-height: 1; }
+  .sd-modal-header-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1rem; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #fff;
+  }
+
+  .sd-modal-body {
+    padding: 1.4rem 1.4rem 0.6rem;
+    font-size: 0.95rem; color: var(--dark); line-height: 1.6;
+  }
+  .sd-modal-body strong { color: var(--red); }
+  .sd-modal-body .sd-modal-sub {
+    margin-top: 0.6rem;
+    font-size: 0.82rem; color: var(--gray);
+  }
+
+  .sd-modal-footer {
+    padding: 1rem 1.4rem 1.4rem;
+    display: flex; gap: 0.7rem; flex-direction: row-reverse;
+  }
+  .sd-modal-btn {
+    flex: 1; padding: 0.72rem 0.5rem;
+    border: none; border-radius: 50px;
+    font-family: 'Cabin', sans-serif; font-weight: 700;
+    font-size: 0.88rem; cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    white-space: nowrap;
+  }
+  .sd-modal-btn:active { transform: scale(0.96); }
+  .sd-modal-btn.primary { background: var(--red); color: #fff; }
+  .sd-modal-btn.primary:hover { background: var(--red-dark); }
+  .sd-modal-btn.secondary {
+    background: var(--off-white); color: var(--dark);
+    border: 1.5px solid var(--border);
+  }
+  .sd-modal-btn.secondary:hover { background: var(--border); }
+
+  @media (max-width: 480px) {
+    .sd-modal { border-radius: 16px 16px 0 0; }
+    .sd-modal-backdrop { align-items: flex-end; padding: 0; }
+    .sd-modal { max-width: 100%; animation: modalSlideUp 0.3s cubic-bezier(0.34,1.2,0.64,1) both; }
+    @keyframes modalSlideUp {
+      from { opacity:0; transform: translateY(60px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+  }
   </style>
 
 
@@ -1136,6 +1291,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="scroll-tooltip">Back to Top</div>
     ↑
   </button>
+
+  <!-- ===== WHATSAPP BUTTON ===== -->
+  <a id="waBtn" href="https://wa.me/19052439404?text=Hi%20SOBDRIVE!%20I'd%20like%20to%20book%20a%20designated%20driver." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <div class="wa-tooltip">Chat on WhatsApp</div>
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.651 4.835 1.79 6.865L2 30l7.343-1.755A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.4a11.36 11.36 0 0 1-5.788-1.582l-.415-.247-4.357 1.042 1.072-4.244-.27-.435A11.38 11.38 0 0 1 4.6 16C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 27.4 16 27.4zm6.27-8.49c-.344-.172-2.036-1.004-2.352-1.118-.317-.115-.547-.172-.778.172-.23.344-.893 1.118-1.094 1.348-.2.23-.403.258-.747.086-.344-.172-1.453-.535-2.768-1.708-1.023-.912-1.713-2.038-1.914-2.382-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.778-1.876-1.066-2.568-.28-.674-.565-.583-.778-.594l-.662-.012c-.23 0-.603.086-.919.43s-1.208 1.18-1.208 2.877 1.237 3.336 1.409 3.566c.172.23 2.434 3.718 5.898 5.213.824.356 1.468.568 1.969.727.827.263 1.58.226 2.175.137.663-.1 2.036-.832 2.323-1.635.287-.803.287-1.492.2-1.635-.086-.143-.316-.23-.66-.402z"/>
+    </svg>
+  </a>
 
   <!-- ===== NAV ===== -->
   <nav>
@@ -1329,6 +1492,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   oninput="formatPhone(this)"
   pattern="[\d\s\-\(\)\+]{10,15}" />
             </div>
+            <div class="form-group">
+              <label for="femail">Email Address </label>
+              <input type="email" id="femail" placeholder="you@email.com"  autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <!-- intentional spacer -->
+            </div>
+
+            <!-- Book for a Friend toggle -->
+            <label class="friend-toggle-wrap" id="friendToggleWrap">
+              <input type="checkbox" id="friendToggle" onchange="toggleFriendFields(this)" />
+              <div class="friend-toggle-switch"></div>
+              <div class="friend-toggle-label">&#128241; Booking for a friend? <span>Toggle to add their details</span></div>
+            </label>
+
+            <!-- Friend fields (hidden until toggled) -->
+            <div class="friend-fields" id="friendFields">
+              <div class="friend-fields-header">&#128587; Friend's Details</div>
+              <div class="form-group">
+                <label for="ffname">Friend's Name *</label>
+                <input type="text" id="ffname" placeholder="Friend's full name" />
+              </div>
+              <div class="form-group">
+                <label for="ffphone">Friend's Phone *</label>
+                <input type="tel" id="ffphone" placeholder="+1 (647) 000-0000" oninput="formatPhone(this)" pattern="[\d\s\-\(\)\+]{10,15}" />
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="fpickup">Pickup Location *</label>
               <input type="text" id="fpickup" placeholder="Your pickup address" required />
@@ -1543,7 +1734,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="nap-block">
         <div class="nap-item"><span class="nap-icon">📍</span><div><span class="nap-label">Service Area</span><span class="nap-value">Toronto GTA, Ontario, Canada</span></div></div>
         <div class="nap-item"><span class="nap-icon">📞</span><div><span class="nap-label">Phone (24/7)</span><span class="nap-value"><a href="tel:+19052439404">+1 (905) 243-9404</a></span></div></div>
-        <div class="nap-item"><span class="nap-icon">✉️</span><div><span class="nap-label">Email</span><span class="nap-value"><a href="mailto:info@sobdrive.ca">info@sobdrive.ca</a></span></div></div>
+        <div class="nap-item"><span class="nap-icon">✉️</span><div><span class="nap-label">Email</span><span class="nap-value"><a href="/cdn-cgi/l/email-protection#b1d8dfd7def1c2ded3d5c3d8c7d49fd2d0"><span class="__cf_email__" data-cfemail="7a13141c153a0915181e08130c1f54191b">[email&#160;protected]</span></a></span></div></div>
         <div class="nap-item"><span class="nap-icon">🕐</span><div><span class="nap-label">Hours</span><span class="nap-value">Open 24 Hours, 7 Days a Week</span></div></div>
       </div>
     </div>
@@ -1581,6 +1772,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
+  <!-- ===== SOBDRIVE MODAL ===== -->
+  <div class="sd-modal-backdrop" id="sdModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="sdModalTitle">
+    <div class="sd-modal" id="sdModal">
+      <div class="sd-modal-header">
+        <span class="sd-modal-header-icon" id="sdModalIcon">⚠️</span>
+        <span class="sd-modal-header-title" id="sdModalTitle">Check Your Number</span>
+      </div>
+      <div class="sd-modal-body" id="sdModalBody"></div>
+      <div class="sd-modal-footer" id="sdModalFooter"></div>
+    </div>
+  </div>
+
   <!-- ===== FOOTER ===== -->
   <!-- ═══ FOOTER ═══ -->
   <footer>
@@ -1598,13 +1801,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="richmond-hill.html">Richmond Hill</a>
       <a href="oshawa.html">Oshawa</a>
       <a href="pickering.html">Pickering</a>
-      <a href="mailto:info@sobdrive.ca">info@sobdrive.ca</a>
+      <a href="/cdn-cgi/l/email-protection#345d5a525b74475b5650465d42511a5755"><span class="__cf_email__" data-cfemail="b8d1d6ded7f8cbd7dadccad1cedd96dbd9">[email&#160;protected]</span></a>
     </div>
-    <p>24/7 Designated Driver Service — Toronto GTA, Ontario, Canada</p><p style="margin-top:0.5rem;color:#444;">📞 <a href="tel:+19052439404" style="color:#888;">+1 (905) 243-9404</a> &nbsp;|&nbsp; ✉️ <a href="mailto:info@sobdrive.ca" style="color:#888;">info@sobdrive.ca</a></p>
+    <p>24/7 Designated Driver Service — Toronto GTA, Ontario, Canada</p><p style="margin-top:0.5rem;color:#444;">📞 <a href="tel:+19052439404" style="color:#888;">+1 (905) 243-9404</a> &nbsp;|&nbsp; ✉️ <a href="/cdn-cgi/l/email-protection#cfa6a1a9a08fbca0adabbda6b9aae1acae" style="color:#888;"><span class="__cf_email__" data-cfemail="462f2820290635292422342f3023682527">[email&#160;protected]</span></a></p>
     <div class="footer-bottom">© 2026 SOBDRIVE. All Rights Reserved.</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Splash control
   const splash = document.getElementById('splash');
   const urlParams = new URLSearchParams(window.location.search);
@@ -1753,23 +1956,223 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const EMAILJS_SMS_TEMPLATE_ID   = 'template_d2cfw1s'; // ← paste Template C ID here
   const EMAILJS_PUBLIC_KEY        = 'oXyYJVwxFQkIvnxHz';
 
+  // ── Phone area code registry ──────────────────────────────────────────────
+  const CA_AREA_CODES = new Set([
+    // Ontario
+    226, 249, 289, 343, 365, 416, 437, 519, 548, 613, 647, 705, 807, 905,
+    // British Columbia
+    236, 250, 604, 672, 778,
+    // Alberta
+    403, 587, 780, 825,
+    // Quebec
+    367, 418, 438, 450, 514, 579, 581, 819, 873,
+    // Manitoba
+    204, 431,
+    // Saskatchewan
+    306, 639,
+    // Nova Scotia / PEI
+    782, 902,
+    // New Brunswick
+    506,
+    // Newfoundland & Labrador
+    709,
+    // NWT / Nunavut / Yukon
+    867
+  ]);
+
+  const US_AREA_CODES = new Set([
+    201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 212, 213, 214, 215, 216,
+    217, 218, 219, 220, 223, 224, 225, 227, 228, 229, 231, 234, 239, 240, 248,
+    251, 252, 253, 254, 256, 260, 262, 267, 269, 270, 272, 274, 276, 278, 279,
+    281, 283, 301, 302, 303, 304, 305, 307, 308, 309, 310, 312, 313, 314, 315,
+    316, 317, 318, 319, 320, 321, 323, 325, 326, 327, 330, 331, 332, 334, 336,
+    337, 339, 341, 346, 347, 351, 352, 360, 361, 364, 369, 380, 385, 386, 401,
+    402, 404, 405, 406, 407, 408, 409, 410, 412, 413, 414, 415, 417, 419, 423,
+    424, 425, 430, 432, 434, 435, 440, 442, 443, 445, 447, 448, 458, 463, 464,
+    469, 470, 472, 475, 478, 479, 480, 484, 501, 502, 503, 504, 505, 507, 508,
+    509, 510, 512, 513, 515, 516, 517, 518, 520, 530, 531, 534, 539, 540, 541,
+    551, 557, 559, 561, 562, 563, 564, 567, 570, 571, 572, 573, 574, 575, 580,
+    582, 585, 586, 601, 602, 603, 605, 606, 607, 608, 609, 610, 612, 614, 615,
+    616, 617, 618, 619, 620, 623, 626, 627, 628, 629, 630, 631, 636, 640, 641,
+    645, 646, 650, 651, 656, 657, 659, 660, 661, 662, 667, 669, 678, 679, 681,
+    682, 689, 701, 702, 703, 704, 706, 707, 708, 712, 713, 714, 715, 716, 717,
+    718, 719, 720, 724, 725, 726, 727, 728, 730, 731, 732, 734, 737, 740, 743,
+    747, 754, 757, 760, 762, 763, 765, 769, 770, 771, 772, 773, 774, 775, 779,
+    781, 785, 786, 787, 800, 801, 802, 803, 804, 805, 806, 808, 810, 812, 813,
+    814, 815, 816, 817, 818, 820, 826, 828, 830, 831, 832, 833, 835, 838, 839,
+    840, 843, 844, 845, 847, 848, 850, 854, 855, 856, 857, 858, 859, 860, 862,
+    863, 864, 865, 866, 870, 872, 877, 878, 888, 888, 901, 903, 904, 906, 907,
+    908, 909, 910, 912, 913, 914, 915, 916, 917, 918, 919, 920, 925, 928, 929,
+    930, 931, 934, 935, 936, 937, 938, 939, 940, 941, 943, 945, 947, 948, 949,
+    951, 952, 954, 956, 957, 959, 970, 971, 972, 973, 975, 978, 979, 980, 983,
+    984, 985, 986, 989
+  ]);
+
+  const GTA_AREA_CODES = new Set([416, 437, 647, 289, 365, 905]);
+  // ─────────────────────────────────────────────────────────────────────────
+
+  function validatePhone(rawPhone) {
+    if (rawPhone.length !== 10) {
+      return { valid: false, message: 'Please enter a valid 10-digit phone number (e.g. 647-000-0000).' };
+    }
+    const area = parseInt(rawPhone.slice(0, 3), 10);
+    if (CA_AREA_CODES.has(area)) {
+      // Valid Canadian number — no block, no warning
+      return { valid: true, country: 'CA', gta: GTA_AREA_CODES.has(area) };
+    }
+    if (US_AREA_CODES.has(area)) {
+      // Valid US number — allow but soft-confirm
+      return { valid: true, country: 'US', gta: false };
+    }
+    // Unrecognised area code
+    return {
+      valid: false,
+      message: `⚠️ The area code "${area}" doesn't match any known Canadian or US number.\n\nPlease double-check your phone number, or call us directly at +1-905-243-9404 to book.`
+    };
+  }
+
+  // ── Modal helpers ─────────────────────────────────────────────────────────
+  function showModal({ icon = '⚠️', title, body, primaryLabel = 'OK', onPrimary, secondaryLabel, onSecondary }) {
+    document.getElementById('sdModalIcon').textContent  = icon;
+    document.getElementById('sdModalTitle').textContent = title;
+    document.getElementById('sdModalBody').innerHTML    = body;
+
+    const footer = document.getElementById('sdModalFooter');
+    footer.innerHTML = '';
+
+    const primary = document.createElement('button');
+    primary.className   = 'sd-modal-btn primary';
+    primary.textContent = primaryLabel;
+    primary.onclick     = () => { closeModal(); onPrimary && onPrimary(); };
+    footer.appendChild(primary);
+
+    if (secondaryLabel) {
+      const secondary = document.createElement('button');
+      secondary.className   = 'sd-modal-btn secondary';
+      secondary.textContent = secondaryLabel;
+      secondary.onclick     = () => { closeModal(); onSecondary && onSecondary(); };
+      footer.appendChild(secondary);
+    }
+
+    const backdrop = document.getElementById('sdModalBackdrop');
+    backdrop.classList.add('open');
+
+    // Tap outside to dismiss (only for alert-style, not confirm)
+    if (!secondaryLabel) {
+      backdrop.onclick = (e) => { if (e.target === backdrop) closeModal(); };
+    } else {
+      backdrop.onclick = null;
+    }
+  }
+
+  function closeModal() {
+    document.getElementById('sdModalBackdrop').classList.remove('open');
+  }
+  // ─────────────────────────────────────────────────────────────────────────
+
   async function submitBooking(e) {
     e.preventDefault();
     const form = document.getElementById('bookingForm');
     const btn  = form.querySelector('.form-submit');
 
-    // Phone validation — 10 digits required
+    // ── Phone validation ──
     const rawPhone = document.getElementById('fphone').value.replace(/\D/g, '');
-    if (rawPhone.length !== 10) {
-      alert('Please enter a valid 10-digit phone number (e.g. 647-000-0000)');
+    const phoneCheck = validatePhone(rawPhone);
+
+    if (!phoneCheck.valid) {
+      showModal({
+        icon: '📵',
+        title: 'Invalid Phone Number',
+        body: `<p>${phoneCheck.message}</p>
+               <p class="sd-modal-sub">Need help? Call us directly at <strong>+1-905-243-9404</strong></p>`,
+        primaryLabel: 'Fix My Number'
+      });
       btn.disabled = false;
       return;
     }
+
+    // US number — soft confirmation modal
+    if (phoneCheck.country === 'US') {
+      const area = rawPhone.slice(0, 3);
+      showModal({
+        icon: '🇺🇸',
+        title: 'US Number Detected',
+        body: `<p>It looks like you entered a <strong>US number</strong> (area code <strong>${area}</strong>).</p>
+               <p class="sd-modal-sub">SOBDRIVE serves Toronto GTA. We can still reach you on a US number — just make sure it's correct before continuing.</p>`,
+        primaryLabel: 'Yes, Continue',
+        secondaryLabel: 'Fix My Number',
+        onPrimary: () => proceedWithBooking(btn),
+        onSecondary: () => { btn.disabled = false; }
+      });
+      return;
+    }
+
+
+    // Friend phone validation — only if toggle is on
+      if (document.getElementById('friendToggle').checked) {
+        const rawFriendPhone = document.getElementById('ffphone').value.replace(/\D/g, '');
+        const friendPhoneCheck = validatePhone(rawFriendPhone);
+
+        if (!friendPhoneCheck.valid) {
+          showModal({
+            icon: '📵',
+            title: "Friend's Phone Invalid",
+            body: `<p>${friendPhoneCheck.message}</p>
+                  <p class="sd-modal-sub">Need help? Call us at <strong>+1-905-243-9404</strong></p>`,
+            primaryLabel: 'Fix Number'
+          });
+          btn.disabled = false;
+          return;
+        }
+
+        if (friendPhoneCheck.country === 'US') {
+          const area = rawFriendPhone.slice(0, 3);
+          showModal({
+            icon: '🇺🇸',
+            title: "Friend's US Number",
+            body: `<p>Your friend's number has a <strong>US area code</strong> (${area}). Make sure it's correct.</p>
+                  <p class="sd-modal-sub">Press Continue to proceed or fix the number.</p>`,
+            primaryLabel: 'Yes, Continue',
+            secondaryLabel: 'Fix Number',
+            onPrimary: () => proceedWithBooking(btn),
+            onSecondary: () => { btn.disabled = false; }
+          });
+          return;
+        }
+      }
+
+      await proceedWithBooking(btn);
+  }
+
+  // ── Friend fields toggle ──────────────────────────────────────────────────
+  function toggleFriendFields(checkbox) {
+    const wrap   = document.getElementById('friendToggleWrap');
+    const fields = document.getElementById('friendFields');
+    const ffname = document.getElementById('ffname');
+    const ffphone = document.getElementById('ffphone');
+    if (checkbox.checked) {
+      wrap.classList.add('active');
+      fields.classList.add('open');
+      ffname.required  = true;
+      ffphone.required = true;
+    } else {
+      wrap.classList.remove('active');
+      fields.classList.remove('open');
+      ffname.required  = false;
+      ffphone.required = false;
+      ffname.value  = '';
+      ffphone.value = '';
+    }
+  }
+  // ─────────────────────────────────────────────────────────────────────────
+
+  async function proceedWithBooking(btn) {
     btn.textContent = '⏳ Sending...';
     btn.disabled = true;
 
     const customerName  = document.getElementById('fname').value;
     const customerPhone = document.getElementById('fphone').value;
+    const customerEmail = document.getElementById('femail').value;
     const pickup        = document.getElementById('fpickup').value;
     const dropoff       = document.getElementById('fdropoff').value;
     const date          = document.getElementById('fdate').value;
@@ -1777,19 +2180,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const city          = document.getElementById('fcity').value;
     const notes         = document.getElementById('fnotes').value || 'None';
 
+    // Friend details (if toggled on)
+    const isFriend   = document.getElementById('friendToggle').checked;
+    const friendName  = isFriend ? document.getElementById('ffname').value  : '';
+    const friendPhone = isFriend ? document.getElementById('ffphone').value : '';
+    const friendNote  = isFriend ? `FOR FRIEND: ${friendName} (${friendPhone})` : '';
+    const fullNotes   = friendNote ? `${friendNote}\n${notes}` : notes;
+
     // ── A: Email notification to SOBDRIVE ──
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID, {
         customer_name: customerName, customer_phone: customerPhone,
-        pickup, dropoff, date, time, city, notes
+        customer_email: customerEmail,
+        friend_name: friendName, friend_phone: friendPhone,
+        pickup, dropoff, date, time, city, notes: fullNotes
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
 
     // ── Show personalised success screen ──
-    showSuccess(customerName, customerPhone, pickup, dropoff, date, time, city);
+    showSuccess(customerName, customerPhone, customerEmail, pickup, dropoff, date, time, city, isFriend, friendName);
   }
 
-  function showSuccess(name, phone, pickup, dropoff, date, time, city) {
+  function showSuccess(name, phone, email, pickup, dropoff, date, time, city, isFriend, friendName) {
     document.getElementById('booking-form-wrap').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
@@ -1800,21 +2212,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let dateStr = date;
     try { dateStr = new Date(date + 'T12:00:00').toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' }); } catch(e){}
 
+    // Friend row (conditional)
+    const friendRow = isFriend && friendName
+      ? `<div class="bs-row"><span class="bs-label">&#128581; Riding For</span><span class="bs-value">${friendName}</span></div>`
+      : '';
+
     // Booking summary card
     document.getElementById('successDetails').innerHTML = `
       <div class="booking-summary">
-        <div class="bs-row"><span class="bs-label">📍 Pickup</span><span class="bs-value">${pickup}</span></div>
-        <div class="bs-row"><span class="bs-label">🏠 Drop-off</span><span class="bs-value">${dropoff}</span></div>
-        <div class="bs-row"><span class="bs-label">📅 Date</span><span class="bs-value">${dateStr}</span></div>
-        <div class="bs-row"><span class="bs-label">🕐 Time</span><span class="bs-value">${time}</span></div>
-        <div class="bs-row"><span class="bs-label">🏙️ City</span><span class="bs-value">${city}</span></div>
+        ${friendRow}
+        <div class="bs-row"><span class="bs-label">&#128205; Pickup</span><span class="bs-value">${pickup}</span></div>
+        <div class="bs-row"><span class="bs-label">&#127968; Drop-off</span><span class="bs-value">${dropoff}</span></div>
+        <div class="bs-row"><span class="bs-label">&#128197; Date</span><span class="bs-value">${dateStr}</span></div>
+        <div class="bs-row"><span class="bs-label">&#128336; Time</span><span class="bs-value">${time}</span></div>
+        <div class="bs-row"><span class="bs-label">&#127963; City</span><span class="bs-value">${city}</span></div>
       </div>
-      <p class="success-eta">🚗 A driver will arrive within <strong>15–30 minutes</strong> at your pickup location.</p>
+      <p class="success-eta">&#128663; A driver will arrive within <strong>15-30 minutes</strong> at your pickup location.</p>
     `;
 
-    // Call confirmation note
+    // Call + email confirmation note
     const smsEl = document.getElementById('successSmsNote');
-    smsEl.innerHTML = `<div class="sms-manual">📱 We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>`;
+    smsEl.innerHTML = `
+      <div class="sms-manual">&#128241; We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>
+      <div class="sms-manual" style="margin-top:0.5rem;font-size:0.82rem;color:var(--gray);">&#9993;&#65039; Confirmation sent to <strong>${email}</strong></div>
+    `;
   }
 
     // Auto-open mobile sections if navigated from city page
@@ -1832,7 +2253,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
   // Fare Calculator
-  function calcFare() {
+   function calcFare() {
     const km = parseFloat(document.getElementById('calcKm').value);
     const result = document.getElementById('calcResult');
     const priceEl = document.getElementById('calcPrice');
