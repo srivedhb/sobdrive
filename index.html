@@ -12,9 +12,7 @@
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-P52GP7FN');</script>
 <!-- End Google Tag Manager -->
-      <!-- Google tag (gtag.js) --> 
-       <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17964833599"></script> 
-       <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-17964833599'); </script>
+      <!-- gtag handled via GTM container — standalone script removed to avoid duplicate request -->
 
   <title>Designated Driver Near Me Durham, Peel & Toronto GTA | SOBDRIVE 24/7</title>
   <meta name="description" content="Need a designated driver in Durham, Peel & Toronto GTA? SOBDRIVE provides 24/7 professional designated driver services across Toronto, Mississauga, Brampton, Markham & surrounding GTA areas. Fast 15-30 min arrival. Book online now!" />
@@ -139,7 +137,13 @@
 
 
 
-  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap" rel="stylesheet">
+  <!-- Preconnect to speed up font negotiation -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Non-blocking font load: renders fallback immediately, swaps when ready -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap"></noscript>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
@@ -194,14 +198,57 @@
     }
     .logo { font-family:'Fjalla One',sans-serif; font-size:clamp(1.1rem,4vw,1.6rem); letter-spacing:3px; color:#fff; display:flex; align-items:center; gap:0.4rem; }
     .nav-links { display:flex; align-items:center; gap:clamp(0.5rem,2vw,1.5rem); }
-    .nav-links a { color:rgba(255,255,255,0.85); font-size:clamp(0.75rem,2vw,0.88rem); font-weight:600; transition:color 0.2s; }
-    .nav-links a:hover { color:#fff; }
+    .nav-links a { color:rgba(255,255,255,0.85); font-size:clamp(0.75rem,2vw,0.88rem); font-weight:600; transition:color 0.2s; border-bottom:2px solid transparent; padding-bottom:2px; }
+    .nav-links a:hover { color:#fff; border-bottom-color:rgba(255,255,255,0.6); }
     .nav-actions { display:flex; align-items:center; gap:0.55rem; }
-    .nav-book { background:rgba(255,255,255,0.14); color:#fff; border:1.5px solid rgba(255,255,255,0.38); padding:0.45rem 0.9rem; border-radius:50px; font-weight:700; font-size:clamp(0.7rem,2.3vw,0.82rem); white-space:nowrap; transition:transform 0.2s,background 0.2s; }
+    .nav-book { background:rgba(255,255,255,0.14); color:#fff; border:1.5px solid rgba(255,255,255,0.38); padding:0.45rem 0.9rem; border-radius:6px; font-weight:700; font-size:clamp(0.7rem,2.3vw,0.82rem); white-space:nowrap; transition:transform 0.2s,background 0.2s; }
     .nav-book:hover { transform:translateY(-2px); background:rgba(255,255,255,0.24); }
-    .nav-phone { background:#fff; color:var(--red); padding:0.48rem 1.2rem; border-radius:50px; font-weight:700; font-size:clamp(0.72rem,2.5vw,0.88rem); white-space:nowrap; box-shadow:0 3px 12px rgba(0,0,0,0.15); transition:transform 0.2s; }
+    .nav-phone { background:#fff; color:var(--red); padding:0.48rem 1.2rem; border-radius:6px; font-weight:700; font-size:clamp(0.72rem,2.5vw,0.88rem); white-space:nowrap; box-shadow:0 3px 12px rgba(0,0,0,0.15); transition:transform 0.2s; }
     .nav-phone:hover { transform:translateY(-2px); }
-    @media(max-width:600px) { .nav-links { display:none; } .nav-book { padding:0.42rem 0.75rem; } }
+    /* Full number on desktop, short number on mobile — saves space, keeps tap target big */
+    .nav-phone-full  { display:inline; }
+    .nav-phone-short { display:none; }
+    /* Book Now button: show full label on desktop, icon-only on small screens */
+    .nav-book-short { display:none; }
+    .nav-book-full  { display:inline; }
+    @media(max-width:600px) { .nav-links { display:none; } }
+    /* ── Mobile nav override: MUST come after all other nav rules to win ── */
+    @media(max-width:480px) {
+      nav {
+        padding:0.55rem 0.85rem;
+        flex-wrap:nowrap;
+        gap:0.4rem;
+      }
+      .logo {
+        font-size:1rem;
+        letter-spacing:1.5px;
+        flex-shrink:0;
+      }
+      .nav-actions { gap:0.4rem; flex-shrink:0; }
+      /* Show icon-only Book Now to save ~80px */
+      .nav-book-full  { display:none; }
+      .nav-book-short { display:inline; }
+      .nav-book {
+        padding:0.55rem 0.65rem;
+        font-size:1rem;
+        border-radius:6px;
+        min-height:44px;
+        display:flex; align-items:center;
+      }
+      /* Phone: large tap target, short number to fit nav row */
+      .nav-phone-full  { display:none; }
+      .nav-phone-short { display:inline; }
+      .nav-phone {
+        font-size:0.95rem !important;
+        font-weight:800 !important;
+        padding:0.55rem 0.9rem !important;
+        letter-spacing:0;
+        white-space:nowrap;
+        min-height:44px;
+        display:flex; align-items:center; gap:0.3rem;
+        box-shadow:0 4px 14px rgba(213,43,30,0.25);
+      }
+    }
 
     /* ============ HERO ============ */
     .hero {
@@ -532,34 +579,7 @@
     .cta-btn-white:hover { transform:translateY(-4px); box-shadow:0 16px 36px rgba(0,0,0,0.3); }
     /* ============ MOBILE POLISH ============ */
     @media (max-width: 768px) {
-      nav {
-        padding: 0.65rem 0.9rem;
-        gap: 0.5rem;
-        flex-wrap: nowrap;
-      }
-
-      .logo {
-        font-size: 1.05rem;
-        letter-spacing: 1.5px;
-        flex-shrink: 0;
-      }
-
-      .nav-actions {
-        gap: 0.4rem;
-        flex-shrink: 0;
-      }
-
-      .nav-phone {
-        padding: 0.42rem 0.7rem;
-        font-size: 0.72rem;
-        white-space: nowrap;
-        letter-spacing: 0;
-      }
-
-      .nav-book {
-        padding: 0.42rem 0.65rem;
-        font-size: 0.7rem;
-      }
+      /* nav mobile handled by dedicated override block in NAV section above */
 
       .emergency-bar {
         justify-content: center;
@@ -1231,25 +1251,7 @@
       line-height: 1.75;
     }
 
-    /* ── Navigation: logo ── */
-    .logo {
-      font-size: clamp(1.2rem, 5vw, 1.5rem);
-      letter-spacing: 2px;
-    }
-
-    /* ── Nav phone — primary CTA, must be large enough to tap drunk ── */
-    .nav-phone {
-      font-size: clamp(0.9rem, 3.5vw, 1rem);
-      padding: 0.6rem 1rem;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    /* ── Nav book button ── */
-    .nav-book {
-      font-size: clamp(0.82rem, 3vw, 0.92rem);
-      padding: 0.55rem 0.85rem;
-    }
+    /* ── Nav phone size handled by dedicated nav override above ── */
 
     /* ── Section headings ── */
     h2 {
@@ -1340,10 +1342,7 @@
       font-size: clamp(1.1rem, 5vw, 1.25rem);
       padding: 1.05rem 1.2rem;
     }
-    .nav-phone {
-      font-size: 0.84rem;
-      padding: 0.55rem 0.75rem;
-    }
+    /* nav-phone at ≤420px handled by nav override block above */
   }
   </style>
 
@@ -1380,14 +1379,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <nav>
     <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><span class="maple">🍁</span> SOBDRIVE</a>
     <div class="nav-links">
-      <a href="#book">Book Now</a>
       <a href="#pricing">Pricing</a>
       <a href="#cities">Cities</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-actions">
-      <a href="#book" class="nav-book">📋 Book Now</a>
-      <a href="tel:+19052439404" class="nav-phone">📞 +1-905-243-9404</a>
+      <!-- Desktop: full label. Mobile (≤480px): icon only to save ~80px -->
+      <a href="#book" class="nav-book" aria-label="Book Now">
+        <span class="nav-book-full">📋 Book Now</span>
+        <span class="nav-book-short">📋</span>
+      </a>
+      <a href="tel:+19052439404" class="nav-phone">
+        📞 <span class="nav-phone-full">+1-905-243-9404</span><span class="nav-phone-short">905-243-9404</span>
+      </a>
     </div>
   </nav>
 
