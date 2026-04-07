@@ -157,7 +157,11 @@
       --gold: #D4AF37;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Cabin', sans-serif; background: var(--white); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
+    body { font-family: 'Cabin', sans-serif; background: var(--white); color: var(--dark); line-height: 1.7; }
+    /* overflow-x: clip does NOT create a scroll container (unlike hidden),
+       so position:sticky is never broken by it */
+    html { overflow-x: clip; }
+    .page-wrapper { overflow-x: clip; }
     a { color: inherit; text-decoration: none; }
 
     /* ── Golden maple leaf: filter shifts emoji from orange-red to gold ── */
@@ -166,60 +170,23 @@
       filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
     }
     /* Pure-emoji elements (no mixed text) get filter directly */
-    .s-leaf,
     .falling-leaf,
     .cta-maple {
       filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
     }
 
 
-    /* ============ SPLASH ============ */
-    #splash {
-      position: fixed; inset: 0; z-index: 9999;
-      background: var(--cream);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      overflow: hidden; pointer-events: none;
-    }
-    .splash-glow {
-      position: absolute;
-      width: clamp(300px,60vw,600px); height: clamp(300px,60vw,600px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(213,43,30,0.13) 0%, transparent 70%);
-      animation: glowPulse 1s ease-in-out infinite alternate;
-    }
-    @keyframes glowPulse { from{transform:scale(0.9);opacity:0.6} to{transform:scale(1.15);opacity:1} }
-    .splash-rings { position:absolute; width:clamp(200px,50vw,500px); height:clamp(200px,50vw,500px); }
-    .ring { position:absolute; inset:0; border-radius:50%; border:1.5px solid rgba(213,43,30,0.15); animation:ringExpand 3s ease-out infinite; }
-    .ring:nth-child(2){animation-delay:0.8s} .ring:nth-child(3){animation-delay:1.6s}
-    @keyframes ringExpand { 0%{transform:scale(0.4);opacity:0} 30%{opacity:1} 100%{transform:scale(1.8);opacity:0} }
-    .s-leaf { position:absolute; bottom:-40px; font-size:clamp(1rem,3vw,1.8rem); animation:leafFloat linear forwards; opacity:0; }
-    @keyframes leafFloat { 0%{transform:translateY(0) rotate(0deg) scale(0.5);opacity:0} 15%{opacity:1} 85%{opacity:0.9} 100%{transform:translateY(-110vh) rotate(360deg) scale(1.1);opacity:0} }
-    .splash-content { position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
-    .splash-maple-icon { font-size:clamp(3rem,10vw,5.5rem); animation:mapleDropIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.3s both; filter:brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%); }
-    @keyframes mapleDropIn { from{opacity:0;transform:translateY(-80px) scale(0.5) rotate(-20deg)} to{opacity:1;transform:translateY(0) scale(1) rotate(0deg)} }
-    .splash-wordmark { display:flex; align-items:center; }
-    .splash-sob { font-family:'Fjalla One',sans-serif; font-size:clamp(3rem,12vw,7rem); letter-spacing:8px; color:var(--red); line-height:1; animation:slideFromLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s both; }
-    .splash-drive { font-family:'Fjalla One',sans-serif; font-size:clamp(3rem,12vw,7rem); letter-spacing:8px; color:var(--dark); line-height:1; animation:slideFromRight 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s both; }
-    @keyframes slideFromLeft { from{opacity:0;transform:translateX(-60px)} to{opacity:1;transform:translateX(0)} }
-    @keyframes slideFromRight { from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)} }
-    .splash-tagline { font-size:clamp(0.7rem,2.5vw,0.9rem); letter-spacing:clamp(2px,1vw,5px); text-transform:uppercase; color:var(--gray); animation:taglineFade 0.8s ease 1.6s both; }
-    .splash-flag { font-size:clamp(1.5rem,5vw,2.5rem); animation:taglineFade 0.8s ease 1.9s both; margin-top:0.25rem; }
-    @keyframes taglineFade { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-    .splash-road { position:absolute; bottom:0; left:0; right:0; height:clamp(55px,12vw,80px); background:#2a2a2a; border-top:3px solid #444; overflow:hidden; }
-    .splash-road-stripe { position:absolute; top:50%; left:-100%; width:300%; height:3px; background:repeating-linear-gradient(90deg,#F5C518 0,#F5C518 40px,transparent 40px,transparent 90px); transform:translateY(-50%); animation:roadMove 0.45s linear infinite; }
-    @keyframes roadMove { from{transform:translateY(-50%) translateX(0)} to{transform:translateY(-50%) translateX(90px)} }
-    .splash-car { position:absolute; bottom:clamp(10px,3vw,18px); font-size:clamp(2rem,7vw,3.5rem); filter:drop-shadow(0 4px 12px rgba(213,43,30,0.4)); animation:splashCarDrive 4s ease-in-out 2s both; left:-100px; }
-    @keyframes splashCarDrive { 0%{left:-100px} 35%{left:50%;transform:translateX(-50%)} 65%{left:50%;transform:translateX(-50%)} 100%{left:110%} }
-    .splash-progress { position:absolute; bottom:clamp(58px,13vw,88px); left:15%; right:15%; height:3px; background:rgba(213,43,30,0.15); border-radius:3px; overflow:hidden; }
-    .splash-fill { height:100%; background:linear-gradient(90deg,var(--red-pale),var(--red)); border-radius:3px; animation:fillBar 2.4s ease forwards; }
-    @keyframes fillBar { from{width:0%} to{width:100%} }
-    .splash-exit { animation:splashOut 0.7s cubic-bezier(0.4,0,0.6,1) forwards !important; }
-    @keyframes splashOut { 0%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(1.06)} }
+
 
     /* ============ NAV ============ */
+    /* Sticky header wraps the emergency bar + nav together */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      /* Do NOT add overflow:hidden here — breaks sticky children */
+    }
     nav {
-      position:sticky; top:0; z-index:200;
       background:var(--red);
       padding:0.85rem clamp(1rem,4vw,2rem);
       display:flex; justify-content:space-between; align-items:center;
@@ -240,8 +207,8 @@
     .hero {
       position:relative;
       background:var(--cream);
-      padding:clamp(4rem,10vw,8rem) clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem);
-      overflow:hidden;
+      padding:clamp(2.5rem,8vw,8rem) clamp(1rem,4vw,2rem) clamp(2rem,5vw,5rem);
+      /* overflow:hidden removed — it breaks layout containment on mobile */
     }
     .hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(213,43,30,0.06) 1px,transparent 1px); background-size:32px 32px; pointer-events:none; }
     .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
@@ -249,12 +216,12 @@
     .falling-leaf { position:absolute; top:-60px; opacity:0; animation:fallLeaf linear infinite; }
     @keyframes fallLeaf { 0%{transform:translateY(-60px) rotate(0deg);opacity:0} 8%{opacity:0.2} 92%{opacity:0.2} 100%{transform:translateY(115vh) rotate(500deg);opacity:0} }
 
-    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:#fff; color:var(--red); border:1.5px solid rgba(213,43,30,0.2); font-size:clamp(0.62rem,2vw,0.76rem); font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.1rem; border-radius:50px; margin-bottom:1.5rem; box-shadow:0 2px 12px rgba(213,43,30,0.1); animation:fadeUpEl 0.7s ease 2.0s both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:#fff; color:var(--red); border:1.5px solid rgba(213,43,30,0.2); font-size:clamp(0.62rem,2vw,0.76rem); font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.1rem; border-radius:50px; margin-bottom:1.5rem; box-shadow:0 2px 12px rgba(213,43,30,0.1); animation:fadeUpEl 0.55s ease 0.05s both; }
     @keyframes fadeUpEl { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    .hero h1 { font-family:'Fjalla One',sans-serif; font-size:clamp(2rem,5vw,4rem); line-height:1.08; margin-bottom:1.2rem; animation:fadeUpEl 0.7s ease 2.15s both; }
+    .hero h1 { font-family:'Fjalla One',sans-serif; font-size:clamp(2rem,5vw,4rem); line-height:1.08; margin-bottom:1.2rem; animation:fadeUpEl 0.55s ease 0.15s both; }
     .hero h1 .red { color:var(--red); }
-    .hero p { font-size:clamp(0.92rem,2vw,1.08rem); color:var(--gray); margin-bottom:2rem; animation:fadeUpEl 0.7s ease 2.3s both; }
-    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUpEl 0.7s ease 2.45s both; }
+    .hero p { font-size:clamp(0.92rem,2vw,1.08rem); color:var(--gray); margin-bottom:2rem; animation:fadeUpEl 0.55s ease 0.25s both; }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUpEl 0.55s ease 0.35s both; }
     .hero-cta { display:inline-block; background:var(--red); color:#fff; font-family:'Fjalla One',sans-serif; font-size:clamp(0.95rem,2.5vw,1.1rem); letter-spacing:1px; padding:0.85rem 2.2rem; border-radius:50px; box-shadow:0 8px 28px rgba(213,43,30,0.38); transition:transform 0.25s,box-shadow 0.25s,background 0.2s; }
     .hero-cta:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 14px 36px rgba(213,43,30,0.45); background:var(--red-dark); }
 
@@ -566,22 +533,38 @@
     /* ============ MOBILE POLISH ============ */
     @media (max-width: 768px) {
       nav {
-        padding: 0.7rem 0.9rem;
-        gap: 0.6rem;
+        padding: 0.65rem 0.9rem;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
       }
 
       .logo {
         font-size: 1.05rem;
         letter-spacing: 1.5px;
+        flex-shrink: 0;
+      }
+
+      .nav-actions {
+        gap: 0.4rem;
+        flex-shrink: 0;
       }
 
       .nav-phone {
-        padding: 0.45rem 0.8rem;
+        padding: 0.42rem 0.7rem;
         font-size: 0.72rem;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+
+      .nav-book {
+        padding: 0.42rem 0.65rem;
+        font-size: 0.7rem;
       }
 
       .emergency-bar {
         justify-content: center;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.68rem;
       }
 
       .emergency-bar-left {
@@ -607,7 +590,8 @@
       }
 
       .hero {
-        padding-top: 3rem;
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
       }
 
       .hero-text {
@@ -742,10 +726,6 @@
         animation: nudge 1.5s ease-in-out infinite;
       }
       .city-swipe-hint::after { content: '→'; }
-      @keyframes nudge {
-        0%,100% { transform: translateX(0); opacity: 0.5; }
-        50% { transform: translateX(3px); opacity: 1; }
-      }
       .calc-row {
         flex-direction: column;
         align-items: stretch;
@@ -847,30 +827,18 @@
 
 
     @media (max-width: 420px) {
-      .splash-sob,
-      .splash-drive {
-        letter-spacing: 4px;
-      }
-
       .stats-bar {
         gap: 1rem;
         padding-top: 1.4rem;
         padding-bottom: 1.4rem;
       }
 
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero p,
-      .section-sub {
-        font-size: 0.9rem;
-      }
+      /* hero h1 & hero p handled by MOBILE TYPOGRAPHY block below */
 
       .nav-phone {
-        max-width: 56vw;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 0.68rem;
+        letter-spacing: 0;
+        padding: 0.38rem 0.55rem;
       }
     }
 
@@ -1236,6 +1204,147 @@
       to   { opacity:1; transform: translateY(0); }
     }
   }
+
+  /* ============ MOBILE TYPOGRAPHY — NIGHT-READABLE ============
+     Large, clear fonts for low-light / impaired reading conditions.
+     Minimum body copy: 1.1rem. Hero: 2.6rem+. Nav: finger-tap friendly.
+  ============================================================= */
+
+  @media (max-width: 768px) {
+
+    /* ── Base body ── */
+    body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* ── Hero heading — must be unmissable ── */
+    .hero h1 {
+      font-size: clamp(2.6rem, 10vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.5px;
+    }
+
+    /* ── Hero paragraph ── */
+    .hero p {
+      font-size: clamp(1.1rem, 4vw, 1.25rem);
+      line-height: 1.75;
+    }
+
+    /* ── Navigation: logo ── */
+    .logo {
+      font-size: clamp(1.2rem, 5vw, 1.5rem);
+      letter-spacing: 2px;
+    }
+
+    /* ── Nav phone — primary CTA, must be large enough to tap drunk ── */
+    .nav-phone {
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      padding: 0.6rem 1rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    /* ── Nav book button ── */
+    .nav-book {
+      font-size: clamp(0.82rem, 3vw, 0.92rem);
+      padding: 0.55rem 0.85rem;
+    }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: clamp(1.9rem, 7vw, 2.4rem);
+    }
+    h3 {
+      font-size: clamp(1.15rem, 5vw, 1.35rem);
+    }
+
+    /* ── Section sub-text ── */
+    .section-sub {
+      font-size: clamp(1.05rem, 3.5vw, 1.15rem);
+    }
+
+    /* ── General paragraphs ── */
+    p {
+      font-size: clamp(1.05rem, 3.8vw, 1.15rem);
+    }
+
+    /* ── FAQ ── */
+    .faq-q {
+      font-size: clamp(1.05rem, 3.8vw, 1.15rem);
+    }
+    .faq-a {
+      font-size: clamp(1rem, 3.5vw, 1.1rem);
+    }
+
+    /* ── Cards ── */
+    .step p,
+    .why-item p {
+      font-size: clamp(1rem, 3.5vw, 1.1rem);
+    }
+    .review p {
+      font-size: clamp(1rem, 3.5vw, 1.1rem);
+    }
+
+    /* ── CTA buttons — tap targets for impaired users ── */
+    .hero-cta {
+      font-size: clamp(1.1rem, 4.5vw, 1.2rem);
+      padding: 1rem 1.5rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ── Area tags ── */
+    .area-tag {
+      font-size: clamp(0.95rem, 3vw, 1.05rem);
+    }
+
+    /* ── iOS zoom prevention: inputs must be >= 16px ── */
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    .calc-input {
+      font-size: 1rem;
+    }
+    .form-group label {
+      font-size: clamp(0.88rem, 2.8vw, 0.95rem);
+    }
+
+    /* ── Footer ── */
+    .footer-links a {
+      font-size: clamp(0.92rem, 3.2vw, 1rem);
+    }
+    footer {
+      font-size: clamp(0.95rem, 3vw, 1rem);
+    }
+  }
+
+  /* ── Smallest phones (≤ 420px): push sizes up a notch ── */
+  @media (max-width: 420px) {
+    .hero h1 {
+      font-size: clamp(2.4rem, 11vw, 3rem);
+    }
+    .hero p {
+      font-size: clamp(1.1rem, 4.5vw, 1.2rem);
+    }
+    body {
+      font-size: 1.1rem;
+    }
+    p {
+      font-size: clamp(1.05rem, 4.2vw, 1.15rem);
+    }
+    h2 {
+      font-size: clamp(1.75rem, 8.5vw, 2.2rem);
+    }
+    .hero-cta {
+      font-size: clamp(1.1rem, 5vw, 1.25rem);
+      padding: 1.05rem 1.2rem;
+    }
+    .nav-phone {
+      font-size: 0.84rem;
+      padding: 0.55rem 0.75rem;
+    }
+  }
   </style>
 
 
@@ -1247,6 +1356,10 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<div class="page-wrapper">
+
+  <!-- ===== STICKY HEADER: emergency bar + nav ===== -->
+  <div class="sticky-header">
 
   <!-- ═══ EMERGENCY TOP BAR ═══ -->
   <div class="emergency-bar">
@@ -1261,40 +1374,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ═══ TRUST SIGNALS BAR ═══ -->
 
 
-  <!-- ===== SPLASH ===== -->
-  <div id="splash">
-    <div class="splash-glow"></div>
-    <div class="splash-rings"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
-    <div class="s-leaf" style="left:5%;animation-duration:4s;animation-delay:0.3s">🍁</div>
-    <div class="s-leaf" style="left:18%;animation-duration:3.5s;animation-delay:0.8s;font-size:1.2rem">🍁</div>
-    <div class="s-leaf" style="left:32%;animation-duration:4.5s;animation-delay:0.1s;font-size:2.2rem">🍁</div>
-    <div class="s-leaf" style="left:50%;animation-duration:3.8s;animation-delay:0.6s;font-size:1rem">🍁</div>
-    <div class="s-leaf" style="left:65%;animation-duration:4.2s;animation-delay:0.4s;font-size:1.8rem">🍁</div>
-    <div class="s-leaf" style="left:80%;animation-duration:3.6s;animation-delay:1.1s">🍁</div>
-    <div class="s-leaf" style="left:93%;animation-duration:4s;animation-delay:0.2s;font-size:1.3rem">🍁</div>
-    <div class="splash-content">
-      <div class="splash-maple-icon">🍁</div>
-      <div class="splash-wordmark"><span class="splash-sob">SOB</span><span class="splash-drive">DRIVE</span></div>
-      <div class="splash-tagline">Durham, Peel & Toronto GTA's Designated Driver</div>
-      <div class="splash-flag">🇨🇦</div>
-    </div>
-    <div class="splash-road"><div class="splash-road-stripe"></div><div class="splash-car">🚗💨</div></div>
-    <div class="splash-progress"><div class="splash-fill"></div></div>
-  </div>
 
-  <!-- ===== SCROLL TO TOP ===== -->
-  <button id="scrollTop" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <div class="scroll-tooltip">Back to Top</div>
-    ↑
-  </button>
-
-  <!-- ===== WHATSAPP BUTTON ===== -->
-  <a id="waBtn" href="https://wa.me/19052439404?text=Hi%20SOBDRIVE!%20I'd%20like%20to%20book%20a%20designated%20driver." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <div class="wa-tooltip">Chat on WhatsApp</div>
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.651 4.835 1.79 6.865L2 30l7.343-1.755A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.4a11.36 11.36 0 0 1-5.788-1.582l-.415-.247-4.357 1.042 1.072-4.244-.27-.435A11.38 11.38 0 0 1 4.6 16C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 27.4 16 27.4zm6.27-8.49c-.344-.172-2.036-1.004-2.352-1.118-.317-.115-.547-.172-.778.172-.23.344-.893 1.118-1.094 1.348-.2.23-.403.258-.747.086-.344-.172-1.453-.535-2.768-1.708-1.023-.912-1.713-2.038-1.914-2.382-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.778-1.876-1.066-2.568-.28-.674-.565-.583-.778-.594l-.662-.012c-.23 0-.603.086-.919.43s-1.208 1.18-1.208 2.877 1.237 3.336 1.409 3.566c.172.23 2.434 3.718 5.898 5.213.824.356 1.468.568 1.969.727.827.263 1.58.226 2.175.137.663-.1 2.036-.832 2.323-1.635.287-.803.287-1.492.2-1.635-.086-.143-.316-.23-.66-.402z"/>
-    </svg>
-  </a>
 
   <!-- ===== NAV ===== -->
   <nav>
@@ -1311,6 +1391,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </nav>
 
+  </div><!-- /.sticky-header -->
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <button id="scrollTop" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="scroll-tooltip">Back to Top</div>
+    ↑
+  </button>
+
+  <!-- ===== WHATSAPP BUTTON ===== -->
+  <a id="waBtn" href="https://wa.me/19052439404?text=Hi%20SOBDRIVE!%20I'd%20like%20to%20book%20a%20designated%20driver." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <div class="wa-tooltip">Chat on WhatsApp</div>
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.651 4.835 1.79 6.865L2 30l7.343-1.755A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.4a11.36 11.36 0 0 1-5.788-1.582l-.415-.247-4.357 1.042 1.072-4.244-.27-.435A11.38 11.38 0 0 1 4.6 16C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 27.4 16 27.4zm6.27-8.49c-.344-.172-2.036-1.004-2.352-1.118-.317-.115-.547-.172-.778.172-.23.344-.893 1.118-1.094 1.348-.2.23-.403.258-.747.086-.344-.172-1.453-.535-2.768-1.708-1.023-.912-1.713-2.038-1.914-2.382-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.778-1.876-1.066-2.568-.28-.674-.565-.583-.778-.594l-.662-.012c-.23 0-.603.086-.919.43s-1.208 1.18-1.208 2.877 1.237 3.336 1.409 3.566c.172.23 2.434 3.718 5.898 5.213.824.356 1.468.568 1.969.727.827.263 1.58.226 2.175.137.663-.1 2.036-.832 2.323-1.635.287-.803.287-1.492.2-1.635-.086-.143-.316-.23-.66-.402z"/>
+    </svg>
+  </a>
+
   <!-- ===== HERO ===== -->
   <header class="hero">
     <div class="hero-leaf-bg" aria-hidden="true">
@@ -1325,7 +1421,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero-text">
         <div class="hero-badge">Durham, Peel & Toronto GTA &nbsp;|&nbsp; 24/7 Service</div>
         <h1>Get Home Safe. <br /><span class="red">We Drive Your Car.</span></h1>
-        <p class="hero-nearme" style="font-size:0.82rem;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;animation:fadeUpEl 0.7s ease 2.1s both;">📍 Designated Driver Near You — Durham, Peel & Toronto GTA</p>
+        <p class="hero-nearme" style="font-size:0.82rem;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;">📍 Designated Driver Near You — Durham, Peel & Toronto GTA</p>
         <p>Had too much to drink? Heading home after a night out? Need someone to drive your car home? SOBDRIVE sends a professional driver to get you and your vehicle home safely — 24/7 across Durham, Peel & Toronto GTA.</p>
         <div class="hero-btns">
           <a href="#book" class="hero-cta">📋 Book Online</a>
@@ -1867,22 +1963,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Splash control
-  const splash = document.getElementById('splash');
-  const urlParams = new URLSearchParams(window.location.search);
-
-  // If coming from child page → skip splash
-  if (urlParams.get("nosplash") === "true") {
-    splash.style.display = "none";
-  } else {
-    // Normal splash animation
-    setTimeout(() => {
-      splash.classList.add('splash-exit');
-      setTimeout(() => { splash.style.display = 'none'; }, 700);
-    }, 2500);
-  }
-
   // Direct scroll to booking form instantly (from child page Book buttons)
+  const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("direct") === "book") {
     document.documentElement.style.scrollBehavior = 'auto';
     setTimeout(() => {
@@ -2347,5 +2429,7 @@ function formatPhone(input) {
   }
 }
   </script>
+
+</div><!-- /.page-wrapper -->
 </body>
 </html>
