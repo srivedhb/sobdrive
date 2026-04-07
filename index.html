@@ -139,8 +139,13 @@
 
 
 
+  <!-- LCP / Performance optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -217,6 +222,11 @@
     }
     .hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(213,43,30,0.06) 1px,transparent 1px); background-size:32px 32px; pointer-events:none; }
     .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    /* Desktop: cap widget so it doesn't stretch too wide */
+    @media(min-width:769px) {
+      .booking-offer-widget { max-width:460px; margin:0 auto; }
+      .bow-cta-row { width:88%; }
+    }
     .hero-leaf-bg { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
     .falling-leaf { position:absolute; top:-60px; opacity:0; animation:fallLeaf linear infinite; }
     @keyframes fallLeaf { 0%{transform:translateY(-60px) rotate(0deg);opacity:0} 8%{opacity:0.2} 92%{opacity:0.2} 100%{transform:translateY(115vh) rotate(500deg);opacity:0} }
@@ -233,130 +243,246 @@
 
     /* ============ BOOKING OFFER WIDGET ============ */
     .booking-offer-widget {
-      width:100%; aspect-ratio:4/3; border-radius:20px;
-      background: linear-gradient(145deg, #1a1a1a 0%, #2c1a19 50%, #1a0f0f 100%);
+      width:100%; aspect-ratio:4/3; border-radius:24px;
+      background: linear-gradient(160deg, #1e0b08 0%, #130404 60%, #0c0202 100%);
       display:flex; flex-direction:column; align-items:center; justify-content:center;
-      border:2px solid rgba(213,43,30,0.4);
-      box-shadow:0 20px 60px rgba(213,43,30,0.25), 0 0 0 1px rgba(213,43,30,0.1);
+      border:1.5px solid rgba(213,43,30,0.35);
+      box-shadow:0 20px 60px rgba(213,43,30,0.2);
       overflow:hidden; position:relative; gap:0;
       cursor:pointer;
     }
+    /* GPU-composited — opacity only, zero repaint */
     .bow-glow {
       position:absolute; inset:0; pointer-events:none;
       background: radial-gradient(ellipse at 50% 0%, rgba(213,43,30,0.18) 0%, transparent 65%);
-      animation: bowGlowPulse 2s ease-in-out infinite alternate;
+      animation: bowGlowPulse 2.5s ease-in-out infinite alternate;
     }
-    @keyframes bowGlowPulse { from{opacity:0.5} to{opacity:1} }
-    .bow-border-flash {
-      position:absolute; inset:0; border-radius:18px; pointer-events:none;
-      box-shadow: inset 0 0 0 2px rgba(213,43,30,0);
-      animation: borderFlash 1.8s ease-in-out infinite;
+    @keyframes bowGlowPulse { from{opacity:0.4} to{opacity:1} }
+    /* Shimmer sweep — transform only, GPU composited */
+    .bow-shimmer {
+      position:absolute; inset:0; pointer-events:none; z-index:1;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.035) 50%, transparent 60%);
+      animation: bowShimmer 4.5s ease-in-out infinite;
     }
-    @keyframes borderFlash { 0%,100%{box-shadow:inset 0 0 0 2px rgba(213,43,30,0)} 50%{box-shadow:inset 0 0 0 2px rgba(213,43,30,0.7), 0 0 24px rgba(213,43,30,0.35)} }
+    @keyframes bowShimmer { 0%{transform:translateX(-100%)} 65%,100%{transform:translateX(100%)} }
 
+    /* Ribbon — static, no flash */
     .bow-top-ribbon {
       position:absolute; top:0; left:0; right:0;
       background: var(--red);
-      padding:0.45rem 1rem;
-      display:flex; align-items:center; justify-content:center; gap:0.5rem;
-      font-family:'Fjalla One',sans-serif; font-size:clamp(0.65rem,1.8vw,0.78rem);
+      padding:0.55rem 1rem;
+      display:flex; align-items:center; justify-content:center; gap:0.6rem;
+      font-family:'Fjalla One',sans-serif; font-size:clamp(0.72rem,1.8vw,0.85rem);
       letter-spacing:2px; text-transform:uppercase; color:#fff;
-      animation: ribbonFlash 2s ease-in-out infinite;
       z-index:3;
     }
-    @keyframes ribbonFlash { 0%,100%{background:var(--red)} 50%{background:#b01f14} }
-    .bow-ribbon-dot { width:7px; height:7px; border-radius:50%; background:#fff; animation:dotBlink 1s ease-in-out infinite; }
-    .bow-ribbon-dot:nth-child(2){ animation-delay:0.3s; }
-    .bow-ribbon-dot:nth-child(3){ animation-delay:0.6s; }
-    @keyframes dotBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    /* Two live dots — opacity + scale, GPU composited */
+    .bow-ribbon-dot {
+      width:8px; height:8px; border-radius:50%; background:#fff; flex-shrink:0;
+      animation: dotBlink 1.4s ease-in-out infinite;
+    }
+    .bow-ribbon-dot:last-child { animation-delay:0.7s; }
+    @keyframes dotBlink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.25;transform:scale(0.65)} }
 
     .bow-content {
       position:relative; z-index:2;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       padding:clamp(1rem,4vw,2rem) clamp(1rem,3vw,1.5rem);
-      text-align:center; gap:0.6rem; width:100%;
-      padding-top: clamp(2.5rem, 6vw, 3.5rem);
+      text-align:center; gap:0.75rem; width:100%;
+      padding-top: clamp(2.8rem, 6vw, 3.8rem);
     }
-    .bow-car-emoji {
-      font-size:clamp(1.8rem,5vw,3.5rem);
-      animation: carBounce 1.5s ease-in-out infinite;
-      filter: drop-shadow(0 4px 12px rgba(213,43,30,0.5));
-      line-height:1;
-    }
-    @keyframes carBounce { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1.05)} }
 
+    /* Main headline — larger floor for elderly readability */
     .bow-offer-main {
       font-family:'Fjalla One',sans-serif;
-      font-size:clamp(1rem,3vw,1.8rem);
-      color:#fff; line-height:1.15;
-      letter-spacing:0.5px;
+      font-size:clamp(2.2rem,5.5vw,4rem);
+      color:#fff; line-height:1.12;
+      letter-spacing:0.3px;
     }
-    .bow-offer-main .bow-red { color:#ff4444; animation: redFlash 1.2s ease-in-out infinite; }
-    @keyframes redFlash { 0%,100%{color:#ff4444} 50%{color:#ff7070} }
+    /* Static accent colour — removed redFlash (was repainting text every 1.2s) */
+    .bow-offer-main .bow-red { color:#ff4433; }
+
+    /* Price box — gold, framed, anchors the eye */
+    .bow-price-box {
+      background:rgba(212,175,55,0.07);
+      border:1px solid rgba(212,175,55,0.22);
+      border-radius:16px; padding:0.75rem 1.6rem;
+      position:relative; overflow:hidden; width:88%;
+    }
+    .bow-price-box::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 50% 65%, rgba(212,175,55,0.16) 0%, transparent 70%);
+      animation:goldGlow 2.5s ease-in-out infinite alternate; pointer-events:none;
+    }
+    @keyframes goldGlow { from{opacity:0.35} to{opacity:1} }
 
     .bow-price-row {
-      display:flex; align-items:baseline; gap:0.4rem;
-      justify-content:center;
+      display:flex; align-items:baseline; gap:0.35rem;
+      justify-content:center; position:relative;
     }
-    .bow-from { font-size:clamp(0.7rem,2vw,0.85rem); color:rgba(255,255,255,0.6); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+    .bow-from {
+      font-family:'Cabin',sans-serif;
+      font-size:clamp(0.75rem,2vw,0.9rem); color:rgba(255,255,255,0.45);
+      font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    }
+    /* Gold price — was #fff, blends into dark bg */
     .bow-price {
       font-family:'Fjalla One',sans-serif;
-      font-size:clamp(4rem,6vw,3.5rem);
-      color:#fff; line-height:1;
-      text-shadow: 0 0 20px rgba(213,43,30,0.6);
-      animation: priceGlow 2s ease-in-out infinite;
+      font-size:clamp(2.6rem,6.5vw,4.4rem);
+      color:var(--white); line-height:1; position:relative;
+      animation: priceGlow 3s ease-in-out infinite;
     }
-    @keyframes priceGlow { 0%,100%{text-shadow:0 0 20px rgba(213,43,30,0.4)} 50%{text-shadow:0 0 35px rgba(213,43,30,0.9), 0 0 60px rgba(213,43,30,0.3)} }
-    .bow-price-sub { font-size:clamp(0.65rem,1.8vw,0.78rem); color:rgba(255,255,255,0.55); letter-spacing:1px; }
+    @keyframes priceGlow {
+      0%,100%{text-shadow:0 0 18px rgba(212,175,55,0.2)}
+      50%{text-shadow:0 0 38px rgba(212,175,55,0.55), 0 0 65px rgba(212,175,55,0.12)}
+    }
 
+    /* Zero-fee pill inside price box */
+ 
+
+    /* Trust badges — creative icon row design */
     .bow-badges {
-      display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:center; margin-top:0.1rem;
+      display:flex; flex-direction:column; gap:0.35rem;
+      width:88%;
     }
     .bow-badge {
-      background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
-      color:rgba(255,255,255,0.8); border-radius:50px;
-      padding:0.25rem 0.7rem; font-size:clamp(0.58rem,1.5vw,0.7rem); font-weight:700;
-      letter-spacing:1px; text-transform:uppercase; white-space:nowrap;
+      background:linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%);
+      border:1px solid rgba(255,255,255,0.12);
+      color:#fff; border-radius:10px;
+      padding:0.5rem 0.9rem; font-size:clamp(0.82rem,1.8vw,0.95rem); font-weight:700;
+      font-family:'Cabin',sans-serif; width:100%;
+      display:flex; align-items:center; gap:0.7rem;
+      position:relative; overflow:hidden;
+    }
+    .bow-badge::before { display:none; }
+    .bow-badge-icon {
+      width:28px; height:28px; border-radius:8px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.95rem; font-style:normal;
+    }
+    .bow-badge-icon.gold { background:rgba(212,175,55,0.18); border:1px solid rgba(212,175,55,0.3); }
+    .bow-badge-icon.green { background:rgba(74,222,128,0.15); border:1px solid rgba(74,222,128,0.28); }
+    .bow-badge-icon.blue  { background:rgba(96,165,250,0.15); border:1px solid rgba(96,165,250,0.28); }
+    .bow-badge-text { flex:1; letter-spacing:0.2px; }
+    .bow-badge-check {
+      width:18px; height:18px; border-radius:50%; background:rgba(74,222,128,0.2);
+      border:1.5px solid rgba(74,222,128,0.5); flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.6rem; color:#4ade80;
+    }
+    /* Accent line on left */
+    .bow-badge::after {
+      content:''; position:absolute; left:0; top:20%; bottom:20%;
+      width:2.5px; border-radius:2px; background:var(--gold);
+    }
+    .bow-badge:nth-child(2)::after { background:#4ade80; }
+    .bow-badge:nth-child(3)::after { background:#60a5fa; }
+
+    /* CTA button pair */
+    .bow-cta-row {
+      display:flex; gap:0.6rem; width:88%;
     }
 
+    /* Primary CTA — Book */
     .bow-cta-btn {
-      display:inline-block; background:var(--red); color:#fff;
-      font-family:'Fjalla One',sans-serif; font-size:clamp(0.8rem,2.5vw,1rem);
-      letter-spacing:1.5px; text-transform:uppercase;
-      padding:0.6rem 1.5rem; border-radius:50px; margin-top:0.3rem;
-      box-shadow:0 6px 24px rgba(213,43,30,0.5);
-      animation: ctaPop 1.8s ease-in-out infinite;
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-    @keyframes ctaPop { 0%,100%{transform:scale(1); box-shadow:0 6px 24px rgba(213,43,30,0.5)} 50%{transform:scale(1.04); box-shadow:0 10px 36px rgba(213,43,30,0.75)} }
-    .bow-cta-btn:hover { transform:scale(1.07) !important; }
-
-    .bow-urgency {
-      font-size:clamp(0.58rem,1.6vw,0.72rem); color:rgba(255,255,255,0.45);
+      flex:1; background:var(--red); color:#fff;
+      font-family:'Fjalla One',sans-serif; font-size:clamp(0.9rem,2.2vw,1.1rem);
       letter-spacing:1px; text-transform:uppercase;
+      padding:0.95rem 1rem; border-radius:14px;
+      text-decoration:none; position:relative; overflow:hidden;
+      animation: ctaShadowPulse 2.2s ease-in-out infinite;
+      transition: transform 0.2s; text-align:center;
+      display:flex; align-items:center; justify-content:center; gap:0.4rem;
     }
-    .bow-urgency .bow-live { color:#4ade80; animation: liveBlink 1s step-end infinite; }
-    @keyframes liveBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    /* Mobile: remove fixed aspect-ratio so content breathes */
+    /* Call CTA */
+    .bow-call-btn {
+      flex:0 0 auto; background:rgba(74,222,128,0.12); color:#4ade80;
+      border:1.5px solid rgba(74,222,128,0.4);
+      font-family:'Fjalla One',sans-serif; font-size:clamp(0.8rem,2vw,1rem);
+      letter-spacing:1px; text-transform:uppercase;
+      padding:0.95rem 1rem; border-radius:14px;
+      text-decoration:none; position:relative; overflow:hidden;
+      transition: transform 0.2s, background 0.2s;
+      text-align:center; display:flex; align-items:center; justify-content:center;
+      gap:0.35rem; white-space:nowrap;
+      animation: callGlowPulse 2.2s ease-in-out infinite;
+    }
+    .bow-call-btn:hover { transform:translateY(-2px); background:rgba(74,222,128,0.2); }
+    @keyframes callGlowPulse {
+      0%,100%{box-shadow:0 4px 16px rgba(74,222,128,0.2)}
+      50%{box-shadow:0 6px 28px rgba(74,222,128,0.5)}
+    }
+    .bow-call-btn .bow-call-icon {
+      width:20px; height:20px; border-radius:50%;
+      background:rgba(74,222,128,0.25); display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem; animation:callRing 2s ease-in-out infinite;
+      flex-shrink:0;
+    }
+    @keyframes callRing {
+      0%,80%,100%{transform:rotate(0deg)}
+      10%{transform:rotate(-15deg)}
+      20%{transform:rotate(15deg)}
+      30%{transform:rotate(-10deg)}
+      40%{transform:rotate(10deg)}
+    }
+
+    /* CTA — full width block, large tap target for elderly + mobile */
+    .bow-cta-btn {
+      display:flex; width:auto; background:var(--red); color:#fff;
+      font-family:'Fjalla One',sans-serif; font-size:clamp(1.05rem,2.8vw,1.3rem);
+      letter-spacing:1.5px; text-transform:uppercase;
+      padding:1rem 1.5rem; border-radius:14px;
+      text-decoration:none; position:relative; overflow:hidden;
+      animation: ctaShadowPulse 2.2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    /* Shadow pulse only — no scale loop (scale was forcing layout recalc) */
+    @keyframes ctaShadowPulse {
+      0%,100%{box-shadow:0 6px 24px rgba(213,43,30,0.45)}
+      50%{box-shadow:0 12px 40px rgba(213,43,30,0.78)}
+    }
+    /* Shine sweep — transform only, GPU composited */
+    .bow-cta-btn::after {
+      content:''; position:absolute; top:0; left:0; width:50%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+      animation:ctaShine 2.8s ease-in-out infinite;
+    }
+    @keyframes ctaShine { 0%{transform:translateX(-120%)} 55%,100%{transform:translateX(280%)} }
+    .bow-cta-btn:hover { transform:translateY(-2px); }
+
+    /* Regions strip — visible, clearly readable */
+    .bow-urgency {
+      width:88%;
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:10px; padding:0.5rem 0.85rem;
+      font-family:'Cabin',sans-serif;
+      font-size:clamp(0.82rem,1.6vw,0.9rem); color:rgba(255,255,255,0.8);
+      letter-spacing:0.3px;
+    }
+    .bow-urgency .bow-live { color:#4ade80; animation: liveBlink 1.4s ease-in-out infinite; }
+    @keyframes liveBlink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} }
+
+    /* Mobile — fluid, no aspect-ratio lock */
     @media(max-width:768px) {
       .booking-offer-widget {
         aspect-ratio: unset;
-        min-height: 320px;
-        padding-bottom: 1rem;
+        min-height: 360px;
+        padding-bottom: 1.25rem;
       }
       .bow-content {
-        gap: 0.4rem;
-        padding-top: 3rem;
-        padding-bottom: 0.5rem;
+        gap: 0.6rem;
+        padding-top: 3.2rem;
+        padding-bottom: 0.75rem;
       }
-      .bow-car-emoji {
-        font-size: 2rem;
-      }
-      .bow-ribbon-dot {
-        display: none;
-      }
+      .bow-cta-row { width: 88%; }
+    }
+    /* Small phones — keep headline large, just tighten line-height slightly */
+    @media(max-width:420px) {
+      .bow-offer-main { font-size: clamp(1.5rem, 9vw, 2.6rem); line-height:1.1; }
+      .bow-price { font-size: 4rem; }
+      .bow-badge { font-size: 0.92rem; padding: 0.55rem 1rem; }
+      .bow-cta-btn { font-size: 1.1rem; padding: 1.05rem 1.5rem; }
     }
 
 
@@ -1353,6 +1479,25 @@
         padding: 0.38rem 0.55rem;
     }
   }
+  .booking-offer-widget {
+  height:auto;
+  aspect-ratio:unset;
+  padding:1.5rem 0;
+}
+
+.bow-content {
+  max-width:420px;
+  margin:0 auto;
+}
+
+.bow-price-box,
+.bow-badges,
+.bow-cta-row {
+  width:100%;
+}
+
+
+
   </style>
 
 
@@ -1445,31 +1590,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero-image-wrap">
         <div class="booking-offer-widget" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
           <div class="bow-glow"></div>
-          <div class="bow-border-flash"></div>
+          <div class="bow-shimmer"></div>
           <div class="bow-top-ribbon">
-            <div class="bow-ribbon-dot"></div>
-            <div class="bow-ribbon-dot"></div>
             <div class="bow-ribbon-dot"></div>
             <span class="maple">🍁</span> Limited-Time Booking Offer
             <div class="bow-ribbon-dot"></div>
-            <div class="bow-ribbon-dot"></div>
-            <div class="bow-ribbon-dot"></div>
           </div>
           <div class="bow-content">
-            <div class="bow-car-emoji">🚗💨</div>
-            <div class="bow-offer-main">Get Home Safe Tonight<br><span class="bow-red">No Booking Fee</span> — Under 10 km</div>
-            <div class="bow-price-row">
-              <span class="bow-from">from</span>
-              <span class="bow-price">$39.99</span>
-              <span class="bow-price-sub">flat rate</span>
+            <div class="bow-offer-main">Your Safe Ride Home,<br><span class="bow-red">In Your Own Car.</span></div>
+            <div class="bow-price-box">
+              <div class="bow-price-row">
+                <span class="bow-from">With</span>
+                <span class="bow-price">$39.99</span>
+               
+              </div>
+            
             </div>
             <div class="bow-badges">
-              <span class="bow-badge">⚡ 15–30 min arrival</span>
-              <span class="bow-badge">🔑 We drive your car</span>
-              <span class="bow-badge">24/7 Available</span>
+              <span class="bow-badge">
+                <span class="bow-badge-icon gold">👨‍✈️</span>
+                <span class="bow-badge-text">Professional Drivers</span>
+                <span class="bow-badge-check">✓</span>
+              </span>
+              <span class="bow-badge">
+                <span class="bow-badge-icon green">🛡️</span>
+                <span class="bow-badge-text">Safe &amp; Reliable</span>
+                <span class="bow-badge-check">✓</span>
+              </span>
+              <span class="bow-badge">
+                <span class="bow-badge-icon blue">🕐</span>
+                <span class="bow-badge-text">24/7 Service · 15–30 Min Arrival</span>
+                <span class="bow-badge-check">✓</span>
+              </span>
             </div>
-            <a href="#book" class="bow-cta-btn">📋 Book Your Driver Now</a>
-            <div class="bow-urgency"><span class="bow-live">●</span> Drivers available now across Durham, Peel & Toronto GTA</div>
+            <div class="bow-cta-row">
+              <a href="#book" class="bow-cta-btn">📋 Book Now</a>
+              <a href="tel:+19052439404" class="bow-call-btn">
+                <span class="bow-call-icon">📞</span>
+                Call Us
+              </a>
+            </div>
           </div>
         </div>
       
