@@ -199,8 +199,13 @@
     .nav-actions { display:flex; align-items:center; gap:0.55rem; }
     .nav-book { background:rgba(255,255,255,0.14); color:#fff; border:1.5px solid rgba(255,255,255,0.38); padding:0.45rem 0.9rem; border-radius:50px; font-weight:700; font-size:clamp(0.7rem,2.3vw,0.82rem); white-space:nowrap; transition:transform 0.2s,background 0.2s; }
     .nav-book:hover { transform:translateY(-2px); background:rgba(255,255,255,0.24); }
-    .nav-phone { background:#fff; color:var(--red); padding:0.48rem 1.2rem; border-radius:50px; font-weight:700; font-size:clamp(0.72rem,2.5vw,0.88rem); white-space:nowrap; box-shadow:0 3px 12px rgba(0,0,0,0.15); transition:transform 0.2s; }
+    .nav-phone { background:#fff; color:var(--red); padding:0.48rem 1.2rem; border-radius:6px; font-weight:700; font-size:clamp(0.72rem,2.5vw,0.88rem); white-space:nowrap; box-shadow:0 3px 12px rgba(0,0,0,0.15); transition:transform 0.2s; }
     .nav-phone:hover { transform:translateY(-2px); }
+    /* Full number on desktop, short number on mobile — saves space, keeps tap target big */
+    .nav-phone-full  { display:inline; }
+    .nav-phone-short { display:none; }
+    .nav-book-short { display:none; }
+    .nav-book-full  { display:inline; }    
     @media(max-width:600px) { .nav-links { display:none; } .nav-book { padding:0.42rem 0.75rem; } }
 
     /* ============ HERO ============ */
@@ -296,7 +301,7 @@
     .bow-from { font-size:clamp(0.7rem,2vw,0.85rem); color:rgba(255,255,255,0.6); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
     .bow-price {
       font-family:'Fjalla One',sans-serif;
-      font-size:clamp(2rem,6vw,3.5rem);
+      font-size:clamp(4rem,6vw,3.5rem);
       color:#fff; line-height:1;
       text-shadow: 0 0 20px rgba(213,43,30,0.6);
       animation: priceGlow 2s ease-in-out infinite;
@@ -548,17 +553,26 @@
         gap: 0.4rem;
         flex-shrink: 0;
       }
-
+    .nav-phone-full  { display:inline; }
+    .nav-phone-short { display:none; }
       .nav-phone {
-        padding: 0.42rem 0.7rem;
-        font-size: 0.72rem;
-        white-space: nowrap;
-        letter-spacing: 0;
+        font-size:0.95rem !important;
+        font-weight:800 !important;
+        padding:0.55rem 0.9rem !important;
+        letter-spacing:0;
+        white-space:nowrap;
+        min-height:44px;
+        display:flex; align-items:center; gap:0.3rem;
+        box-shadow:0 4px 14px rgba(213,43,30,0.25);
       }
-
+      .nav-book-full  { display:none; }
+      .nav-book-short { display:inline; }
       .nav-book {
-        padding: 0.42rem 0.65rem;
-        font-size: 0.7rem;
+        padding:0.55rem 0.65rem;
+        font-size:1rem;
+        border-radius:6px;
+        min-height:44px;
+        display:flex; align-items:center;
       }
 
       .emergency-bar {
@@ -1237,13 +1251,6 @@
       letter-spacing: 2px;
     }
 
-    /* ── Nav phone — primary CTA, must be large enough to tap drunk ── */
-    .nav-phone {
-      font-size: clamp(0.9rem, 3.5vw, 1rem);
-      padding: 0.6rem 1rem;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
 
     /* ── Nav book button ── */
     .nav-book {
@@ -1341,8 +1348,9 @@
       padding: 1.05rem 1.2rem;
     }
     .nav-phone {
-      font-size: 0.84rem;
-      padding: 0.55rem 0.75rem;
+        font-size: 0.68rem;
+        letter-spacing: 0;
+        padding: 0.38rem 0.55rem;
     }
   }
   </style>
@@ -1386,8 +1394,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-actions">
-      <a href="#book" class="nav-book">📋 Book Now</a>
-      <a href="tel:+19052439404" class="nav-phone">📞 +1-905-243-9404</a>
+      <a href="#book" class="nav-book" aria-label="Book Now">
+        <span class="nav-book-full">📋 Book Now</span>
+        <span class="nav-book-short">📋</span>
+      </a>
+      <a href="tel:+19052439404" class="nav-phone">
+        📞 <span class="nav-phone-full">+1-905-243-9404</span><span class="nav-phone-short">905-243-9404</span>
+      </a>
     </div>
   </nav>
 
