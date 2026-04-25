@@ -2269,6 +2269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const EMAILJS_EMAIL_TEMPLATE_ID = 'template_7hoccg2';
   const EMAILJS_SMS_TEMPLATE_ID   = 'template_d2cfw1s'; // ← paste Template C ID here
   const EMAILJS_PUBLIC_KEY        = 'oXyYJVwxFQkIvnxHz';
+  const EMAILJS_CUSTOMER_TEMPLATE_ID = 'template_1zo86tw'; // ← your new template ID
 
   // ── Phone area code registry ──────────────────────────────────────────────
   const CA_AREA_CODES = new Set([
@@ -2510,6 +2511,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         pickup, dropoff, date, time, city, notes: fullNotes
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
+    
+// ── B: Confirmation email to customer ── 
+    try {
+  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, {
+    customer_name: customerName,
+    customer_email: customerEmail,
+    pickup, dropoff, date, time, city
+  }, EMAILJS_PUBLIC_KEY);
+} catch (err) { console.warn('Customer confirmation email failed:', err); }
 
     // ── Show personalised success screen ──
     showSuccess(customerName, customerPhone, customerEmail, pickup, dropoff, date, time, city, isFriend, friendName);
