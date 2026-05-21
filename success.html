@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Authorized – Sobdrive</title>
+  <link rel="icon" type="image/png" href="/images/sobDrive-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #D52B1E;
+      --red-dark: #A82018;
+      --red-pale: #FEF2F1;
+      --dark: #1C1C1C;
+      --gray: #5a5a5a;
+      --cream: #FDFAF6;
+      --border: #E8E0D5;
+    }
+    body {
+      font-family: 'Cabin', sans-serif;
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--red);
+      padding: 0.85rem clamp(1rem, 4vw, 2rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 24px rgba(213,43,30,0.3);
+    }
+    .logo {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      letter-spacing: 3px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav-phone {
+      background: #fff;
+      color: var(--red);
+      padding: 0.48rem 1.1rem;
+      border-radius: 6px;
+      font-family: 'Cabin', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.72rem, 2.5vw, 0.88rem);
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+    .nav-phone:hover { transform: translateY(-2px); }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(32px, 8vw, 64px) clamp(16px, 5vw, 32px);
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      padding: clamp(28px, 6vw, 48px) clamp(20px, 6vw, 40px);
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .icon {
+      width: clamp(56px, 15vw, 72px);
+      height: clamp(56px, 15vw, 72px);
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto clamp(16px, 4vw, 24px);
+    }
+    .icon svg { width: clamp(28px, 8vw, 36px); height: clamp(28px, 8vw, 36px); }
+    h1 {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: clamp(1.3rem, 5vw, 1.7rem);
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    p { color: var(--gray); font-size: clamp(14px, 3.5vw, 15px); line-height: 1.65; margin-bottom: 10px; }
+    .note {
+      background: #f1f8e9;
+      border-left: 4px solid #66bb6a;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: clamp(14px, 4vw, 20px) 0 clamp(20px, 5vw, 28px);
+      text-align: left;
+      font-size: clamp(12px, 3vw, 13px);
+      color: #2e7d32;
+    }
+    .btn {
+      display: block;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: clamp(13px, 3.5vw, 14px) clamp(24px, 8vw, 36px);
+      border-radius: 50px;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+      letter-spacing: 1px;
+      box-shadow: 0 6px 24px rgba(213,43,30,0.30);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .stripe-note { margin-top: clamp(20px, 5vw, 28px); color: #aaa; font-size: 12px; }
+    .stripe-note a { color: var(--gray); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      color: #666;
+      padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .footer-logo {
+      font-family: 'Fjalla One', sans-serif;
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      letter-spacing: 3px;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .footer-contact { margin-bottom: 0.75rem; line-height: 1.8; }
+    .footer-contact a { color: #888; text-decoration: none; }
+    .footer-contact a:hover { color: #bbb; }
+    .footer-bottom { margin-top: 0.75rem; color: #333; font-size: 0.76rem; }
+  </style>
+</head>
+<body>
+  <script>
+    if (!new URLSearchParams(window.location.search).get('session_id')) {
+      window.location.replace('https://sobdrive.ca');
+    }
+  </script>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://sobdrive.ca" class="logo">🍁 SOBDRIVE</a>
+    <a href="tel:+19052439404" class="nav-phone">📞 +1-905-243-9404</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="card">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="12" fill="#4caf50"/>
+          <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1>Card Authorized</h1>
+      <p>Your card has been verified and a hold has been placed on the authorized amount.</p>
+      <div class="note">
+        <strong>No charge yet.</strong> Your card will only be charged once your booking is confirmed by Sobdrive. You will be notified before any capture.
+      </div>
+      <a href="https://sobdrive.ca" class="btn">Return to Sobdrive.ca</a>
+      <p class="stripe-note">Secured by <a href="https://stripe.com" target="_blank" rel="noopener">Stripe</a></p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🍁 SOBDRIVE 🍁</div>
+    <div class="footer-contact">
+      📞 <a href="tel:+19052439404">+1 (905) 243-9404</a>
+      &nbsp;|&nbsp;
+      ✉️ <a href="mailto:info@sobdrive.ca">info@sobdrive.ca</a>
+    </div>
+    <p>24/7 Designated Driver Service — Durham, Peel &amp; Toronto GTA, Ontario, Canada</p>
+    <div class="footer-bottom">© 2026 SOBDRIVE. All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
