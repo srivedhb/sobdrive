@@ -544,6 +544,24 @@
     .form-success p { color:var(--gray); }
     @media(max-width:600px) { .form-grid { grid-template-columns:1fr; } .form-group.full { grid-column:1; } }
 
+    /* ── Address autocomplete dropdown ── */
+    .ac-wrap { position: relative; }
+    .ac-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 9999;
+      max-height: 220px; overflow-y: auto; display: none;
+    }
+    .ac-dropdown.open { display: block; }
+    .ac-item {
+      padding: 0.65rem 1rem; font-size: 0.88rem; cursor: pointer;
+      color: var(--dark); border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item:hover, .ac-item.active { background: var(--red-pale); color: var(--red); }
+
+
     /* ============ HOW IT WORKS ============ */
     .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; }
     .step { background:#fff; border:1.5px solid var(--border); border-top:4px solid var(--red); padding:2rem 1.5rem; border-radius:16px; text-align:center; box-shadow:0 4px 18px rgba(0,0,0,0.05); transition:transform 0.3s,box-shadow 0.3s; }
@@ -1580,7 +1598,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-badge">Durham, Peel & Toronto GTA &nbsp;|&nbsp; 24/7 Service</div>
         <h1>Get Home Safe. <br /><span class="red">We Drive Your Car.</span></h1>
         <p class="hero-nearme" style="font-size:0.82rem;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;">📍 Designated Driver Near You — Durham, Peel & Toronto GTA</p>
-        <p>Had too much to drink? Heading home after a night out? Need someone to drive your car home? SOBDRIVE sends a professional driver to get you and your vehicle home safely — 24/7 across Durham, Peel & Toronto GTA.</p>
+        <p>Had too much to drink? Heading home after a night out? Give your keys to us — our professional designated driver will get you and your vehicle home safely — 24/7 across Durham, Peel & Toronto GTA.</p>
         <div class="hero-btns">
           <a href="#book" class="hero-cta">📋 Book Online</a>
           <a href="tel:+19052439404" class="hero-cta" style="background:#1a1a1a;box-shadow:0 8px 28px rgba(0,0,0,0.3);">📞 Call Now</a>
@@ -1609,7 +1627,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bow-badges">
               <span class="bow-badge">
                 <span class="bow-badge-icon gold">👨‍✈️</span>
-                <span class="bow-badge-text">Professional Drivers</span>
+                <span class="bow-badge-text">Professional Designated Drivers</span>
                 <span class="bow-badge-check">✓</span>
               </span>
               <span class="bow-badge">
@@ -1698,10 +1716,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="pricing-icon">🚗</div>
           <h3>City Ride</h3>
           <div class="pricing-range">11+ km</div>
-          <div class="pricing-price">$19.99<span> + $2.50/km</span></div>
-          <div class="pricing-price-sub">$19.99 booking fee<br/>+ $2.50 per km</div>
+          <div class="pricing-price">$2.50/km</div>
           <ul class="pricing-features">
-            <li>e.g. 20km = $70 total</li>
+            <li>Turn On key fee of $19.99</li>
             <li>We drive your own car</li>
             <li>Professional driver</li>
             <li>15–30 min arrival</li>
@@ -1714,25 +1731,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="pricing-swipe-hint">Swipe to see all plans</div>
 
-      <!-- FARE CALCULATOR -->
-      <div class="calc-wrap reveal">
-        <h3>🧮 Estimate Your Fare</h3>
-        <p>Enter your approximate distance and see your price instantly.</p>
-        <div class="calc-row">
-          <label for="calcKm">Distance</label>
-          <input class="calc-input" type="number" id="calcKm" placeholder="e.g. 18" min="0" oninput="calcFare()" />
-          <span class="calc-unit">km</span>
-        </div>
-        <div class="calc-result calc-result-hidden" id="calcResult">
-          <div>
-            <div class="calc-result-label">Estimated Fare</div>
-            <div class="calc-result-breakdown" id="calcBreakdown"></div>
-          </div>
-          <div class="calc-result-price" id="calcPrice"></div>
-        </div>
-      </div>
-
-      <p class="pricing-disclaimer">* Prices are estimates based on distance only. Final price confirmed at booking. Call us for a custom quote on unusual routes.</p>
+      <p class="pricing-disclaimer">* Our pricing within the Greater Toronto Area may vary based on location, time, and situational factors. Contact us for an accurate quote.</p>
     </div>
   </div>
 
@@ -1765,34 +1764,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <!-- intentional spacer -->
             </div>
 
-            <!-- Book for a Friend toggle -->
-            <label class="friend-toggle-wrap" id="friendToggleWrap">
-              <input type="checkbox" id="friendToggle" onchange="toggleFriendFields(this)" />
-              <div class="friend-toggle-switch"></div>
-              <div class="friend-toggle-label">&#128241; Booking for a friend? <span>Toggle to add their details</span></div>
-            </label>
-
-            <!-- Friend fields (hidden until toggled) -->
-            <div class="friend-fields" id="friendFields">
-              <div class="friend-fields-header">&#128587; Friend's Details</div>
-              <div class="form-group">
-                <label for="ffname">Friend's Name *</label>
-                <input type="text" id="ffname" placeholder="Friend's full name" />
-              </div>
-              <div class="form-group">
-                <label for="ffphone">Friend's Phone *</label>
-                <input type="tel" id="ffphone" placeholder="+1 (647) 000-0000" oninput="formatPhone(this)" pattern="[\d\s\-\(\)\+]{10,15}" />
-              </div>
-            </div>
 
             <div class="form-group">
               <label for="fpickup">Pickup Location *</label>
-              <input type="text" id="fpickup" placeholder="Your pickup address" required />
+              <div class="ac-wrap">
+                <input type="text" id="fpickup" placeholder="Your pickup address" required autocomplete="off" />
+                <div class="ac-dropdown" id="fpickup-ac"></div>
+              </div>
             </div>
             <div class="form-group">
               <label for="fdropoff">Drop-off Location *</label>
-              <input type="text" id="fdropoff" placeholder="Your home address" required />
+              <div class="ac-wrap">
+                <input type="text" id="fdropoff" placeholder="Your home address" required autocomplete="off" />
+                <div class="ac-dropdown" id="fdropoff-ac"></div>
+              </div>
             </div>
+
             <div class="form-group">
               <label for="fdate">Date *</label>
               <input type="date" id="fdate" required />
@@ -1800,29 +1787,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="form-group">
               <label for="ftime">Time *</label>
               <input type="time" id="ftime" required />
-            </div>
-            <div class="form-group">
-              <label for="fcity">City *</label>
-              <select id="fcity" required>
-                <option value="">Select your city</option>
-                <option>Toronto</option>
-                <option>Mississauga</option>
-                <option>Brampton</option>
-                <option>Markham</option>
-                <option>Vaughan</option>
-                <option>Richmond Hill</option>
-                <option>Scarborough</option>
-                <option>North York</option>
-                <option>Etobicoke</option>
-                <option>Pickering</option>
-                <option>Oshawa</option>
-                <option>Whitby</option>
-                <option>Other GTA Area</option>
-              </select>
-            </div>
-            <div class="form-group full">
-              <label for="fnotes">Additional Notes</label>
-              <textarea id="fnotes" placeholder="Any special instructions, parking info, etc."></textarea>
             </div>
             <div class="form-group full">
               <button type="submit" class="form-submit">🚗 Request My Driver Now</button>
@@ -1857,13 +1821,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       </svg>
                       Debit
                     </div>
-                    <div class="payment-icon cash">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="6" width="20" height="12" rx="2"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      Cash
-                    </div>
+
                     <div class="secure-badge">
                       🔒 Secure &amp; Safe Booking — Your info is never shared
                     </div>
@@ -2423,63 +2381,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
 
-    // Friend phone validation — only if toggle is on
-      if (document.getElementById('friendToggle').checked) {
-        const rawFriendPhone = document.getElementById('ffphone').value.replace(/\D/g, '');
-        const friendPhoneCheck = validatePhone(rawFriendPhone);
-
-        if (!friendPhoneCheck.valid) {
-          showModal({
-            icon: '📵',
-            title: "Friend's Phone Invalid",
-            body: `<p>${friendPhoneCheck.message}</p>
-                  <p class="sd-modal-sub">Need help? Call us at <strong>+1-905-243-9404</strong></p>`,
-            primaryLabel: 'Fix Number'
-          });
-          btn.disabled = false;
-          return;
-        }
-
-        if (friendPhoneCheck.country === 'US') {
-          const area = rawFriendPhone.slice(0, 3);
-          showModal({
-            icon: '🇺🇸',
-            title: "Friend's US Number",
-            body: `<p>Your friend's number has a <strong>US area code</strong> (${area}). Make sure it's correct.</p>
-                  <p class="sd-modal-sub">Press Continue to proceed or fix the number.</p>`,
-            primaryLabel: 'Yes, Continue',
-            secondaryLabel: 'Fix Number',
-            onPrimary: () => proceedWithBooking(btn),
-            onSecondary: () => { btn.disabled = false; }
-          });
-          return;
-        }
-      }
-
       await proceedWithBooking(btn);
   }
-
-  // ── Friend fields toggle ──────────────────────────────────────────────────
-  function toggleFriendFields(checkbox) {
-    const wrap   = document.getElementById('friendToggleWrap');
-    const fields = document.getElementById('friendFields');
-    const ffname = document.getElementById('ffname');
-    const ffphone = document.getElementById('ffphone');
-    if (checkbox.checked) {
-      wrap.classList.add('active');
-      fields.classList.add('open');
-      ffname.required  = true;
-      ffphone.required = true;
-    } else {
-      wrap.classList.remove('active');
-      fields.classList.remove('open');
-      ffname.required  = false;
-      ffphone.required = false;
-      ffname.value  = '';
-      ffphone.value = '';
-    }
-  }
-  // ─────────────────────────────────────────────────────────────────────────
 
   async function proceedWithBooking(btn) {
     btn.textContent = '⏳ Sending...';
@@ -2492,40 +2395,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const dropoff       = document.getElementById('fdropoff').value;
     const date          = document.getElementById('fdate').value;
     const time          = document.getElementById('ftime').value;
-    const city          = document.getElementById('fcity').value;
-    const notes         = document.getElementById('fnotes').value || 'None';
-
-    // Friend details (if toggled on)
-    const isFriend   = document.getElementById('friendToggle').checked;
-    const friendName  = isFriend ? document.getElementById('ffname').value  : '';
-    const friendPhone = isFriend ? document.getElementById('ffphone').value : '';
-    const friendNote  = isFriend ? `FOR FRIEND: ${friendName} (${friendPhone})` : '';
-    const fullNotes   = friendNote ? `${friendNote}\n${notes}` : notes;
 
     // ── A: Email notification to SOBDRIVE ──
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID, {
         customer_name: customerName, customer_phone: customerPhone,
         customer_email: customerEmail,
-        friend_name: friendName, friend_phone: friendPhone,
-        pickup, dropoff, date, time, city, notes: fullNotes
+        pickup, dropoff, date, time
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
-    
-// ── B: Confirmation email to customer ── 
+
+    // ── B: Confirmation email to customer ──
     try {
-  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, {
-    customer_name: customerName,
-    customer_email: customerEmail,
-    pickup, dropoff, date, time, city
-  }, EMAILJS_PUBLIC_KEY);
-} catch (err) { console.warn('Customer confirmation email failed:', err); }
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, {
+        customer_name: customerName,
+        customer_email: customerEmail,
+        pickup, dropoff, date, time
+      }, EMAILJS_PUBLIC_KEY);
+    } catch (err) { console.warn('Customer confirmation email failed:', err); }
 
     // ── Show personalised success screen ──
-    showSuccess(customerName, customerPhone, customerEmail, pickup, dropoff, date, time, city, isFriend, friendName);
+    showSuccess(customerName, customerPhone, customerEmail, pickup, dropoff, date, time);
   }
 
-  function showSuccess(name, phone, email, pickup, dropoff, date, time, city, isFriend, friendName) {
+  function showSuccess(name, phone, email, pickup, dropoff, date, time) {
     document.getElementById('booking-form-wrap').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
@@ -2536,20 +2429,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let dateStr = date;
     try { dateStr = new Date(date + 'T12:00:00').toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' }); } catch(e){}
 
-    // Friend row (conditional)
-    const friendRow = isFriend && friendName
-      ? `<div class="bs-row"><span class="bs-label">&#128581; Riding For</span><span class="bs-value">${friendName}</span></div>`
-      : '';
-
     // Booking summary card
     document.getElementById('successDetails').innerHTML = `
       <div class="booking-summary">
-        ${friendRow}
         <div class="bs-row"><span class="bs-label">&#128205; Pickup</span><span class="bs-value">${pickup}</span></div>
         <div class="bs-row"><span class="bs-label">&#127968; Drop-off</span><span class="bs-value">${dropoff}</span></div>
         <div class="bs-row"><span class="bs-label">&#128197; Date</span><span class="bs-value">${dateStr}</span></div>
         <div class="bs-row"><span class="bs-label">&#128336; Time</span><span class="bs-value">${time}</span></div>
-        <div class="bs-row"><span class="bs-label">&#127963; City</span><span class="bs-value">${city}</span></div>
       </div>
       <p class="success-eta">&#128663; A driver will arrive within <strong>15-30 minutes</strong> at your pickup location.</p>
     `;
@@ -2611,6 +2497,117 @@ function formatPhone(input) {
     input.value = digits.slice(0,3) + '-' + digits.slice(3,6) + '-' + digits.slice(6);
   }
 }
+
+  // Address autocomplete + fare calculator using Geoapify
+  (function() {
+    const GEOAPIFY_KEY = 'cced98652cc54ef49a5845718d2a670d';
+    const DEBOUNCE_MS = 300;
+    // Stores {lat, lon} for each input after a suggestion is selected
+    const coords = { fpickup: null, fdropoff: null };
+
+    function initAC(inputId) {
+      const input = document.getElementById(inputId);
+      const dropdown = document.getElementById(inputId + '-ac');
+      if (!input || !dropdown) return;
+
+      let timer, activeIdx = -1, suggestions = [], features = [];
+
+      // Clear stored coords if user edits the field manually
+      input.addEventListener('input', function() {
+        coords[inputId] = null;
+        clearTimeout(timer);
+        const val = input.value.trim();
+        if (val.length < 3) { closeDropdown(); return; }
+        timer = setTimeout(() => fetchSuggestions(val), DEBOUNCE_MS);
+      });
+
+      input.addEventListener('keydown', function(e) {
+        if (!dropdown.classList.contains('open')) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+        else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); selectItem(activeIdx); }
+        else if (e.key === 'Escape') { closeDropdown(); }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !dropdown.contains(e.target)) closeDropdown();
+      });
+
+      async function fetchSuggestions(text) {
+        try {
+          const url = 'https://api.geoapify.com/v1/geocode/autocomplete?text='
+            + encodeURIComponent(text)
+            + '&limit=5&filter=countrycode:ca&apiKey=' + GEOAPIFY_KEY;
+          const res = await fetch(url);
+          const data = await res.json();
+          features = data.features || [];
+          suggestions = features.map(function(f) { return f.properties.formatted; });
+          renderDropdown();
+        } catch (err) { console.warn('Autocomplete error:', err); }
+      }
+
+      function renderDropdown() {
+        if (!suggestions.length) { closeDropdown(); return; }
+        dropdown.innerHTML = suggestions.map(function(s, i) {
+          return '<div class="ac-item" data-idx="' + i + '">' + s + '</div>';
+        }).join('');
+        dropdown.querySelectorAll('.ac-item').forEach(function(item) {
+          item.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            selectItem(parseInt(this.dataset.idx));
+          });
+        });
+        activeIdx = -1;
+        dropdown.classList.add('open');
+      }
+
+      function setActive(idx) {
+        const items = dropdown.querySelectorAll('.ac-item');
+        activeIdx = Math.max(-1, Math.min(idx, items.length - 1));
+        items.forEach(function(el, i) { el.classList.toggle('active', i === activeIdx); });
+      }
+
+      function selectItem(idx) {
+        if (suggestions[idx]) {
+          input.value = suggestions[idx];
+          // Store coordinates from the selected feature
+          var props = features[idx] && features[idx].properties;
+          if (props && props.lat != null && props.lon != null) {
+            coords[inputId] = { lat: props.lat, lon: props.lon };
+          }
+          closeDropdown();
+        }
+      }
+
+      function closeDropdown() {
+        dropdown.classList.remove('open');
+        dropdown.innerHTML = '';
+        activeIdx = -1;
+        suggestions = [];
+        features = [];
+      }
+    }
+
+    // Geocode a free-text address and return {lat, lon}
+    async function geocode(text) {
+      const url = 'https://api.geoapify.com/v1/geocode/search?text='
+        + encodeURIComponent(text)
+        + '&limit=1&filter=countrycode:ca&apiKey=' + GEOAPIFY_KEY;
+      const res = await fetch(url);
+      const data = await res.json();
+      const f = data.features && data.features[0];
+      if (!f) return null;
+      return { lat: f.properties.lat, lon: f.properties.lon };
+    }
+
+    // Round km: decimal > 0.2 → ceil, else floor
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initAC('fpickup');
+      initAC('fdropoff');
+    });
+  })();
   </script>
 
 </div><!-- /.page-wrapper -->
