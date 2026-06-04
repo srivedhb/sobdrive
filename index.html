@@ -543,6 +543,10 @@
     .form-success h3 { font-family:'Fjalla One',sans-serif; font-size:1.5rem; color:var(--red); margin-bottom:0.5rem; }
     .form-success p { color:var(--gray); }
     @media(max-width:600px) { .form-grid { grid-template-columns:1fr; } .form-group.full { grid-column:1; } }
+    .defaults-hint { display:flex; align-items:flex-start; gap:0.7rem; background:#FEF2F1; border:1px solid rgba(213,43,30,0.2); border-radius:10px; padding:0.85rem 1rem; font-size:0.88rem; }
+    .defaults-hint-icon { color:var(--red); font-size:1rem; flex-shrink:0; margin-top:1px; }
+    .defaults-hint strong { color:var(--dark); display:block; margin-bottom:0.15rem; }
+    .defaults-hint span { color:var(--gray); font-size:0.82rem; }
 
     /* ── Address autocomplete dropdown ── */
     .ac-wrap { position: relative; }
@@ -1757,15 +1761,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   pattern="[\d\s\-\(\)\+]{10,15}" />
             </div>
             <div class="form-group">
-              <label for="femail">Email Address </label>
-              <input type="email" id="femail" placeholder="you@email.com"  autocomplete="email" />
-            </div>
-            <div class="form-group">
-              <!-- intentional spacer -->
-            </div>
-
-
-            <div class="form-group">
               <label for="fpickup">Pickup Location *</label>
               <div class="ac-wrap">
                 <input type="text" id="fpickup" placeholder="Your pickup address" required autocomplete="off" />
@@ -1786,7 +1781,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="form-group">
               <label for="ftime">Time *</label>
-              <input type="time" id="ftime" required />
+              <select id="ftime" required></select>
+            </div>
+            <div class="form-group full">
+              <div class="defaults-hint">
+                <span class="defaults-hint-icon">ℹ️</span>
+                <div>
+                  <strong>We've set these defaults for you.</strong>
+                  <span>You can change the date and time if needed.</span>
+                </div>
+              </div>
             </div>
             <div class="form-group full">
               <button type="submit" class="form-submit">🚗 Request My Driver Now</button>
@@ -2390,7 +2394,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const customerName  = document.getElementById('fname').value;
     const customerPhone = document.getElementById('fphone').value;
-    const customerEmail = document.getElementById('femail').value;
     const pickup        = document.getElementById('fpickup').value;
     const dropoff       = document.getElementById('fdropoff').value;
     const date          = document.getElementById('fdate').value;
@@ -2400,25 +2403,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID, {
         customer_name: customerName, customer_phone: customerPhone,
-        customer_email: customerEmail,
         pickup, dropoff, date, time
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
 
-    // ── B: Confirmation email to customer ──
-    try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, {
-        customer_name: customerName,
-        customer_email: customerEmail,
-        pickup, dropoff, date, time
-      }, EMAILJS_PUBLIC_KEY);
-    } catch (err) { console.warn('Customer confirmation email failed:', err); }
-
     // ── Show personalised success screen ──
-    showSuccess(customerName, customerPhone, customerEmail, pickup, dropoff, date, time);
+    showSuccess(customerName, customerPhone, pickup, dropoff, date, time);
   }
 
-  function showSuccess(name, phone, email, pickup, dropoff, date, time) {
+  function showSuccess(name, phone, pickup, dropoff, date, time) {
     document.getElementById('booking-form-wrap').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
@@ -2444,7 +2437,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const smsEl = document.getElementById('successSmsNote');
     smsEl.innerHTML = `
       <div class="sms-manual">&#128241; We'll call you at <strong>${phone}</strong> within 5 minutes to confirm your booking.</div>
-      <div class="sms-manual" style="margin-top:0.5rem;font-size:0.82rem;color:var(--gray);">&#9993;&#65039; Confirmation sent to <strong>${email}</strong></div>
     `;
   }
 
@@ -2606,6 +2598,39 @@ function formatPhone(input) {
     document.addEventListener('DOMContentLoaded', function() {
       initAC('fpickup');
       initAC('fdropoff');
+
+      // ── Default date: today ──
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm   = String(today.getMonth() + 1).padStart(2, '0');
+      const dd   = String(today.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      const fdateEl = document.getElementById('fdate');
+      fdateEl.value = todayStr;
+      fdateEl.min   = todayStr;
+
+      // ── Default time: +30 min, snapped to next 30-min slot ──
+      const plusThirty = new Date(today.getTime() + 30 * 60 * 1000);
+      const rem = plusThirty.getMinutes() % 30;
+      if (rem !== 0) plusThirty.setMinutes(plusThirty.getMinutes() + (30 - rem));
+      const defH = plusThirty.getHours() % 24;
+      const defM = plusThirty.getMinutes() % 60;
+      const defVal = `${String(defH).padStart(2,'0')}:${String(defM).padStart(2,'0')}`;
+
+      const ftimeEl = document.getElementById('ftime');
+      for (let h = 0; h < 24; h++) {
+        for (const m of [0, 30]) {
+          const val    = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+          const period = h < 12 ? 'AM' : 'PM';
+          const h12    = h === 0 ? 12 : h > 12 ? h - 12 : h;
+          const label  = `${h12}:${String(m).padStart(2,'0')} ${period}`;
+          const opt    = document.createElement('option');
+          opt.value       = val;
+          opt.textContent = val === defVal ? `${label} (30 min from now)` : label;
+          ftimeEl.appendChild(opt);
+        }
+      }
+      ftimeEl.value = defVal;
     });
   })();
   </script>
