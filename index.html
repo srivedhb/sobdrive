@@ -2807,6 +2807,47 @@ function formatPhone(input) {
         if (document.visibilityState === 'hidden') _fireAbandon();
       });
       window.addEventListener('pagehide', _fireAbandon, { passive: true });
+
+      // ── Phone-click conversion tracking ──
+      // To complete Google Ads setup:
+      //   1. Google Ads → Goals → Conversions → New conversion → Website → Phone number clicks
+      //   2. Copy the conversion label (the part after the "/" in the send_to value)
+      //   3. Paste it below to replace REPLACE_WITH_YOUR_LABEL
+      const GADS_PHONE_LABEL = 'UyK1CKTc8bgcEL-2pvZC';
+
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href^="tel:"]');
+        if (!link) return;
+
+        const src = (link.closest('[id]') || document.body).id || 'page';
+
+        // GA4 — phone_call event (visible in GA4 > Events)
+        if (typeof gtag === 'function') {
+          gtag('event', 'phone_call', {
+            phone_number: '+19052439404',
+            event_category: 'engagement',
+            click_source: src
+          });
+
+          // Google Ads conversion — only fires once label is filled in
+          if (GADS_PHONE_LABEL !== 'REPLACE_WITH_YOUR_LABEL') {
+            gtag('event', 'conversion', {
+              send_to: 'AW-17964833599/' + GADS_PHONE_LABEL,
+              value: 1.0,
+              currency: 'CAD'
+            });
+          }
+        }
+
+        // GTM dataLayer push (lets GTM trigger on phone_click event)
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'phone_click',
+            phone_number: '+19052439404',
+            click_source: src
+          });
+        }
+      }, { passive: true });
     });
   })();
   </script>
