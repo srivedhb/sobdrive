@@ -2543,6 +2543,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function showSuccess(name, phone, pickup, dropoff, date, time) {
+    _formSubmitted = true;
     document.getElementById('booking-form-wrap').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
@@ -2620,6 +2621,10 @@ function formatPhone(input) {
     input.value = digits.slice(0,3) + '-' + digits.slice(3,6) + '-' + digits.slice(6);
   }
 }
+
+  // Funnel tracking flags — shared between DOMContentLoaded and showSuccess
+  let _formStarted   = false;
+  let _formSubmitted = false;
 
   // Address autocomplete + fare calculator using Geoapify
   (function() {
@@ -2762,6 +2767,44 @@ function formatPhone(input) {
         }
       }
       ftimeEl.value = defVal;
+
+      // ── GA4 funnel: form_start + form_abandon ──
+      function _gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, params);
+        if (window.dataLayer) window.dataLayer.push(Object.assign({ event: name }, params));
+      }
+
+      function _filledCount() {
+        return ['fname','fphone','fpickup','fdropoff','fdate','ftime']
+          .filter(id => { const el = document.getElementById(id); return el && el.value.trim() !== ''; })
+          .length;
+      }
+
+      const _bForm = document.getElementById('bookingForm');
+      if (_bForm) {
+        _bForm.addEventListener('focusin', function() {
+          if (!_formStarted) {
+            _formStarted = true;
+            _gaEvent('form_start', { form_id: 'booking_form', form_name: 'Book a Driver' });
+          }
+        }, { passive: true });
+      }
+
+      function _fireAbandon() {
+        if (_formStarted && !_formSubmitted) {
+          _gaEvent('form_abandon', {
+            form_id: 'booking_form',
+            form_name: 'Book a Driver',
+            fields_filled: _filledCount(),
+            fields_total: 6
+          });
+        }
+      }
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') _fireAbandon();
+      });
+      window.addEventListener('pagehide', _fireAbandon, { passive: true });
     });
   })();
   </script>
