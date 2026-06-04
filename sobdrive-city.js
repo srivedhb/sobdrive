@@ -1,5 +1,81 @@
 /* sobdrive-city.js — shared logic for all city landing pages */
 
+// Inject booking form into <div id="bookingMount"></div>
+(function () {
+  var mount = document.getElementById('bookingMount');
+  if (!mount) return;
+  mount.outerHTML = [
+    '<div class="booking-section" id="book">',
+    '  <div class="booking-inner">',
+    '    <div class="section-label">Online Booking</div>',
+    '    <h2>Book Your Driver in Seconds</h2>',
+    '    <p class="section-sub">Book in under 60 seconds. We confirm fast, 24/7 across Durham, Peel &amp; GTA.</p>',
+    '    <div class="booking-form">',
+    '      <div id="booking-form-wrap">',
+    '        <form class="form-grid" id="bookingForm" onsubmit="submitBooking(event)">',
+    '          <div class="form-group">',
+    '            <label for="fname">Your Name *</label>',
+    '            <input type="text" id="fname" placeholder="John Smith" required />',
+    '          </div>',
+    '          <div class="form-group">',
+    '            <label for="fphone">Phone Number *</label>',
+    '            <input type="tel" id="fphone" placeholder="+1 (647) 000-0000" required oninput="formatPhone(this)" pattern="[\\d\\s\\-\\(\\)\\+]{10,15}" />',
+    '          </div>',
+    '          <div class="form-group">',
+    '            <label for="fpickup">Pickup Location *</label>',
+    '            <div class="ac-wrap">',
+    '              <input type="text" id="fpickup" placeholder="Your pickup address" required autocomplete="off" />',
+    '              <div class="ac-dropdown" id="fpickup-ac"></div>',
+    '            </div>',
+    '          </div>',
+    '          <div class="form-group">',
+    '            <label for="fdropoff">Drop-off Location *</label>',
+    '            <div class="ac-wrap">',
+    '              <input type="text" id="fdropoff" placeholder="Your home address" required autocomplete="off" />',
+    '              <div class="ac-dropdown" id="fdropoff-ac"></div>',
+    '            </div>',
+    '          </div>',
+    '          <div class="form-group">',
+    '            <label for="fdate">Date *</label>',
+    '            <input type="date" id="fdate" required />',
+    '          </div>',
+    '          <div class="form-group">',
+    '            <label for="ftime">Time *</label>',
+    '            <div class="ftime-wrap"><input type="time" id="ftime" required /><small class="ftime-hint">15 min from now</small></div>',
+    '          </div>',
+    '          <div class="form-group full">',
+    '            <div class="defaults-hint">',
+    '              <span class="defaults-hint-icon">&#x2139;&#xFE0F;</span>',
+    '              <div><strong>We\'ve set these defaults for you.</strong><span>You can change the date and time if needed.</span></div>',
+    '            </div>',
+    '          </div>',
+    '          <div class="form-group full">',
+    '            <button type="submit" class="form-submit">&#x1F697; Request My Driver Now</button>',
+    '            <p class="form-note">We\'ll call you within 5 minutes to confirm. Available 24/7.</p>',
+    '            <div class="payment-methods">',
+    '              <div class="payment-label">Accepted Payments</div>',
+    '              <div class="payment-icon visa"><svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#1a1f71"/><text x="5" y="14" font-family="Arial" font-size="9" font-weight="bold" fill="white">VISA</text></svg></div>',
+    '              <div class="payment-icon mc"><svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#252525"/><circle cx="13" cy="10" r="6" fill="#eb001b"/><circle cx="19" cy="10" r="6" fill="#f79e1b"/><path d="M16 5.8a6 6 0 0 1 0 8.4A6 6 0 0 1 16 5.8z" fill="#ff5f00"/></svg></div>',
+    '              <div class="payment-icon amex"><svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#2e77bc"/><text x="3" y="14" font-family="Arial" font-size="7" font-weight="bold" fill="white">AMEX</text></svg></div>',
+    '              <div class="payment-icon debit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Debit</div>',
+    '              <div class="secure-badge">&#x1F512; Secure &amp; Safe Booking &#x2014; Your info is never shared</div>',
+    '            </div>',
+    '          </div>',
+    '        </form>',
+    '      </div>',
+    '      <div class="form-success" id="formSuccess">',
+    '        <div class="success-icon">&#x2705;</div>',
+    '        <h3>Booking Confirmed, <span id="successName"></span>!</h3>',
+    '        <div id="successDetails"></div>',
+    '        <div id="successSmsNote"></div>',
+    '        <p style="margin-top:1rem;font-size:0.82rem;">Questions? Call us anytime: <a href="tel:+19052439404" style="color:var(--red);font-weight:700;">+1-905-243-9404</a></p>',
+    '      </div>',
+    '    </div>',
+    '  </div>',
+    '</div>'
+  ].join('\n');
+})();
+
 // Nav scroll shadow + FAQ accordion
 (function () {
   var nav = document.getElementById('mainNav');
@@ -277,28 +353,10 @@ var _formStarted = false;
     if (fdateEl) { fdateEl.value = todayStr; fdateEl.min = todayStr; }
 
     // Default time: next 30-min slot after +30 min
-    var plusThirty = new Date(today.getTime() + 30*60*1000);
-    var rem = plusThirty.getMinutes() % 30;
-    if (rem !== 0) plusThirty.setMinutes(plusThirty.getMinutes() + (30-rem));
-    var defH   = plusThirty.getHours() % 24;
-    var defM   = plusThirty.getMinutes() % 60;
-    var defVal = String(defH).padStart(2,'0')+':'+String(defM).padStart(2,'0');
+    var plusFifteen = new Date(today.getTime() + 15*60*1000);
+    var defVal = String(plusFifteen.getHours()).padStart(2,'0')+':'+String(plusFifteen.getMinutes()).padStart(2,'0');
     var ftimeEl = document.getElementById('ftime');
-    if (ftimeEl) {
-      for (var h=0; h<24; h++) {
-        [0,30].forEach(function (m) {
-          var val    = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
-          var period = h < 12 ? 'AM' : 'PM';
-          var h12    = h===0 ? 12 : h>12 ? h-12 : h;
-          var label  = h12+':'+String(m).padStart(2,'0')+' '+period;
-          var opt    = document.createElement('option');
-          opt.value       = val;
-          opt.textContent = val===defVal ? label+' (30 min from now)' : label;
-          ftimeEl.appendChild(opt);
-        });
-      }
-      ftimeEl.value = defVal;
-    }
+    if (ftimeEl) ftimeEl.value = defVal;
 
     // GA4 form funnel tracking
     function _gaEvent(name, params) {

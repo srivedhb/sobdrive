@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -539,6 +539,9 @@
     .form-submit { width:100%; background:var(--red); color:#fff; border:none; border-radius:50px; padding:1rem 2rem; font-family:'Fjalla One',sans-serif; font-size:1.1rem; letter-spacing:1px; cursor:pointer; margin-top:0.5rem; box-shadow:0 6px 24px rgba(213,43,30,0.35); transition:transform 0.2s,box-shadow 0.2s,background 0.2s; }
     .form-submit:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(213,43,30,0.45); background:var(--red-dark); }
     .form-note { text-align:center; font-size:0.78rem; color:var(--gray); margin-top:0.75rem; }
+    .ftime-wrap { display:flex; align-items:center; gap:0.6rem; }
+    .ftime-wrap input { flex:1; }
+    .ftime-hint { font-size:0.75rem; color:var(--red); font-weight:600; white-space:nowrap; }
     .form-success { display:none; text-align:center; padding:2rem; }
     .form-success .success-icon { font-size:3rem; margin-bottom:0.75rem; }
     .form-success h3 { font-family:'Fjalla One',sans-serif; font-size:1.5rem; color:var(--red); margin-bottom:0.5rem; }
@@ -1798,7 +1801,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="form-group">
               <label for="ftime">Time *</label>
-              <select id="ftime" required></select>
+              <div class="ftime-wrap"><input type="time" id="ftime" required /><small class=""ftime-hint"">15 min from now</small></div>
             </div>
             <div class="form-group full">
               <div class="defaults-hint">
@@ -2748,27 +2751,10 @@ function formatPhone(input) {
       fdateEl.min   = todayStr;
 
       // ── Default time: +30 min, snapped to next 30-min slot ──
-      const plusThirty = new Date(today.getTime() + 30 * 60 * 1000);
-      const rem = plusThirty.getMinutes() % 30;
-      if (rem !== 0) plusThirty.setMinutes(plusThirty.getMinutes() + (30 - rem));
-      const defH = plusThirty.getHours() % 24;
-      const defM = plusThirty.getMinutes() % 60;
-      const defVal = `${String(defH).padStart(2,'0')}:${String(defM).padStart(2,'0')}`;
-
+      const plusFifteen = new Date(today.getTime() + 15 * 60 * 1000);
+      const defVal = `${String(plusFifteen.getHours()).padStart(2,'0')}:${String(plusFifteen.getMinutes()).padStart(2,'0')}`;
       const ftimeEl = document.getElementById('ftime');
-      for (let h = 0; h < 24; h++) {
-        for (const m of [0, 30]) {
-          const val    = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-          const period = h < 12 ? 'AM' : 'PM';
-          const h12    = h === 0 ? 12 : h > 12 ? h - 12 : h;
-          const label  = `${h12}:${String(m).padStart(2,'0')} ${period}`;
-          const opt    = document.createElement('option');
-          opt.value       = val;
-          opt.textContent = val === defVal ? `${label} (30 min from now)` : label;
-          ftimeEl.appendChild(opt);
-        }
-      }
-      ftimeEl.value = defVal;
+      if (ftimeEl) ftimeEl.value = defVal;
 
       // ── GA4 funnel: form_start + form_abandon ──
       function _gaEvent(name, params) {
