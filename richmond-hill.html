@@ -68,319 +68,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&family=Fjalla+One&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --red:#D52B1E;--red-dark:#A82018;--red-pale:#FEF2F1;
-      --white:#fff;--cream:#FDFAF6;--off-white:#F7F3EE;
-      --dark:#111111;--gray:#5a5a5a;--border:#E8E0D5;
-      --city1:#000a1a;--city2:#000f25;
-    }
-    html{scroll-behavior:smooth}
-    body{font-family:'Cabin',sans-serif;background:var(--white);color:var(--dark);line-height:1.7;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-
-    /* ─── EMERGENCY BAR ─── */
-    .emergency-bar{background:#111;color:#fff;padding:0.55rem clamp(1rem,4vw,2rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;font-size:clamp(0.68rem,2vw,0.8rem)}
-    .emergency-bar-left{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
-    .avail-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;animation:dotPulse 1.5s ease-in-out infinite;flex-shrink:0}
-    @keyframes dotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.5)}50%{opacity:0.8;box-shadow:0 0 0 5px rgba(34,197,94,0)}}
-    .emergency-bar-right a{color:#fff;font-weight:700;font-size:clamp(0.72rem,2vw,0.82rem);background:var(--red);padding:0.3rem 0.9rem;border-radius:50px}
-
-    /* ─── TRUST SIGNALS BAR ─── */
-    .trust-signals-bar{background:var(--off-white);border-bottom:1px solid var(--border);padding:0.9rem clamp(1rem,4vw,2rem);overflow:hidden}
-    .trust-signals-inner{display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);justify-content:center;flex-wrap:wrap}
-    .ts-item{display:flex;align-items:center;gap:0.5rem;font-size:clamp(0.72rem,2vw,0.82rem);font-weight:700;color:var(--dark);white-space:nowrap}
-    .ts-divider{width:1px;height:20px;background:var(--border);flex-shrink:0}
-    @media(max-width:600px){.ts-divider{display:none}}
-
-    /* ─── NAV ─── */
-    nav{position:sticky;top:0;left:0;right:0;z-index:321;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:var(--red);box-shadow:0 4px 24px rgba(213,43,30,0.35);transition:box-shadow 0.4s}    nav.scrolled{background:var(--red);box-shadow:0 4px 24px rgba(213,43,30,0.4)}
-    .logo{font-family:'Fjalla One',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#fff}
-    .nav-actions{display:flex;align-items:center;gap:0.55rem}
-    .nav-book{background:rgba(255,255,255,0.14);color:#fff;border:1.5px solid rgba(255,255,255,0.38);padding:0.42rem 0.88rem;border-radius:50px;font-weight:700;font-size:0.78rem;white-space:nowrap;transition:transform 0.2s,background 0.2s}
-    .nav-book:hover{transform:translateY(-2px);background:rgba(255,255,255,0.24)}
-
-    .nav-phone{background:#fff;color:var(--red);padding:0.45rem 1.2rem;border-radius:50px;font-weight:700;font-size:0.85rem;transition:transform 0.2s}
-    .nav-phone:hover{transform:translateY(-2px)}
-
-    /* ─── HERO ─── */
-    .hero{min-height:100vh;background:linear-gradient(160deg,var(--city1) 0%,var(--city2) 50%,#0a0a0a 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(1.5rem,6vw,5rem) clamp(3rem,8vw,6rem);position:relative;overflow:hidden}
-    .hero-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
-    .hero-glow{position:absolute;top:-20%;right:-10%;width:70vw;height:70vw;max-width:800px;max-height:800px;border-radius:50%;background:radial-gradient(circle,rgba(213,43,30,0.25) 0%,transparent 65%);pointer-events:none}
-    .breadcrumb{position:relative;z-index:3;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:rgba(255,255,255,0.5)}
-    .breadcrumb a{color:rgba(255,255,255,0.5);transition:color 0.2s}
-    .breadcrumb a:hover{color:#fff}
-    .breadcrumb span{color:rgba(255,255,255,0.25)}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;color:rgba(255,255,255,0.6);font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;position:relative;z-index:2}
-    .hero-eyebrow::before{content:'';width:30px;height:2px;background:var(--red);border-radius:2px}
-    .hero h1{font-family:'Fjalla One',sans-serif;font-size:clamp(3.5rem,10vw,8rem);line-height:0.95;color:#fff;position:relative;z-index:2;margin-bottom:0.5rem;letter-spacing:-1px}
-    .hero h1 .city-name{display:block;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.6));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .hero-near-me{font-size:0.8rem;color:var(--red);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;position:relative;z-index:2}
-    .hero-desc{color:rgba(255,255,255,0.7);font-size:clamp(1rem,2vw,1.15rem);max-width:520px;margin-bottom:2.5rem;position:relative;z-index:2;line-height:1.7}
-    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:2;margin-bottom:2rem}
-    .btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:var(--red);color:#fff;font-family:'Fjalla One',sans-serif;font-size:1rem;letter-spacing:1px;padding:0.9rem 2rem;border-radius:50px;box-shadow:0 8px 28px rgba(213,43,30,0.5);transition:transform 0.25s,box-shadow 0.25s}
-    .btn-primary:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(213,43,30,0.6)}
-    .btn-outline{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(255,255,255,0.08);color:#fff;font-family:'Fjalla One',sans-serif;font-size:1rem;letter-spacing:1px;padding:0.9rem 2rem;border-radius:50px;border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);transition:background 0.25s}
-    .btn-outline:hover{background:rgba(255,255,255,0.15)}
-    .hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem}
-    .hero-stat-num{font-family:'Fjalla One',sans-serif;font-size:1.8rem;color:#fff;line-height:1}
-    .hero-stat-label{font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:1px;text-transform:uppercase;margin-top:0.2rem}
-
-    /* ─── TRUST PILLS ─── */
-    .trust-pills{display:flex;gap:0.6rem;flex-wrap:wrap;position:relative;z-index:2;margin-bottom:2rem}
-    .trust-pill{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:0.75rem;font-weight:700;padding:0.3rem 0.8rem;border-radius:50px;backdrop-filter:blur(8px)}
-
-    /* ─── LANDMARKS ─── */
-    .landmarks-section{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--dark)}
-    .landmarks-inner{max-width:1100px;margin:0 auto}
-    .section-label{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem}
-    .section-label::before{content:'';width:24px;height:2px;background:var(--red);border-radius:2px}
-    .landmarks-heading{font-family:'Fjalla One',sans-serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;margin-bottom:0.5rem}
-    .landmarks-sub{color:rgba(255,255,255,0.45);font-size:1rem;margin-bottom:3rem}
-    .landmarks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-    .landmark-card{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:#1a1a1a;border:1px solid rgba(255,255,255,0.06);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s}
-    .landmark-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 30px 60px rgba(0,0,0,0.5)}
-    .landmark-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(4rem,10vw,7rem);transition:transform 0.5s;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4))}
-    .landmark-card:hover .landmark-emoji{transform:scale(1.15) translateY(-8px)}
-    .landmark-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.4) 45%,transparent 70%)}
-    .landmark-bg-glow{position:absolute;inset:0;opacity:0;transition:opacity 0.4s;background:radial-gradient(circle at 50% 50%,var(--red) 0%,transparent 70%);mix-blend-mode:soft-light}
-    .landmark-card:hover .landmark-bg-glow{opacity:0.6}
-    .landmark-info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;transform:translateY(8px);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1)}
-    .landmark-card:hover .landmark-info{transform:translateY(0)}
-    .landmark-tag{display:inline-block;background:var(--red);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:50px;margin-bottom:0.5rem}
-    .landmark-name{font-family:'Fjalla One',sans-serif;font-size:1.25rem;color:#fff;line-height:1.2;margin-bottom:0.4rem}
-    .landmark-desc{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.5;max-height:0;overflow:hidden;transition:max-height 0.4s ease,opacity 0.3s;opacity:0}
-    .landmark-card:hover .landmark-desc{max-height:80px;opacity:1}
-    .landmark-swipe-hint{display:none;background:var(--red);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:50px;margin-bottom:0.5rem;}
-
-
-    /* ─── SERVICE SECTION ─── */
-    .service-section{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--cream)}
-    .service-inner{max-width:1000px;margin:0 auto}
-    .service-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-    @media(max-width:768px){.service-grid{grid-template-columns:1fr;gap:2rem}}
-    .service-heading{font-family:'Fjalla One',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin-bottom:1.2rem}
-    .service-heading .accent{color:var(--red)}
-    .service-body{color:var(--gray);font-size:1rem;margin-bottom:1.5rem;line-height:1.8}
-    .service-pills{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.8rem}
-    .pill{background:#fff;border:1.5px solid rgba(213,43,30,0.2);color:var(--red);font-size:0.8rem;font-weight:700;padding:0.35rem 0.9rem;border-radius:50px;transition:background 0.2s,transform 0.2s}
-    .pill:hover{background:#FEF2F1;transform:translateY(-2px)}
-    .service-cards{display:flex;flex-direction:column;gap:1rem}
-    .service-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
-    .service-card:hover{transform:translateX(6px);border-color:rgba(213,43,30,0.3);box-shadow:0 6px 24px rgba(213,43,30,0.08)}
-    .service-card-icon{font-size:1.8rem;flex-shrink:0}
-    .service-card h4{font-weight:700;margin-bottom:0.2rem;font-size:0.95rem}
-    .service-card p{color:var(--gray);font-size:0.83rem;line-height:1.5}
-
-    /* ─── NAP BLOCK ─── */
-    .nap-block{background:var(--off-white);border:1.5px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start;margin-top:1.5rem}
-    .nap-item{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.88rem}
-    .nap-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
-    .nap-label{font-weight:700;color:var(--dark);display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.1rem}
-    .nap-value{color:var(--gray)}
-    .nap-value a{color:var(--red);font-weight:700}
-
-    /* ─── NEARBY CITIES ─── */
-    .nearby-cities{background:var(--off-white);border-top:1px solid var(--border);padding:1.5rem clamp(1rem,4vw,2rem)}
-    .nearby-cities-inner{max-width:960px;margin:0 auto}
-    .nearby-cities h4{font-family:'Fjalla One',sans-serif;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:0.75rem}
-    .nearby-links{display:flex;flex-wrap:wrap;gap:0.5rem}
-    .nearby-link{display:inline-flex;align-items:center;gap:0.35rem;background:#fff;border:1.5px solid var(--border);color:var(--red);font-size:0.8rem;font-weight:700;padding:0.35rem 0.85rem;border-radius:50px;transition:background 0.2s,transform 0.2s,border-color 0.2s}
-    .nearby-link:hover{background:var(--red-pale);border-color:rgba(213,43,30,0.3);transform:translateY(-2px)}
-    .nearby-link::before{content:'📍';font-size:0.7rem}
-
-    /* ─── FAQ ─── */
-    .faq-section{padding:clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem);background:var(--off-white)}
-    .faq-inner{max-width:800px;margin:0 auto}
-    .faq-item{border-bottom:1px solid var(--border);cursor:pointer}
-    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;font-weight:700;font-size:clamp(0.88rem,2.5vw,1rem);gap:1rem}
-    .faq-arrow{color:var(--red);font-size:0.9rem;flex-shrink:0;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}
-    .faq-item.open .faq-arrow{transform:rotate(180deg)}
-    .faq-a{color:var(--gray);font-size:0.92rem;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
-    .faq-item.open .faq-a{max-height:200px;padding-bottom:1.2rem}
-
-    /* ─── CTA ─── */
-    .cta-section{background:var(--dark);color:#fff;padding:clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden}
-    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(213,43,30,0.2) 0%,transparent 65%);pointer-events:none}
-    .cta-inner{max-width:600px;margin:0 auto;position:relative;z-index:1}
-    .cta-label{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:1rem}
-    .cta-heading{font-family:'Fjalla One',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;line-height:1.1;margin-bottom:1rem}
-    .cta-sub{color:rgba(255,255,255,0.55);margin-bottom:2.5rem;font-size:1rem}
-    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-
-    /* ─── FOOTER ─── */
-    footer{background:#0a0a0a;color:#444;padding:2.5rem 2rem;text-align:center;font-size:0.82rem;border-top:1px solid #1a1a1a}
-    .footer-logo{font-family:'Fjalla One',sans-serif;font-size:1.3rem;letter-spacing:3px;color:var(--red);margin-bottom:0.75rem}
-    .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1.2rem;margin-bottom:1rem}
-    .footer-links a{color:#555;transition:color 0.2s;font-size:0.82rem}
-    .footer-links a:hover{color:var(--red)}
-    .footer-nap{margin-top:0.75rem;color:#333;font-size:0.76rem;line-height:1.8}
-    .footer-nap a{color:#555}
-  
-    /* ===== SCROLL TOP ===== */
-    #scrollTop {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      width: 48px;
-      height: 48px;
-      border: none;
-      border-radius: 50%;
-      background: var(--red, #D52B1E);
-      color: #fff;
-      font-size: 1.2rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(213,43,30,0.35);
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: opacity 0.25s, transform 0.25s;
-      z-index: 1000;
-    }
-    #scrollTop.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    /* ===== TOP STACK FIX ===== */
-    :root { --emergency-h: 36px; --trust-h: 40px; }
-    .emergency-bar { position: relative; z-index: 1; }
-    .trust-signals-bar { position: relative; z-index: 1; }
-
-    .emergency-bar-right { display: none !important; }
-    @media (max-width: 768px) {
-      .trust-signals-inner .ts-item:nth-child(n+3),
-      .trust-signals-inner .ts-divider:nth-child(n+2) {
-        display: none;
-      }
-    }
-    .maple {
-      display: inline-block;
-      filter: brightness(0) saturate(100%) invert(72%) sepia(61%) saturate(502%) hue-rotate(5deg) brightness(98%) contrast(92%);
-    }
-    /* Mobile responsive nav */
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
-  flex-shrink: 0;
-}
-.nav-hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
-}
-.nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-.nav-mobile-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--red);
-  border-top: 1px solid rgba(255,255,255,0.15);
-  padding: 0.75rem 1.25rem 1rem;
-  flex-direction: column;
-  gap: 0.25rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  z-index: 320;
-}
-.nav-mobile-menu.is-open { display: flex; }
-.nav-mobile-menu a {
-  color: rgba(255,255,255,0.9);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: block;
-  transition: color 0.2s, padding-left 0.2s;
-}
-.nav-mobile-menu a:last-child { border-bottom: none; }
-.nav-mobile-menu a:hover { color: #fff; padding-left: 0.4rem; }
-
-@media (max-width: 768px) {
-  .landmarks-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 1rem;
-    padding-bottom: 0.75rem;
-    margin: 0 -1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    scrollbar-width: none;
-  }
-  .landmarks-grid::-webkit-scrollbar { display: none; }
-  .landmark-card {
-    flex: 0 0 72vw;
-    max-width: 260px;
-    scroll-snap-align: start;
-  }
-}
-
-/* Hidden on desktop */
-.landmark-swipe-hint { display: none !important; }
-
-@media (max-width: 768px) {
-  .landmark-swipe-hint {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.45);
-    margin-top: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .landmark-swipe-hint::before,
-  .landmark-swipe-hint::after {
-    content: '←';
-    font-size: 0.8rem;
-    opacity: 0.5;
-    animation: nudge 1.5s ease-in-out infinite;
-  }
-  .landmark-swipe-hint::after { content: '→'; }
-  @keyframes nudge {
-    0%,100% { transform: translateX(0); opacity: 0.5; }
-    50% { transform: translateX(3px); opacity: 1; }
-  }
-}
-
-@media (max-width: 640px) {
-  nav {
-    padding: 0.75rem 1rem;
-    position: sticky;
-  }
-  .nav-hamburger { display: flex; }
-  .nav-book { display: none; }
-  .nav-phone .phone-full  { display: none; }
-  .nav-phone .phone-short { display: inline; }  
-  .nav-phone {
-    font-size: 0.72rem;
-    padding: 0.38rem 0.7rem;
-  }
-  .logo {
-    font-size: 1rem;
-    letter-spacing: 1.5px;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="sobdrive-city.css">
+  <style>:root{--city1:#000a1a;--city2:#000f25}</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="sobdrive-city.js"></script>
 </head>
 <body>
 
@@ -462,58 +153,91 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- ═══ LANDMARKS ═══ -->
-  <section class="landmarks-section">
-    <div class="landmarks-inner">
-      <div class="section-label">We Know Richmond Hill</div>
-      <h2 class="landmarks-heading">We Pick You Up Anywhere in Richmond Hill</h2>
-      <p class="landmarks-sub">Our drivers know every neighbourhood — hover to explore pickup spots.</p>
-      <div class="landmarks-grid">
-      <div class="landmark-card">
-        <div class="landmark-bg-glow"></div>
-        <div class="landmark-emoji">🌿</div>
-        <div class="landmark-overlay"></div>
-        <div class="landmark-info">
-          <div class="landmark-tag">North</div>
-          <div class="landmark-name">Oak Ridges</div>
-          <div class="landmark-desc">Scenic neighbourhoods with busy restaurants — we cover the area.</div>
+
+  <!-- ===== BOOKING FORM ===== -->
+  <div class="booking-section" id="book">
+    <div class="booking-inner">
+      <div class="section-label">Online Booking</div>
+      <h2>Book Your Driver in Seconds</h2>
+      <p class="section-sub">Book in under 60 seconds. We confirm fast, 24/7 across Durham, Peel &amp; GTA.</p>
+      <div class="booking-form">
+        <div id="booking-form-wrap">
+          <form class="form-grid" id="bookingForm" onsubmit="submitBooking(event)">
+            <div class="form-group">
+              <label for="fname">Your Name *</label>
+              <input type="text" id="fname" placeholder="John Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="fphone">Phone Number *</label>
+              <input type="tel" id="fphone" placeholder="+1 (647) 000-0000" required
+  oninput="formatPhone(this)"
+  pattern="[\d\s\-\(\)\+]{10,15}" />
+            </div>
+            <div class="form-group">
+              <label for="fpickup">Pickup Location *</label>
+              <div class="ac-wrap">
+                <input type="text" id="fpickup" placeholder="Your pickup address" required autocomplete="off" />
+                <div class="ac-dropdown" id="fpickup-ac"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="fdropoff">Drop-off Location *</label>
+              <div class="ac-wrap">
+                <input type="text" id="fdropoff" placeholder="Your home address" required autocomplete="off" />
+                <div class="ac-dropdown" id="fdropoff-ac"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="fdate">Date *</label>
+              <input type="date" id="fdate" required />
+            </div>
+            <div class="form-group">
+              <label for="ftime">Time *</label>
+              <select id="ftime" required></select>
+            </div>
+            <div class="form-group full">
+              <div class="defaults-hint">
+                <span class="defaults-hint-icon">&#x2139;&#xFE0F;</span>
+                <div>
+                  <strong>We've set these defaults for you.</strong>
+                  <span>You can change the date and time if needed.</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group full">
+              <button type="submit" class="form-submit">&#x1F697; Request My Driver Now</button>
+              <p class="form-note">We'll call you within 5 minutes to confirm. Available 24/7.</p>
+              <div class="payment-methods">
+                <div class="payment-label">Accepted Payments</div>
+                <div class="payment-icon visa">
+                  <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#1a1f71"/><text x="5" y="14" font-family="Arial" font-size="9" font-weight="bold" fill="white">VISA</text></svg>
+                </div>
+                <div class="payment-icon mc">
+                  <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#252525"/><circle cx="13" cy="10" r="6" fill="#eb001b"/><circle cx="19" cy="10" r="6" fill="#f79e1b"/><path d="M16 5.8a6 6 0 0 1 0 8.4A6 6 0 0 1 16 5.8z" fill="#ff5f00"/></svg>
+                </div>
+                <div class="payment-icon amex">
+                  <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#2e77bc"/><text x="3" y="14" font-family="Arial" font-size="7" font-weight="bold" fill="white">AMEX</text></svg>
+                </div>
+                <div class="payment-icon debit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                  Debit
+                </div>
+                <div class="secure-badge">&#x1F512; Secure &amp; Safe Booking &#x2014; Your info is never shared</div>
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
-      <div class="landmark-card">
-        <div class="landmark-bg-glow"></div>
-        <div class="landmark-emoji">🍽️</div>
-        <div class="landmark-overlay"></div>
-        <div class="landmark-info">
-          <div class="landmark-tag">Main Strip</div>
-          <div class="landmark-name">Yonge Corridor</div>
-          <div class="landmark-desc">Richmond Hill's busiest dining and bar strip — we pick up anywhere.</div>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">&#x2705;</div>
+          <h3>Booking Confirmed, <span id="successName"></span>!</h3>
+          <div id="successDetails"></div>
+          <div id="successSmsNote"></div>
+          <p style="margin-top:1rem;font-size:0.82rem;">Questions? Call us anytime: <a href="tel:+19052439404" style="color:var(--red);font-weight:700;">+1-905-243-9404</a></p>
         </div>
-      </div>
-      <div class="landmark-card">
-        <div class="landmark-bg-glow"></div>
-        <div class="landmark-emoji">🏘️</div>
-        <div class="landmark-overlay"></div>
-        <div class="landmark-info">
-          <div class="landmark-tag">East Side</div>
-          <div class="landmark-name">Bayview Hill</div>
-          <div class="landmark-desc">Upscale neighbourhood restaurants and events — professional drivers.</div>
-        </div>
-      </div>
-      <div class="landmark-card">
-        <div class="landmark-bg-glow"></div>
-        <div class="landmark-emoji">🌊</div>
-        <div class="landmark-overlay"></div>
-        <div class="landmark-info">
-          <div class="landmark-tag">Heritage</div>
-          <div class="landmark-name">Mill Pond</div>
-          <div class="landmark-desc">Charming lakeside area — quiet streets, fast SOBDRIVE pickup.</div>
-        </div>
-      </div>
       </div>
     </div>
-       <div class="landmark-swipe-hint">Swipe to see all landmarks</div>
+  </div>
 
-  </section>
 
   <!-- ═══ SERVICE SECTION ═══ -->
   <section class="service-section">
@@ -620,72 +344,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="margin-top:0.75rem;color:#222;font-size:0.73rem;">🍁 Proudly Canadian — © 2026 SOBDRIVE. All Rights Reserved.</p>
   </footer>
 
-  <script>
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); });
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-q').addEventListener('click', () => {
-        const open = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!open) item.classList.add('open');
-      });
-    });
-  </script>
 
   <button id="scrollTop" aria-label="Scroll to top">↑</button>
-  <script>
-    // Hamburger menu toggle
-      const hamburger  = document.getElementById('navHamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
+  <!-- ===== SOBDRIVE MODAL ===== -->
+  <div class="sd-modal-backdrop" id="sdModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="sdModalTitle">
+    <div class="sd-modal" id="sdModal">
+      <div class="sd-modal-header">
+        <span class="sd-modal-header-icon" id="sdModalIcon">&#x26A0;&#xFE0F;</span>
+        <span class="sd-modal-header-title" id="sdModalTitle">Check Your Number</span>
+      </div>
+      <div class="sd-modal-body" id="sdModalBody"></div>
+      <div class="sd-modal-footer" id="sdModalFooter"></div>
+    </div>
+  </div>
 
-      if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', () => {
-          const open = mobileMenu.classList.toggle('is-open');
-          hamburger.classList.toggle('is-open', open);
-          hamburger.setAttribute('aria-expanded', String(open));
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            mobileMenu.classList.remove('is-open');
-            hamburger.classList.remove('is-open');
-            hamburger.setAttribute('aria-expanded', 'false');
-          });
-        });
-        document.addEventListener('click', (e) => {
-          const nav = document.getElementById('mainNav');
-          if (nav && !nav.contains(e.target)) {
-            mobileMenu.classList.remove('is-open');
-            hamburger.classList.remove('is-open');
-            hamburger.setAttribute('aria-expanded', 'false');
-          }
-        });
-      }
-  </script>
-    <script>
-    // Fix: open mobile collapsible sections before navigating to #cities or #faq
-    document.querySelectorAll('a[href*="index.html"]').forEach(link => {
-      link.addEventListener('click', function() {
-        const href = this.getAttribute('href');
-        if (href.includes('#cities') || href.includes('#faq')) {
-          // Store a flag so index.html knows to open sections on load
-          sessionStorage.setItem('openMobileSections', 'true');
-        }
-      });
-    });
-  </script>
-  <script>
-    (() => {
-      const btn = document.getElementById('scrollTop');
-      if (!btn) return;
-      const onScroll = () => {
-        if (window.scrollY > 260) btn.classList.add('visible');
-        else btn.classList.remove('visible');
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      onScroll();
-    })();
-  </script>
+
 </body>
 </html>
 
