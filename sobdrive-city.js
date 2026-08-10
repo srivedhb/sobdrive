@@ -50,6 +50,12 @@
     '            </div>',
     '          </div>',
     '          <div class="form-group full">',
+    '            <div class="late-night-note" id="lateNightNote">',
+    '              <span class="late-night-note-icon">&#x1F319;</span>',
+    '              <div><strong>Late-night Durham Region pricing</strong><span>After 2:30 AM, fares in Durham Region may vary based on driver availability. We\'ll confirm your exact price when we call to confirm.</span></div>',
+    '            </div>',
+    '          </div>',
+    '          <div class="form-group full">',
     '            <button type="submit" class="form-submit">&#x1F697; Request My Driver Now</button>',
     '            <p class="form-note">We\'ll call you within 5 minutes to confirm. Available 24/7.</p>',
     '            <div class="payment-methods">',
@@ -357,6 +363,36 @@ var _formStarted = false;
     var defVal = String(plusFifteen.getHours()).padStart(2,'0')+':'+String(plusFifteen.getMinutes()).padStart(2,'0');
     var ftimeEl = document.getElementById('ftime');
     if (ftimeEl) ftimeEl.value = defVal;
+
+    // Late-night Durham Region pricing note
+    var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
+    function isDurhamAddress(text) {
+      var t = (text || '').toLowerCase();
+      return DURHAM_KEYWORDS.some(function (k) { return t.indexOf(k) !== -1; });
+    }
+    function isLateNight(timeStr) {
+      if (!timeStr) return false;
+      var parts = timeStr.split(':');
+      var mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+      return mins >= 150 && mins < 360; // 02:30–06:00
+    }
+    function checkLateNightDurham() {
+      var pickupEl = document.getElementById('fpickup');
+      var noteEl   = document.getElementById('lateNightNote');
+      if (!pickupEl || !ftimeEl || !noteEl) return;
+      var show = isDurhamAddress(pickupEl.value) && isLateNight(ftimeEl.value);
+      noteEl.classList.toggle('show', show);
+    }
+    var fpickupEl = document.getElementById('fpickup');
+    if (fpickupEl) {
+      fpickupEl.addEventListener('input', checkLateNightDurham);
+      fpickupEl.addEventListener('blur', checkLateNightDurham);
+    }
+    if (ftimeEl) {
+      ftimeEl.addEventListener('input', checkLateNightDurham);
+      ftimeEl.addEventListener('change', checkLateNightDurham);
+    }
+    checkLateNightDurham();
 
     // GA4 form funnel tracking
     function _gaEvent(name, params) {
