@@ -551,6 +551,11 @@
     .defaults-hint-icon { color:var(--red); font-size:1rem; flex-shrink:0; margin-top:1px; }
     .defaults-hint strong { color:var(--dark); display:block; margin-bottom:0.15rem; }
     .defaults-hint span { color:var(--gray); font-size:0.82rem; }
+    .late-night-note { display:none; align-items:flex-start; gap:0.7rem; background:#FFF7E6; border:1px solid rgba(255,167,38,0.35); border-radius:10px; padding:0.85rem 1rem; font-size:0.88rem; margin-top:0.75rem; }
+    .late-night-note.show { display:flex; }
+    .late-night-note-icon { color:#e65100; font-size:1rem; flex-shrink:0; margin-top:1px; }
+    .late-night-note strong { color:var(--dark); display:block; margin-bottom:0.15rem; }
+    .late-night-note span { color:var(--gray); font-size:0.82rem; }
 
     /* ── Address autocomplete dropdown ── */
     .ac-wrap { position: relative; }
@@ -1813,6 +1818,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
             <div class="form-group full">
+              <div class="late-night-note" id="lateNightNote">
+                <span class="late-night-note-icon">🌙</span>
+                <div>
+                  <strong>Late-night Durham Region pricing</strong>
+                  <span>After 2:30 AM, fares in Durham Region may vary based on driver availability. We'll confirm your exact price when we call to confirm.</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group full">
               <button type="submit" class="form-submit">🚗 Request My Driver Now</button>
               <p class="form-note">We'll call you within 5 minutes to confirm. Available 24/7.</p>
                                 <!-- ═══ PAYMENT METHODS ═══ -->
@@ -2756,6 +2770,36 @@ function formatPhone(input) {
       const defVal = `${String(plusFifteen.getHours()).padStart(2,'0')}:${String(plusFifteen.getMinutes()).padStart(2,'0')}`;
       const ftimeEl = document.getElementById('ftime');
       if (ftimeEl) ftimeEl.value = defVal;
+
+      // ── Late-night Durham Region pricing note ──
+      const DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
+      function isDurhamAddress(text) {
+        const t = (text || '').toLowerCase();
+        return DURHAM_KEYWORDS.some(function(k) { return t.indexOf(k) !== -1; });
+      }
+      function isLateNight(timeStr) {
+        if (!timeStr) return false;
+        const parts = timeStr.split(':');
+        const mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+        return mins >= 150 && mins < 360; // 02:30–06:00
+      }
+      function checkLateNightDurham() {
+        const pickupEl = document.getElementById('fpickup');
+        const noteEl   = document.getElementById('lateNightNote');
+        if (!pickupEl || !ftimeEl || !noteEl) return;
+        const show = isDurhamAddress(pickupEl.value) && isLateNight(ftimeEl.value);
+        noteEl.classList.toggle('show', show);
+      }
+      const fpickupEl = document.getElementById('fpickup');
+      if (fpickupEl) {
+        fpickupEl.addEventListener('input', checkLateNightDurham);
+        fpickupEl.addEventListener('blur', checkLateNightDurham);
+      }
+      if (ftimeEl) {
+        ftimeEl.addEventListener('input', checkLateNightDurham);
+        ftimeEl.addEventListener('change', checkLateNightDurham);
+      }
+      checkLateNightDurham();
 
       // ── GA4 funnel: form_start + form_abandon ──
       function _gaEvent(name, params) {
