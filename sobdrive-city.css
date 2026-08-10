@@ -186,6 +186,11 @@ footer{background:#0a0a0a;color:#444;padding:2.5rem 2rem;text-align:center;font-
 .late-night-note-icon{color:#e65100;font-size:1rem;flex-shrink:0;margin-top:1px}
 .late-night-note strong{color:var(--dark);display:block;margin-bottom:0.15rem}
 .late-night-note span{color:var(--gray);font-size:0.82rem}
+.late-night-banner{display:none;align-items:center;justify-content:center;gap:0.5rem;flex-wrap:wrap;background:#FFF3E0;color:#7a3e00;border-bottom:1px solid rgba(255,167,38,0.4);padding:0.55rem 1rem;font-size:0.82rem;text-align:center}
+.late-night-banner.show{display:flex}
+.late-night-banner a{color:#7a3e00;font-weight:700;text-decoration:underline}
+.late-night-banner .lnb-close{background:none;border:none;color:#7a3e00;font-size:1rem;line-height:1;cursor:pointer;padding:0 0.25rem;opacity:0.65}
+.late-night-banner .lnb-close:hover{opacity:1}
 .ac-wrap{position:relative}
 .ac-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:9999;max-height:220px;overflow-y:auto;display:none}
 .ac-dropdown.open{display:block}
