@@ -144,6 +144,40 @@ document.querySelectorAll('a[href*="index.html"]').forEach(function (link) {
   onScroll();
 })();
 
+// Late-night Durham Region banner — shown only on Durham-region pages (matched via <title>)
+(function () {
+  var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
+  var DISMISS_KEY = 'sobdriveLateNightBannerDismissed';
+
+  function isDurhamPage() {
+    var title = (document.title || '').toLowerCase();
+    return DURHAM_KEYWORDS.some(function (k) { return title.indexOf(k) !== -1; });
+  }
+  function isLateNightNow() {
+    var mins = new Date().getHours() * 60 + new Date().getMinutes();
+    return mins >= 150 && mins < 360; // 02:30–06:00 local time
+  }
+  function showLateNightBanner() {
+    if (sessionStorage.getItem(DISMISS_KEY) === 'true') return;
+    if (document.getElementById('lateNightBanner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'lateNightBanner';
+    bar.className = 'late-night-banner show';
+    bar.innerHTML = '🌙 Late night in Durham Region? Fares may vary based on driver availability — '
+      + '<a href="tel:+19052439404">call +1-905-243-9404</a> for an exact quote.'
+      + '<button class="lnb-close" type="button" aria-label="Dismiss">&times;</button>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    bar.querySelector('.lnb-close').addEventListener('click', function () {
+      bar.remove();
+      sessionStorage.setItem(DISMISS_KEY, 'true');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (isDurhamPage() && isLateNightNow()) showLateNightBanner();
+  });
+})();
+
 // Booking form — EmailJS + phone validation + address autocomplete
 var EMAILJS_SERVICE_ID        = 'service_14jlgrk';
 var EMAILJS_EMAIL_TEMPLATE_ID = 'template_7hoccg2';

@@ -556,6 +556,11 @@
     .late-night-note-icon { color:#e65100; font-size:1rem; flex-shrink:0; margin-top:1px; }
     .late-night-note strong { color:var(--dark); display:block; margin-bottom:0.15rem; }
     .late-night-note span { color:var(--gray); font-size:0.82rem; }
+    .late-night-banner { display:none; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; background:#FFF3E0; color:#7a3e00; border-bottom:1px solid rgba(255,167,38,0.4); padding:0.55rem 1rem; font-size:0.82rem; text-align:center; }
+    .late-night-banner.show { display:flex; }
+    .late-night-banner a { color:#7a3e00; font-weight:700; text-decoration:underline; }
+    .late-night-banner .lnb-close { background:none; border:none; color:#7a3e00; font-size:1rem; line-height:1; cursor:pointer; padding:0 0.25rem; opacity:0.65; }
+    .late-night-banner .lnb-close:hover { opacity:1; }
 
     /* ── Address autocomplete dropdown ── */
     .ac-wrap { position: relative; }
@@ -2879,6 +2884,42 @@ function formatPhone(input) {
           });
         }
       }, { passive: true });
+    });
+  })();
+  </script>
+
+  <script>
+  // Late-night Durham Region banner — index.html always qualifies (title mentions Oshawa/Durham)
+  (function () {
+    var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
+    var DISMISS_KEY = 'sobdriveLateNightBannerDismissed';
+
+    function isDurhamPage() {
+      var title = (document.title || '').toLowerCase();
+      return DURHAM_KEYWORDS.some(function (k) { return title.indexOf(k) !== -1; });
+    }
+    function isLateNightNow() {
+      var mins = new Date().getHours() * 60 + new Date().getMinutes();
+      return mins >= 150 && mins < 360; // 02:30–06:00 local time
+    }
+    function showLateNightBanner() {
+      if (sessionStorage.getItem(DISMISS_KEY) === 'true') return;
+      if (document.getElementById('lateNightBanner')) return;
+      var bar = document.createElement('div');
+      bar.id = 'lateNightBanner';
+      bar.className = 'late-night-banner show';
+      bar.innerHTML = '🌙 Late night in Durham Region? Fares may vary based on driver availability — '
+        + '<a href="tel:+19052439404">call +1-905-243-9404</a> for an exact quote.'
+        + '<button class="lnb-close" type="button" aria-label="Dismiss">&times;</button>';
+      document.body.insertBefore(bar, document.body.firstChild);
+      bar.querySelector('.lnb-close').addEventListener('click', function () {
+        bar.remove();
+        sessionStorage.setItem(DISMISS_KEY, 'true');
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (isDurhamPage() && isLateNightNow()) showLateNightBanner();
     });
   })();
   </script>
