@@ -52,12 +52,13 @@
     '          <div class="form-group full">',
     '            <div class="late-night-note" id="lateNightNote">',
     '              <span class="late-night-note-icon">&#x1F319;</span>',
-    '              <div><strong>Late-night Durham Region pricing</strong><span>After 2:30 AM, fares in Durham Region may vary based on driver availability. We\'ll confirm your exact price when we call to confirm.</span></div>',
+    '              <div><strong>Late-night pricing</strong><span>After 2:30 AM, fares may vary based on driver availability. We\'ll confirm your exact price when we call to confirm.</span></div>',
     '            </div>',
     '          </div>',
     '          <div class="form-group full">',
     '            <button type="submit" class="form-submit">&#x1F697; Request My Driver Now</button>',
     '            <p class="form-note">We\'ll call you within 5 minutes to confirm. Available 24/7.</p>',
+    '            <p class="form-policy-note">First 10 min of waiting free, then $1.50/min &#xB7; Cancel free up to 1 hr before pickup &#x2014; $30 once a driver has started &#xB7; No-show at pickup is charged the full fare.</p>',
     '            <div class="payment-methods">',
     '              <div class="payment-label">Accepted Payments</div>',
     '              <div class="payment-icon visa"><svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#1a1f71"/><text x="5" y="14" font-family="Arial" font-size="9" font-weight="bold" fill="white">VISA</text></svg></div>',
@@ -146,36 +147,8 @@ document.querySelectorAll('a[href*="index.html"]').forEach(function (link) {
 
 // Late-night Durham Region banner — shown only on Durham-region pages (matched via <title>)
 (function () {
-  var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
-  var DISMISS_KEY = 'sobdriveLateNightBannerDismissed';
-
-  function isDurhamPage() {
-    var title = (document.title || '').toLowerCase();
-    return DURHAM_KEYWORDS.some(function (k) { return title.indexOf(k) !== -1; });
-  }
-  function isLateNightNow() {
-    var mins = new Date().getHours() * 60 + new Date().getMinutes();
-    return mins >= 150 && mins < 360; // 02:30–06:00 local time
-  }
-  function showLateNightBanner() {
-    if (sessionStorage.getItem(DISMISS_KEY) === 'true') return;
-    if (document.getElementById('lateNightBanner')) return;
-    var bar = document.createElement('div');
-    bar.id = 'lateNightBanner';
-    bar.className = 'late-night-banner show';
-    bar.innerHTML = '🌙 Late night in Durham Region? Fares may vary based on driver availability — '
-      + '<a href="tel:+19052439404">call +1-905-243-9404</a> for an exact quote.'
-      + '<button class="lnb-close" type="button" aria-label="Dismiss">&times;</button>';
-    document.body.insertBefore(bar, document.body.firstChild);
-    bar.querySelector('.lnb-close').addEventListener('click', function () {
-      bar.remove();
-      sessionStorage.setItem(DISMISS_KEY, 'true');
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    if (isDurhamPage() && isLateNightNow()) showLateNightBanner();
-  });
+  // Late-night banner is now static markup in each page, shown by a
+  // pre-paint inline script - kept out of here so it causes no layout shift.
 })();
 
 // Booking form — EmailJS + phone validation + address autocomplete
@@ -398,35 +371,23 @@ var _formStarted = false;
     var ftimeEl = document.getElementById('ftime');
     if (ftimeEl) ftimeEl.value = defVal;
 
-    // Late-night Durham Region pricing note
-    var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
-    function isDurhamAddress(text) {
-      var t = (text || '').toLowerCase();
-      return DURHAM_KEYWORDS.some(function (k) { return t.indexOf(k) !== -1; });
-    }
+    // Late-night pricing note - time-based, all service areas
     function isLateNight(timeStr) {
       if (!timeStr) return false;
       var parts = timeStr.split(':');
       var mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-      return mins >= 150 && mins < 360; // 02:30–06:00
+      return mins >= 150 && mins < 360; // 02:30-06:00
     }
-    function checkLateNightDurham() {
-      var pickupEl = document.getElementById('fpickup');
-      var noteEl   = document.getElementById('lateNightNote');
-      if (!pickupEl || !ftimeEl || !noteEl) return;
-      var show = isDurhamAddress(pickupEl.value) && isLateNight(ftimeEl.value);
-      noteEl.classList.toggle('show', show);
-    }
-    var fpickupEl = document.getElementById('fpickup');
-    if (fpickupEl) {
-      fpickupEl.addEventListener('input', checkLateNightDurham);
-      fpickupEl.addEventListener('blur', checkLateNightDurham);
+    function checkLateNight() {
+      var noteEl = document.getElementById('lateNightNote');
+      if (!ftimeEl || !noteEl) return;
+      noteEl.classList.toggle('show', isLateNight(ftimeEl.value));
     }
     if (ftimeEl) {
-      ftimeEl.addEventListener('input', checkLateNightDurham);
-      ftimeEl.addEventListener('change', checkLateNightDurham);
+      ftimeEl.addEventListener('input', checkLateNight);
+      ftimeEl.addEventListener('change', checkLateNight);
     }
-    checkLateNightDurham();
+    checkLateNight();
 
     // GA4 form funnel tracking
     function _gaEvent(name, params) {

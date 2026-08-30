@@ -63,8 +63,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {"@type":"Question","name":"Where can I find a designated driver near me in Pickering?","acceptedAnswer":{"@type":"Answer","text":"SOBDRIVE covers all of Pickering and surrounding GTA areas. Call +1-905-243-9404 or book online for a driver near you in 15–30 minutes."}},
     {"@type":"Question","name":"How much does a designated driver cost in Pickering?","acceptedAnswer":{"@type":"Answer","text":"Rides under 10km are a flat $39.99 with zero booking fee. For 11+km: $19.99 booking fee + $2.50/km."}},
     {"@type":"Question","name":"Is SOBDRIVE available 24/7 in Pickering?","acceptedAnswer":{"@type":"Answer","text":"Yes. SOBDRIVE operates 24 hours a day, 7 days a week including weekends and Canadian holidays throughout Pickering."}},
-    {"@type":"Question","name":"Can I cancel or reschedule my booking in Pickering?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can cancel or reschedule at no charge by calling or texting +1-905-243-9404 before your driver is dispatched. Once a driver has been dispatched, or if you're a no-show at pickup, a $30 CAD cancellation fee applies."}},
-    {"@type":"Question","name":"Does the price change late at night in Pickering?","acceptedAnswer":{"@type":"Answer","text":"Yes. After 2:30 AM, pricing in Durham Region (Oshawa, Whitby, Ajax, Pickering and surrounding areas) may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request."}}
+    {"@type":"Question","name":"Can I cancel or reschedule my booking in Pickering?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cancel or reschedule at no charge by calling or texting +1-905-243-9404 at least 1 hour before your pickup time. Once a driver has started toward you, a $30 CAD cancellation fee applies. If the driver arrives at your pickup point and you are not there, the full ride price is charged."}},
+    {"@type":"Question","name":"Do you charge for waiting time?","acceptedAnswer":{"@type":"Answer","text":"The first 10 minutes of waiting are free. After that, waiting is charged at $1.50 per minute and added to your final fare."}},
+    {"@type":"Question","name":"Can my fare be higher than the rates listed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fares can be higher than our standard rates at any time of day, depending on driver availability and demand in your area. Our dispatch team confirms your exact price before a driver is dispatched, so you always know the fare up front."}},
+    {"@type":"Question","name":"Does the price change late at night?","acceptedAnswer":{"@type":"Answer","text":"Yes. After 2:30 AM, fares may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request."}}
   ]}
   </script>
 
@@ -80,6 +82,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52GP7FN"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- ═══ LATE-NIGHT BANNER — static markup + pre-paint check, so it never shifts layout ═══ -->
+<div class="late-night-banner" id="lateNightBanner">
+  <span>🌙 After 2:30 AM, fares may vary — <a href="tel:+19052439404">call +1-905-243-9404</a> for a quote.</span>
+  <button class="lnb-close" type="button" aria-label="Dismiss late-night notice">&times;</button>
+</div>
+<script>
+(function(){var b=document.getElementById('lateNightBanner');if(!b)return;
+var d=new Date(),m=d.getHours()*60+d.getMinutes();
+if(m<150||m>=360)return;
+try{if(sessionStorage.getItem('sobdriveLateNightBannerDismissed')==='true')return;}catch(e){}
+b.classList.add('show');
+b.querySelector('.lnb-close').addEventListener('click',function(){b.remove();
+try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){}});})();
+</script>
+
 
   <!-- ═══ EMERGENCY BAR ═══ -->
   <div class="emergency-bar">
@@ -209,8 +227,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-item"><div class="faq-q">How much does a designated driver cost in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Rides under 10km are a flat $39.99 with zero booking fee. For 11+km: $19.99 booking fee + $2.50/km. Use our fare calculator at sobdrive.ca.</div></div>
       <div class="faq-item"><div class="faq-q">Is SOBDRIVE available 24/7 in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. SOBDRIVE operates 24 hours a day, 7 days a week in Pickering including weekends and Canadian holidays. We're always available when you need us.</div></div>
       <div class="faq-item"><div class="faq-q">Do you drive my own car in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Absolutely. Our drivers come to you in Pickering, drive you home in YOUR own vehicle, and your car stays with you. No leaving it parked overnight.</div></div>
-      <div class="faq-item"><div class="faq-q">Can I cancel or reschedule my booking in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. You can cancel or reschedule at no charge by calling or texting +1-905-243-9404 before your driver is dispatched. Once a driver has been dispatched, or if you're a no-show at pickup, a $30 CAD cancellation fee applies.</div></div>
-      <div class="faq-item"><div class="faq-q">Does the price change late at night in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. After 2:30 AM, pricing in Durham Region (Oshawa, Whitby, Ajax, Pickering and surrounding areas) may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I cancel or reschedule my booking in Pickering? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. Cancel or reschedule at no charge by calling or texting +1-905-243-9404 at least 1 hour before your pickup time. Once a driver has started toward you, a $30 CAD cancellation fee applies. If the driver arrives at your pickup point and you are not there, the full ride price is charged.</div></div>
+      <div class="faq-item"><div class="faq-q">Do you charge for waiting time? <span class="faq-arrow">▼</span></div><div class="faq-a">The first 10 minutes of waiting are free. After that, waiting is charged at $1.50 per minute and added to your final fare.</div></div>
+      <div class="faq-item"><div class="faq-q">Can my fare be higher than the rates listed? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. Fares can be higher than our standard rates at any time of day, depending on driver availability and demand in your area. Our dispatch team confirms your exact price before a driver is dispatched, so you always know the fare up front.</div></div>
+      <div class="faq-item"><div class="faq-q">Does the price change late at night? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. After 2:30 AM, fares may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request.</div></div>
     </div>
   </section>
 

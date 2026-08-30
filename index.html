@@ -130,8 +130,10 @@
     {"@type":"Question","name":"How much does a designated driver cost in Durham, Peel & Toronto GTA?","acceptedAnswer":{"@type":"Answer","text":"Rides under 10km are a flat $39.99 with zero booking fee. For 11+km: $19.99 booking fee + $2.50/km."}},
     {"@type":"Question","name":"Is SOBDRIVE available 24/7?","acceptedAnswer":{"@type":"Answer","text":"Yes. SOBDRIVE is available 24 hours a day, 7 days a week, including weekends and Canadian holidays across all Durham, Peel & Toronto GTA cities."}},
     {"@type":"Question","name":"What areas near me does SOBDRIVE serve?","acceptedAnswer":{"@type":"Answer","text":"We serve Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Scarborough, North York, Oshawa, Pickering, Oakville, Ajax, Whitby and Burlington."}},
-    {"@type":"Question","name":"Can I cancel or reschedule my SOBDRIVE booking?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can cancel or reschedule at no charge by calling or texting +1-905-243-9404 before your driver is dispatched. Once a driver has been dispatched, or if you're a no-show at pickup, a $30 CAD cancellation fee applies."}},
-    {"@type":"Question","name":"Does the price change late at night in Durham Region?","acceptedAnswer":{"@type":"Answer","text":"Yes. After 2:30 AM, pricing in Durham Region (Oshawa, Whitby, Ajax, Pickering and surrounding areas) may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request."}}
+    {"@type":"Question","name":"Can I cancel or reschedule my SOBDRIVE booking?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cancel or reschedule at no charge by calling or texting +1-905-243-9404 at least 1 hour before your pickup time. Once a driver has started toward you, a $30 CAD cancellation fee applies. If the driver arrives at your pickup point and you are not there, the full ride price is charged."}},
+    {"@type":"Question","name":"Do you charge for waiting time?","acceptedAnswer":{"@type":"Answer","text":"The first 10 minutes of waiting are free. After that, waiting is charged at $1.50 per minute and added to your final fare."}},
+    {"@type":"Question","name":"Can my fare be higher than the rates listed on the site?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fares can be higher than our standard rates at any time of day, depending on driver availability and demand in your area. Our dispatch team confirms your exact price before a driver is dispatched, so you always know the fare up front."}},
+    {"@type":"Question","name":"Does the price change late at night?","acceptedAnswer":{"@type":"Answer","text":"Yes. After 2:30 AM, fares may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request."}}
   ]}</script>
   <!-- WebPage -->
   <script type="application/ld+json">
@@ -556,10 +558,11 @@
     .late-night-note-icon { color:#e65100; font-size:1rem; flex-shrink:0; margin-top:1px; }
     .late-night-note strong { color:var(--dark); display:block; margin-bottom:0.15rem; }
     .late-night-note span { color:var(--gray); font-size:0.82rem; }
-    .late-night-banner { display:none; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; background:#FFF3E0; color:#7a3e00; border-bottom:1px solid rgba(255,167,38,0.4); padding:0.55rem 1rem; font-size:0.82rem; text-align:center; }
+    .late-night-banner { display:none; position:relative; align-items:center; justify-content:center; gap:0.4rem; background:#FFF3E0; color:#7a3e00; border-bottom:1px solid rgba(255,167,38,0.4); padding:0.5rem 2.1rem; font-size:0.82rem; line-height:1.45; text-align:center; }
     .late-night-banner.show { display:flex; }
     .late-night-banner a { color:#7a3e00; font-weight:700; text-decoration:underline; }
-    .late-night-banner .lnb-close { background:none; border:none; color:#7a3e00; font-size:1rem; line-height:1; cursor:pointer; padding:0 0.25rem; opacity:0.65; }
+    .late-night-banner .lnb-close { position:absolute; right:0.35rem; top:50%; transform:translateY(-50%); background:none; border:none; color:#7a3e00; font-size:1.15rem; line-height:1; cursor:pointer; padding:0.35rem 0.5rem; opacity:0.65; }
+    @media (max-width:480px) { .late-night-banner { font-size:0.76rem; padding:0.45rem 2.6rem; } .late-night-banner .lnb-close { padding:0.7rem 0.85rem; right:0.1rem; } }
     .late-night-banner .lnb-close:hover { opacity:1; }
 
     /* ── Address autocomplete dropdown ── */
@@ -612,6 +615,17 @@
     .pricing-cta:hover { background:var(--red-dark); transform:translateY(-2px); }
     .pricing-disclaimer { text-align:center; font-size:0.78rem; color:var(--gray); margin-top:1.5rem; }
     .pricing-swipe-hint { display: none; } /* shown only in mobile media query */
+    .rate-notes { display:grid; grid-template-columns:1fr; margin-top:1.5rem; text-align:left; background:var(--off-white); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .rate-note { display:flex; gap:0.5rem; padding:0.65rem 0.95rem; font-size:0.82rem; line-height:1.5; border-top:1px solid var(--border); }
+    .rate-note:first-child { border-top:none; }
+    .rate-note strong { color:var(--dark); flex-shrink:0; }
+    .rate-note span { color:var(--gray); }
+    @media (min-width:760px) {
+      .rate-notes { grid-template-columns:1fr 1fr; }
+      .rate-note:nth-child(2) { border-top:none; }
+      .rate-note:nth-child(even) { border-left:1px solid var(--border); }
+    }
+    .form-policy-note { grid-column:1/-1; font-size:0.76rem; color:var(--gray); text-align:center; margin-top:-0.25rem; }
     .city-swipe-hint { display: none; }
 
     /* ============ FARE CALCULATOR ============ */
@@ -699,7 +713,7 @@
     .faq-arrow { color:var(--red); font-size:0.9rem; flex-shrink:0; transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
     .faq-item.open .faq-arrow { transform:rotate(180deg); }
     .faq-a { color:var(--gray); font-size:0.92rem; max-height:0; overflow:hidden; transition:max-height 0.4s ease,padding 0.3s; }
-    .faq-item.open .faq-a { max-height:200px; padding-bottom:1.2rem; }
+    .faq-item.open .faq-a { max-height:460px; padding-bottom:1.2rem; }
 
     /* ============ CTA ============ */
     .cta-section { background:var(--red); color:#fff; text-align:center; padding:clamp(4rem,9vw,7rem) clamp(1rem,4vw,2rem); position:relative; overflow:hidden; }
@@ -1562,6 +1576,21 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<!-- ═══ LATE-NIGHT BANNER — static markup + pre-paint check, so it never shifts layout ═══ -->
+<div class="late-night-banner" id="lateNightBanner">
+  <span>🌙 After 2:30 AM, fares may vary — <a href="tel:+19052439404">call +1-905-243-9404</a> for a quote.</span>
+  <button class="lnb-close" type="button" aria-label="Dismiss late-night notice">&times;</button>
+</div>
+<script>
+(function(){var b=document.getElementById('lateNightBanner');if(!b)return;
+var d=new Date(),m=d.getHours()*60+d.getMinutes();
+if(m<150||m>=360)return;
+try{if(sessionStorage.getItem('sobdriveLateNightBannerDismissed')==='true')return;}catch(e){}
+b.classList.add('show');
+b.querySelector('.lnb-close').addEventListener('click',function(){b.remove();
+try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){}});})();
+</script>
+
 <div class="page-wrapper">
 
   <!-- ===== STICKY HEADER: emergency bar + nav ===== -->
@@ -1765,7 +1794,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="pricing-swipe-hint">Swipe to see all plans</div>
 
-      <p class="pricing-disclaimer">* Our pricing within the Greater Toronto Area may vary based on location, time, and situational factors. Contact us for an accurate quote.</p>
+      <div class="rate-notes reveal">
+        <div class="rate-note"><strong>⏰ Availability</strong><span>Fares may exceed posted rates at any hour, subject to driver availability.</span></div>
+        <div class="rate-note"><strong>⏱️ Waiting</strong><span>First 10 minutes free, then $1.50 per minute.</span></div>
+        <div class="rate-note"><strong>✕ Cancellation</strong><span>Free with 1 hour notice. $30 CAD once a driver has started.</span></div>
+        <div class="rate-note"><strong>⚠️ No-show</strong><span>Full ride price is charged.</span></div>
+      </div>
+
+      <p class="pricing-disclaimer">* Rates shown are our standard fares. Final pricing may vary based on location, time, driver availability and situational factors — contact us for an accurate quote.</p>
     </div>
   </div>
 
@@ -1826,14 +1862,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="late-night-note" id="lateNightNote">
                 <span class="late-night-note-icon">🌙</span>
                 <div>
-                  <strong>Late-night Durham Region pricing</strong>
-                  <span>After 2:30 AM, fares in Durham Region may vary based on driver availability. We'll confirm your exact price when we call to confirm.</span>
+                  <strong>Late-night pricing</strong>
+                  <span>After 2:30 AM, fares may vary based on driver availability. We'll confirm your exact price when we call to confirm.</span>
                 </div>
               </div>
             </div>
             <div class="form-group full">
               <button type="submit" class="form-submit">🚗 Request My Driver Now</button>
               <p class="form-note">We'll call you within 5 minutes to confirm. Available 24/7.</p>
+              <p class="form-policy-note">First 10 min of waiting free, then $1.50/min · Cancel free up to 1 hr before pickup — $30 once a driver has started · No-show at pickup is charged the full fare.</p>
                                 <!-- ═══ PAYMENT METHODS ═══ -->
                   <div class="payment-methods">
                     <div class="payment-label">Accepted Payments</div>
@@ -2166,8 +2203,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-item reveal"><div class="faq-q">How much does it cost? <span class="faq-arrow">▼</span></div><div class="faq-a">Rides under 10km are a flat $39.99 with zero booking fee. For 11+km it's a $19.99 booking fee + $2.50/km.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Are your drivers background-checked? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. All SOBDRIVE drivers are fully licensed in Ontario and have passed thorough background checks for your peace of mind.</div></div>
       <div class="faq-item reveal"><div class="faq-q">Can I book in advance? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes, advance bookings are available. Weekends fill fast.</div></div>
-      <div class="faq-item reveal"><div class="faq-q">Can I cancel or reschedule my booking? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. You can cancel or reschedule at no charge by calling or texting us at +1-905-243-9404 before your driver is dispatched. Once a driver has been dispatched, or if you're a no-show at pickup, a $30 CAD cancellation fee applies.</div></div>
-      <div class="faq-item reveal"><div class="faq-q">Does the price change late at night in Durham Region? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. After 2:30 AM, pricing in Durham Region (Oshawa, Whitby, Ajax, Pickering and surrounding areas) may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Can I cancel or reschedule my booking? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. Cancel or reschedule at no charge by calling or texting +1-905-243-9404 at least 1 hour before your pickup time. Once a driver has started toward you, a $30 CAD cancellation fee applies. If the driver arrives at your pickup point and you are not there, the full ride price is charged.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Do you charge for waiting time? <span class="faq-arrow">▼</span></div><div class="faq-a">The first 10 minutes of waiting are free. After that, waiting is charged at $1.50 per minute and added to your final fare.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Can my fare be higher than the rates listed on the site? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. Fares can be higher than our standard rates at any time of day, depending on driver availability and demand in your area. Our dispatch team confirms your exact price before a driver is dispatched, so you always know the fare up front.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Does the price change late at night? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. After 2:30 AM, fares may vary based on driver availability and demand. Our dispatch team will confirm your exact fare when you call or submit a booking request.</div></div>
     </div>
   </div>
 
@@ -2776,35 +2815,23 @@ function formatPhone(input) {
       const ftimeEl = document.getElementById('ftime');
       if (ftimeEl) ftimeEl.value = defVal;
 
-      // ── Late-night Durham Region pricing note ──
-      const DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
-      function isDurhamAddress(text) {
-        const t = (text || '').toLowerCase();
-        return DURHAM_KEYWORDS.some(function(k) { return t.indexOf(k) !== -1; });
-      }
+      // ── Late-night pricing note — time-based, all service areas ──
       function isLateNight(timeStr) {
         if (!timeStr) return false;
         const parts = timeStr.split(':');
         const mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
         return mins >= 150 && mins < 360; // 02:30–06:00
       }
-      function checkLateNightDurham() {
-        const pickupEl = document.getElementById('fpickup');
-        const noteEl   = document.getElementById('lateNightNote');
-        if (!pickupEl || !ftimeEl || !noteEl) return;
-        const show = isDurhamAddress(pickupEl.value) && isLateNight(ftimeEl.value);
-        noteEl.classList.toggle('show', show);
-      }
-      const fpickupEl = document.getElementById('fpickup');
-      if (fpickupEl) {
-        fpickupEl.addEventListener('input', checkLateNightDurham);
-        fpickupEl.addEventListener('blur', checkLateNightDurham);
+      function checkLateNight() {
+        const noteEl = document.getElementById('lateNightNote');
+        if (!ftimeEl || !noteEl) return;
+        noteEl.classList.toggle('show', isLateNight(ftimeEl.value));
       }
       if (ftimeEl) {
-        ftimeEl.addEventListener('input', checkLateNightDurham);
-        ftimeEl.addEventListener('change', checkLateNightDurham);
+        ftimeEl.addEventListener('input', checkLateNight);
+        ftimeEl.addEventListener('change', checkLateNight);
       }
-      checkLateNightDurham();
+      checkLateNight();
 
       // ── GA4 funnel: form_start + form_abandon ──
       function _gaEvent(name, params) {
@@ -2888,41 +2915,6 @@ function formatPhone(input) {
   })();
   </script>
 
-  <script>
-  // Late-night Durham Region banner — index.html always qualifies (title mentions Oshawa/Durham)
-  (function () {
-    var DURHAM_KEYWORDS = ['oshawa','whitby','ajax','pickering','clarington','durham'];
-    var DISMISS_KEY = 'sobdriveLateNightBannerDismissed';
-
-    function isDurhamPage() {
-      var title = (document.title || '').toLowerCase();
-      return DURHAM_KEYWORDS.some(function (k) { return title.indexOf(k) !== -1; });
-    }
-    function isLateNightNow() {
-      var mins = new Date().getHours() * 60 + new Date().getMinutes();
-      return mins >= 150 && mins < 360; // 02:30–06:00 local time
-    }
-    function showLateNightBanner() {
-      if (sessionStorage.getItem(DISMISS_KEY) === 'true') return;
-      if (document.getElementById('lateNightBanner')) return;
-      var bar = document.createElement('div');
-      bar.id = 'lateNightBanner';
-      bar.className = 'late-night-banner show';
-      bar.innerHTML = '🌙 Late night in Durham Region? Fares may vary based on driver availability — '
-        + '<a href="tel:+19052439404">call +1-905-243-9404</a> for an exact quote.'
-        + '<button class="lnb-close" type="button" aria-label="Dismiss">&times;</button>';
-      document.body.insertBefore(bar, document.body.firstChild);
-      bar.querySelector('.lnb-close').addEventListener('click', function () {
-        bar.remove();
-        sessionStorage.setItem(DISMISS_KEY, 'true');
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      if (isDurhamPage() && isLateNightNow()) showLateNightBanner();
-    });
-  })();
-  </script>
 
 </div><!-- /.page-wrapper -->
 </body>
