@@ -2,7 +2,7 @@
 // Fetches Google reviews via the Places API (New) and writes reviews.json.
 // Run: GOOGLE_MAPS_API_KEY=... GOOGLE_PLACE_ID=... node scripts/fetch-google-reviews.mjs
 
-import { writeFile, readFile } from 'node:fs/promises';
+import { writeFile, readFile, readdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -58,6 +58,29 @@ const next = {
   updatedAt: new Date().toISOString(),
   reviews,
 };
+
+// The JSON-LD aggregateRating is static markup for crawlers, so it can't be
+// filled in by the client-side renderer — rewrite it here instead, keeping
+// the structured data and the visible count from drifting apart.
+async function syncSchema(rating, count) {
+  if (rating == null || count == null) return 0;
+  const pattern =
+    /("aggregateRating"\s*:\s*\{[^}]*?"ratingValue"\s*:\s*")[^"]*("[^}]*?"reviewCount"\s*:\s*")[^"]*(")/g;
+  let changed = 0;
+  for (const name of (await readdir(ROOT)).filter((f) => f.endsWith('.html'))) {
+    const file = resolve(ROOT, name);
+    const html = await readFile(file, 'utf8');
+    const updated = html.replace(pattern, `$1${rating}$2${count}$3`);
+    if (updated !== html) {
+      await writeFile(file, updated);
+      changed++;
+    }
+  }
+  return changed;
+}
+
+const schemaUpdates = await syncSchema(next.rating, next.reviewCount);
+if (schemaUpdates) console.log(`Updated aggregateRating in ${schemaUpdates} page(s).`);
 
 // updatedAt always differs, so compare everything else to avoid empty commits.
 const stable = (o) => JSON.stringify({ ...o, updatedAt: null });
