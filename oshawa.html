@@ -75,7 +75,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="stylesheet" href="sobdrive-city.css">
   <style>:root{--city1:#0f0a00;--city2:#1a1200}</style>
   <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="sobdrive-trip.js"></script>
   <script defer src="sobdrive-city.js"></script>
+  <script defer src="sobdrive-reviews.js"></script>
 </head>
 <body>
 
@@ -217,6 +219,25 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
         <div class="nap-item"><span class="nap-icon">✉️</span><div><span class="nap-label">Email</span><span class="nap-value"><a href="mailto:info@sobdrive.ca" style="color:var(--red);">info@sobdrive.ca</a></span></div></div>
         <div class="nap-item"><span class="nap-icon">🕐</span><div><span class="nap-label">Hours</span><span class="nap-value">Open 24 Hours, 7 Days a Week</span></div></div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ GOOGLE REVIEWS (populated from reviews.json) ═══ -->
+  <section class="reviews-section" id="reviews" data-sd-reviews-section hidden>
+    <div class="reviews-inner">
+      <div class="section-label">Customer Reviews</div>
+      <h2>What Our Clients Are Saying</h2>
+      <p class="reviews-sub">Recent Google reviews from SOBDRIVE customers across Oshawa and the GTA.</p>
+      <div class="reviews-rating">
+        <span class="rating-number" data-sd-rating>5.0</span>
+        <span class="rating-stars">★★★★★</span>
+        <span class="rating-count"><span data-sd-count="long">35 Google Reviews</span></span>
+      </div>
+      <div class="reviews" data-sd-reviews></div>
+      <a href="https://maps.google.com/?cid=8205731459308380307" target="_blank" rel="noopener" class="reviews-cta-link" data-sd-maps>
+        ⭐ See All Our Google Reviews →
+      </a>
     </div>
   </section>
 

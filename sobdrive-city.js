@@ -255,9 +255,19 @@ async function proceedWithBooking(btn) {
   var dropoff       = document.getElementById('fdropoff').value;
   var date          = document.getElementById('fdate').value;
   var time          = document.getElementById('ftime').value;
+  // Trip distance + fare, so dispatch can quote on the confirmation call
+  var trip = { distance_km:'Not available', drive_time:'Not available',
+               fare_estimate:'Quote manually', fare_breakdown:'', distance_source:'unavailable' };
+  try {
+    if (window.SobdriveTrip) trip = await window.SobdriveTrip.estimate(pickup, dropoff);
+  } catch (err) { console.warn('Trip estimate failed:', err); }
+
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID,
-      { customer_name:customerName, customer_phone:customerPhone, pickup:pickup, dropoff:dropoff, date:date, time:time },
+      { customer_name:customerName, customer_phone:customerPhone, pickup:pickup, dropoff:dropoff, date:date, time:time,
+        distance_km:trip.distance_km, drive_time:trip.drive_time,
+        fare_estimate:trip.fare_estimate, fare_breakdown:trip.fare_breakdown,
+        distance_source:trip.distance_source },
       EMAILJS_PUBLIC_KEY);
   } catch (err) { console.warn('Owner email failed:', err); }
   showSuccess(customerName, customerPhone, pickup, dropoff, date, time);
@@ -295,6 +305,8 @@ var _formStarted = false;
   var GEOAPIFY_KEY = 'cced98652cc54ef49a5845718d2a670d';
   var DEBOUNCE_MS  = 300;
   var coords = { fpickup:null, fdropoff:null };
+  // Shared with sobdrive-trip.js so it can skip a redundant geocode call.
+  window.__sobdriveCoords = coords;
 
   function initAC(inputId) {
     var input    = document.getElementById(inputId);

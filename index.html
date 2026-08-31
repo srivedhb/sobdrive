@@ -1966,7 +1966,7 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
       <!-- Rating summary widget -->
       <div class="rating-widget reveal">
         <div class="rating-score-block">
-          <div class="rating-number">5.0</div>
+          <div class="rating-number" data-sd-rating>5.0</div>
           <span class="rating-stars-lg">★★★★★</span>
           <div class="rating-label">out of 5</div>
         </div>
@@ -1975,7 +1975,7 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
           <div class="rating-bar-row">
             <span>5★</span>
             <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%"></div></div>
-            <span class="rating-bar-count">35</span>
+            <span class="rating-bar-count" data-sd-count>35</span>
           </div>
           <div class="rating-bar-row">
             <span>4★</span>
@@ -1999,12 +1999,12 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
           </div>
           <div class="rating-google-row">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            35 Google Reviews
+            <span data-sd-count="long">35 Google Reviews</span>
           </div>
         </div>
       </div>
 
-      <div class="reviews">
+      <div class="reviews" data-sd-reviews>
 
         <div class="review reveal">
           <div class="stars">★★★★★</div>
@@ -2120,7 +2120,7 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
 
       </div>
       <div style="text-align:center;margin-top:2rem;">
-        <a href="https://www.google.com/maps/place/SobDrive/@43.7305814,-80.8796467,8z/data=!4m16!1m9!3m8!1s0x625b81beea13ec83:0x71e09d495252e093!2sSobDrive!8m2!3d43.738168!4d-79.5604614!9m1!1b1!16s%2Fg%2F11n47q5lhy!3m5!1s0x625b81beea13ec83:0x71e09d495252e093!8m2!3d43.738168!4d-79.5604614!16s%2Fg%2F11n47q5lhy?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="reviews-cta-link">
+        <a href="https://www.google.com/maps/place/SobDrive/@43.7305814,-80.8796467,8z/data=!4m16!1m9!3m8!1s0x625b81beea13ec83:0x71e09d495252e093!2sSobDrive!8m2!3d43.738168!4d-79.5604614!9m1!1b1!16s%2Fg%2F11n47q5lhy!3m5!1s0x625b81beea13ec83:0x71e09d495252e093!8m2!3d43.738168!4d-79.5604614!16s%2Fg%2F11n47q5lhy?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="reviews-cta-link" data-sd-maps>
           ⭐ See All Our Google Reviews →
         </a>
       </div>
@@ -2594,11 +2594,21 @@ try{sessionStorage.setItem('sobdriveLateNightBannerDismissed','true');}catch(e){
     const date          = document.getElementById('fdate').value;
     const time          = document.getElementById('ftime').value;
 
+    // ── Trip distance + fare, so dispatch can quote on the confirmation call ──
+    let trip = { distance_km: 'Not available', drive_time: 'Not available',
+                 fare_estimate: 'Quote manually', fare_breakdown: '', distance_source: 'unavailable' };
+    try {
+      if (window.SobdriveTrip) trip = await window.SobdriveTrip.estimate(pickup, dropoff);
+    } catch (err) { console.warn('Trip estimate failed:', err); }
+
     // ── A: Email notification to SOBDRIVE ──
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_EMAIL_TEMPLATE_ID, {
         customer_name: customerName, customer_phone: customerPhone,
-        pickup, dropoff, date, time
+        pickup, dropoff, date, time,
+        distance_km: trip.distance_km, drive_time: trip.drive_time,
+        fare_estimate: trip.fare_estimate, fare_breakdown: trip.fare_breakdown,
+        distance_source: trip.distance_source
       }, EMAILJS_PUBLIC_KEY);
     } catch (err) { console.warn('Owner email failed:', err); }
 
@@ -2696,6 +2706,8 @@ function formatPhone(input) {
     const DEBOUNCE_MS = 300;
     // Stores {lat, lon} for each input after a suggestion is selected
     const coords = { fpickup: null, fdropoff: null };
+    // Shared with sobdrive-trip.js so it can skip a redundant geocode call.
+    window.__sobdriveCoords = coords;
 
     function initAC(inputId) {
       const input = document.getElementById(inputId);
@@ -2917,5 +2929,7 @@ function formatPhone(input) {
 
 
 </div><!-- /.page-wrapper -->
+<script defer src="sobdrive-reviews.js"></script>
+<script src="sobdrive-trip.js"></script>
 </body>
 </html>
