@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: sync-google-reviews
@@ -29,6 +30,7 @@ jobs:
         run: node scripts/fetch-google-reviews.mjs
 
       - name: Commit if changed
+        id: commit
         run: |
           if [ -z "$(git status --porcelain reviews.json ./*.html)" ]; then
             echo "No changes to commit."
@@ -39,3 +41,13 @@ jobs:
           git add reviews.json ./*.html
           git commit -m "Sync Google reviews"
           git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made with GITHUB_TOKEN don't trigger other workflows, so the
+      # Pages deploy never sees this commit on its own. workflow_dispatch is
+      # the documented exception, so start the deploy explicitly.
+      - name: Deploy to Pages
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run static.yml --ref main
