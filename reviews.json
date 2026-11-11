@@ -1,8 +1,8 @@
 {
   "rating": 5,
-  "reviewCount": 84,
+  "reviewCount": 85,
   "mapsUri": "https://maps.google.com/?cid=8205731459308380307&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
-  "updatedAt": "2026-11-09T16:55:40.930Z",
+  "updatedAt": "2026-11-11T14:46:19.008Z",
   "reviews": [
     {
       "rating": 5,
@@ -20,17 +20,17 @@
     },
     {
       "rating": 5,
-      "text": "Kishore has driven my vehicle with great care, always safe and polite. They are on time always and are available for great services! Thanks!!!",
-      "author": "Herod P",
-      "publishTime": "2026-08-30T21:03:49.057493919Z",
-      "relativeTime": "2 months ago"
-    },
-    {
-      "rating": 5,
       "text": "We used this service last weekend. From start to finish they were good at communicating in a timely manner. They followed up to confirm the reservation as promised. They were on time, courteous and drove with care. The price is reasonable for the service. We were very happy with them and highly recommend. Wouldn't hesitate to use again.",
       "author": "Darlene Suchy",
       "publishTime": "2026-08-26T01:48:39.251958051Z",
       "relativeTime": "2 months ago"
+    },
+    {
+      "rating": 5,
+      "text": "Had a couple of drinks and looked for DD service/ Designated driver service. These guys showed up very prompt response and professional. Always recommend and would love to take service again",
+      "author": "shiva reddy",
+      "publishTime": "2026-06-21T20:06:24.294441298Z",
+      "relativeTime": "4 months ago"
     },
     {
       "rating": 5,
